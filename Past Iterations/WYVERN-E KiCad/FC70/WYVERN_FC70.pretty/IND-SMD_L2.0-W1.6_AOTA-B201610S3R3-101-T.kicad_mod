@@ -1,0 +1,190 @@
+(footprint "IND-SMD_L2.0-W1.6_AOTA-B201610S3R3-101-T"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at -0.008 0 0)
+		(layer "F.Fab")
+		(uuid "f894777f-f54e-413a-9b74-2305ced8c694")
+		(effects
+			(font
+				(size 0.6 0.6)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "3.3uH"
+		(at 0 1.85 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "ecc4e427-06e5-4133-9770-dced3ee796d5")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.12)
+			)
+		)
+	)
+	(property "Datasheet" "https://www.lcsc.com/product-detail/C42411119.html"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "a457ad48-4521-471a-b95a-81952267f2e2")
+		(effects
+			(font
+				(size 1 1)
+			)
+		)
+	)
+	(property "Description" "0806 Molding Power Inductors"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "4d368d73-4c34-4063-abaf-9c421c98122f")
+		(effects
+			(font
+				(size 1 1)
+			)
+		)
+	)
+	(property "LCSC" "C42411119"
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "088e385f-a3cb-4c06-8752-3a0adb6dc5c7")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "MPN" "AOTA-B201610S3R3-101-T"
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "4dc1525f-3169-469f-9b0e-23bb24287157")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Manufacturer" "Abracon LLC"
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e75b613b-0ace-4531-8e7c-a047c485e79f")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_rect
+		(start -1.866 -1.05)
+		(end 1.85 1.05)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "827cb942-49f1-4a22-b1f8-6b4428105c75")
+	)
+	(fp_line
+		(start -1 -0.8)
+		(end 1 -0.8)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "1f213bd7-e27d-4386-aa7d-43752d861c40")
+	)
+	(fp_line
+		(start -1 0.8)
+		(end -1 -0.8)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "8f680b61-aa1c-459e-b2b7-e9f71773ccb2")
+	)
+	(fp_line
+		(start 1 -0.8)
+		(end 1 0.8)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "e531ce66-9a2b-4ae2-bd55-34f17689efe7")
+	)
+	(fp_line
+		(start 1 0.8)
+		(end -1 0.8)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "a4493dcf-56f0-455c-abc0-74006cd5eb60")
+	)
+	(fp_circle
+		(center -1 0.8)
+		(end -0.94 0.8)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "70c0214b-e820-4fb3-a2e2-1a2f6abbd9db")
+	)
+	(fp_circle
+		(center 1 -0.5)
+		(end 1.127 -0.5)
+		(stroke
+			(width 0.254)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "c855de8c-42f5-418f-9075-c14e86fb8f3a")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "f23ad207-a845-42e8-85d3-7d3405b5db5e")
+		(effects
+			(font
+				(size 0.6 0.6)
+				(thickness 0.1)
+			)
+		)
+	)
+	(pad "1" smd rect
+		(at -1.016 0)
+		(size 1.2 1.6)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "e1457d42-719d-4aeb-951e-c1c8b173753c")
+	)
+	(pad "2" smd rect
+		(at 1 0)
+		(size 1.2 1.6)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "d61124c8-f379-4ded-9a5a-da09c33c7850")
+	)
+	(embedded_fonts no)
+
+  (model "${KIPRJMOD}/3dmodels/IND-SMD_L2.0-W1.6_AOTA-B201610S3R3-101-T.step" (offset (xyz -0.0080 0.0050 0.0500)) (scale (xyz 1 1 1)) (rotate (xyz 0 0 0)))
+
+  (model "${KIPRJMOD}/3dmodels/IND-SMD_L2.0-W1.6_AOTA-B201610S3R3-101-T.step" (offset (xyz -0.0080 0.0050 0.0500)) (scale (xyz 1 1 1)) (rotate (xyz 0 0 0)))
+)

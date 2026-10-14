@@ -1,0 +1,283 @@
+(footprint "SOIC-8_L5.3-W5.3-P1.27-LS8.0-BL"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0 5.625 270)
+		(layer "F.SilkS")
+		(uuid "efa4b581-3921-4631-b19b-9e894ef8ea6d")
+		(effects
+			(font
+				(size 0.7 0.7)
+				(thickness 0.12)
+			)
+		)
+	)
+	(property "Value" "W25Q128JVSIQ"
+		(at 0 5.705 0)
+		(layer "F.Fab")
+		(uuid "f3e79fb3-9622-4d64-ad2c-06aff4d08a1c")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.12)
+			)
+		)
+	)
+	(property "Datasheet" "https://www.lcsc.com/product-detail/C97521.html"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "2d850eb3-c057-4c52-9e2b-820be23c6fd3")
+		(effects
+			(font
+				(size 1 1)
+			)
+		)
+	)
+	(property "Description" "-40℃~+85℃ 100,000 cycles 120ms@(32KB) 128Mbit 133MHz 1uA 2.7V~3.6V 20 Years 3ms Power-on reset、Hardware write protection、Software write protection、Write enable latch、Absolute write protection SPI SOIC"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e2ce1958-5a7d-4215-8193-a1b87932ea95")
+		(effects
+			(font
+				(size 1 1)
+			)
+		)
+	)
+	(property "LCSC" "C97521"
+		(at 0 0 90)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "bb8871c7-726c-45d2-98ed-6138f6b9fe56")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "MPN" "W25Q128JVSIQ"
+		(at 0 0 90)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "c691b4c2-03fb-4e16-82cc-4077456ac3db")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Manufacturer" "Winbond Elec"
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "53d0e63f-c049-4f09-bff1-0a4917e9b999")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -2.6387 -2.1764)
+		(end 2.6387 -2.1764)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "5e5b7705-fde8-4e6b-b5eb-8cdb215fe497")
+	)
+	(fp_line
+		(start -2.6387 2.1764)
+		(end -2.6387 -2.1764)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "2dae6e71-e7de-448b-8310-60bc3ad5b997")
+	)
+	(fp_line
+		(start 2.6387 -2.1764)
+		(end 2.6387 2.1764)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "81b560c1-7df9-4251-af3a-a4dc4811372f")
+	)
+	(fp_line
+		(start 2.6387 2.1764)
+		(end -2.6387 2.1764)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "162b2669-9c61-4bf4-9ec1-c1a652db4a37")
+	)
+	(fp_circle
+		(center -1.905 1.4239)
+		(end -1.7549 1.4239)
+		(stroke
+			(width 0.3)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "886b47c6-0570-477b-a89a-72c5b012d9e6")
+	)
+	(fp_rect
+		(start -2.865 -4.905)
+		(end 2.865 4.905)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "ab5baf2d-1171-443c-ad45-972c08ba3d73")
+	)
+	(fp_line
+		(start -2.615 -2.64)
+		(end 2.615 -2.64)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "76130f9b-4b6c-4fb8-ab99-3ce297c01323")
+	)
+	(fp_line
+		(start -2.615 2.64)
+		(end -2.615 -2.64)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "9b7458a5-fd46-4c66-ab35-39a7a2477781")
+	)
+	(fp_line
+		(start 2.615 -2.64)
+		(end 2.615 2.64)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "ac7d639b-c8a1-42d6-a75d-f759ddf60dc1")
+	)
+	(fp_line
+		(start 2.615 2.64)
+		(end -2.615 2.64)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "20ec2c97-2f6d-445c-81b3-e1b395da0c0c")
+	)
+	(fp_circle
+		(center -2.5851 3.92)
+		(end -2.5251 3.92)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "cf44cff9-75ad-4211-9547-c331a68cf2c9")
+	)
+	(fp_circle
+		(center -1.905 4.35)
+		(end -1.7549 4.35)
+		(stroke
+			(width 0.3)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "d5518fa3-0202-41be-a4cd-4fad9ca0f7be")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "63cea717-08c9-4dcc-94d7-f10ea0908ba3")
+		(effects
+			(font
+				(size 0.6 0.6)
+				(thickness 0.1)
+			)
+		)
+	)
+	(pad "1" smd oval
+		(at -1.905 3.5301)
+		(size 0.63 2.25)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "75d67344-40b1-4696-b636-b08e6f48662d")
+	)
+	(pad "2" smd oval
+		(at -0.635 3.5301)
+		(size 0.63 2.25)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "c3ef6545-d366-42d7-a9e8-a7083b653b84")
+	)
+	(pad "3" smd oval
+		(at 0.635 3.5301)
+		(size 0.63 2.25)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "4a15d2e5-15d9-4c2b-9038-63a594f3f058")
+	)
+	(pad "4" smd oval
+		(at 1.905 3.5301)
+		(size 0.63 2.25)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "979ba444-569f-407d-abbd-6e0e1af0f1e8")
+	)
+	(pad "5" smd oval
+		(at 1.905 -3.5301)
+		(size 0.63 2.25)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "6b921c2b-d2ab-440e-a5b8-33d9d5d57d5f")
+	)
+	(pad "6" smd oval
+		(at 0.635 -3.5301)
+		(size 0.63 2.25)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "86174066-144a-4a69-8f71-cc15b0e451aa")
+	)
+	(pad "7" smd oval
+		(at -0.635 -3.5301)
+		(size 0.63 2.25)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "7d62d9ca-e8d6-4120-9b5e-dd4c436b29b8")
+	)
+	(pad "8" smd oval
+		(at -1.905 -3.5301)
+		(size 0.63 2.25)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "4f296de3-b2d4-4ceb-80bd-a84d53f5d358")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/3dmodels/SOIC-8_L5.3-W5.3-H1.9-LS7.9-P1.27.step"
+		(offset
+			(xyz 0 -0 0.069)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

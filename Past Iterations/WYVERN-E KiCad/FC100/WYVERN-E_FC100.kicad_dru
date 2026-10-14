@@ -1,0 +1,6 @@
+(version 1)
+(rule "Fine-pitch escape U1" (condition "A.intersectsCourtyard('U1') && B.intersectsCourtyard('U1')") (constraint clearance (min 0.1mm)))
+(rule "Fine-pitch escape U3" (condition "A.intersectsCourtyard('U3') && B.intersectsCourtyard('U3')") (constraint clearance (min 0.1mm)))
+(rule "Fine-pitch escape U18" (condition "A.intersectsCourtyard('U18') && B.intersectsCourtyard('U18')") (constraint clearance (min 0.1mm)))
+(rule "Footprint-internal hole U17" (condition "A.intersectsCourtyard('U17') && B.intersectsCourtyard('U17')") (constraint hole_clearance (min 0mm)))
+(rule "Signal fine 3.9mil" (condition "(A.NetClass == 'Default' || A.NetClass == 'USB') && (B.NetClass == 'Default' || B.NetClass == 'USB')") (constraint clearance (min 0.1mm)))

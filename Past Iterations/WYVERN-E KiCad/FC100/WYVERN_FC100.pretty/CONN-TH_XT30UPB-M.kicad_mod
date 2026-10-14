@@ -1,0 +1,323 @@
+(footprint "CONN-TH_XT30UPB-M"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at -5.895 0 90)
+		(layer "F.SilkS")
+		(uuid "c2af3c50-26f1-438a-abfd-7a0187c23740")
+		(effects
+			(font
+				(size 0.7 0.7)
+				(thickness 0.12)
+			)
+		)
+	)
+	(property "Value" "XT30UPB-M"
+		(at 0 3.85 0)
+		(layer "F.Fab")
+		(uuid "0a0f0e6e-9547-4387-9098-d43212449eec")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.12)
+			)
+		)
+	)
+	(property "Datasheet" "https://www.lcsc.com/product-detail/C428721.html"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "a58e0fb6-4ec6-469c-9876-910f51122c1a")
+		(effects
+			(font
+				(size 1 1)
+			)
+		)
+	)
+	(property "Description" "-、Aviation model plug 0.65mΩ 15A DC 500V Gold Plated Male PA Yellow - Power connector / plug connector"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "0d58ece0-f337-4643-aada-71eb6221994c")
+		(effects
+			(font
+				(size 1 1)
+			)
+		)
+	)
+	(property "LCSC" "C428721"
+		(at 0 0 90)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "5849a2ab-0965-4485-9a28-5127deb1838a")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "MPN" "XT30UPB-M"
+		(at 0 0 90)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "0382b58b-027e-4450-9ef4-495dc336f3ba")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Manufacturer" "Changzhou Amass Elec"
+		(at 0 0 90)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "62c63138-9338-4f7c-a765-f8155b7a6366")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -4.4451 -1.016)
+		(end -3.4291 -2.032)
+		(stroke
+			(width 0.254)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "69aab776-3224-4c41-b5bd-bf59b459d2df")
+	)
+	(fp_line
+		(start -4.4451 0.889)
+		(end -4.4451 -1.016)
+		(stroke
+			(width 0.254)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "880474b4-e388-4f83-b6bb-873aa89d5d0b")
+	)
+	(fp_line
+		(start -3.4291 -2.032)
+		(end 4.4449 -2.032)
+		(stroke
+			(width 0.254)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "32c611ce-4746-4b10-984f-562ec6561750")
+	)
+	(fp_line
+		(start -3.4291 1.905)
+		(end -4.4451 0.889)
+		(stroke
+			(width 0.254)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "461d36ba-124e-4081-8e3a-619d2dfd25db")
+	)
+	(fp_line
+		(start -2.5968 -2.6)
+		(end 5.0999 -2.6)
+		(stroke
+			(width 0.254)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "b98662ef-1c27-4d4b-8d34-58779cc75743")
+	)
+	(fp_line
+		(start 4.4449 -2.032)
+		(end 4.4449 1.905)
+		(stroke
+			(width 0.254)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "874344a7-f880-4b2f-8f0a-a250cab9cbc3")
+	)
+	(fp_line
+		(start 4.4449 1.905)
+		(end -3.4291 1.905)
+		(stroke
+			(width 0.254)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "121cb9c5-ffdb-4303-99ac-28782cf1828b")
+	)
+	(fp_line
+		(start 5.0999 -2.6)
+		(end 5.0999 2.6)
+		(stroke
+			(width 0.254)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "9350d821-c968-46ec-8f5f-1b22da8949ad")
+	)
+	(fp_line
+		(start 5.0999 2.6)
+		(end -2.5061 2.6004)
+		(stroke
+			(width 0.254)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "505067d8-c3d1-40ca-8eab-ed6c7c831e5a")
+	)
+	(fp_rect
+		(start -5.35 -3.05)
+		(end 5.35 3.05)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "c148d588-cf74-4b57-9811-62fa20058e2c")
+	)
+	(fp_line
+		(start -5.1 -2.8)
+		(end 5.1 -2.8)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "b48347ec-afa7-4611-acbf-9c7a1e517f8b")
+	)
+	(fp_line
+		(start -5.1 2.8)
+		(end -5.1 -2.8)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "78c53398-7382-4709-a208-35044f8a773f")
+	)
+	(fp_line
+		(start 5.1 -2.8)
+		(end 5.1 2.8)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "5fa6ac9c-5967-4f23-9a61-ae03869b42d0")
+	)
+	(fp_line
+		(start 5.1 2.8)
+		(end -5.1 2.8)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "8987964d-114e-4d20-97cd-758cf3588ddd")
+	)
+	(fp_arc
+		(start -2.667 -2.667)
+		(mid -2.54 -2.54)
+		(end -2.667 -2.413)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "13c5aff2-e5bc-4240-b739-8194c7efc81b")
+	)
+	(fp_arc
+		(start -2.667 2.413)
+		(mid -5.08 0)
+		(end -2.667 -2.413)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "fecec2a3-ded9-46d7-8a45-d84fae7c4765")
+	)
+	(fp_arc
+		(start -2.667 2.413)
+		(mid -2.54 2.54)
+		(end -2.667 2.667)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "1051585b-d24e-460c-a2be-8d4a8425b3a3")
+	)
+	(fp_arc
+		(start -2.667 2.667)
+		(mid -5.334 0)
+		(end -2.667 -2.667)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "7d76a8c8-4d4b-4631-a156-3d0cff9d769d")
+	)
+	(fp_circle
+		(center -5.1 2.8)
+		(end -5.04 2.8)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "ae7f00b4-c974-475c-a3ad-e9ef9e1c458c")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "1c1a88c4-42a4-4c60-aea5-62067e60ca65")
+		(effects
+			(font
+				(size 0.6 0.6)
+				(thickness 0.1)
+			)
+		)
+	)
+	(pad "1" thru_hole circle
+		(at -2.5 0)
+		(size 2.5 2.5)
+		(drill 1.8)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "6a77392b-4f5e-4079-9c41-4a1928944117")
+	)
+	(pad "2" thru_hole circle
+		(at 2.5 0)
+		(size 2.5 2.5)
+		(drill 1.8)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "36ef0005-77c0-4d19-a87a-75f5258818b5")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/3dmodels/CONN-TH_XT30UPB-M.step"
+		(offset
+			(xyz 0 -0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

@@ -1,0 +1,295 @@
+(footprint "MSOP-10_L3.0-W3.0-P0.50-LS5.0-BL"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0 3.715 0)
+		(layer "F.SilkS")
+		(uuid "3c6675f5-2cc1-4188-b240-e643f752df1f")
+		(effects
+			(font
+				(size 0.7 0.7)
+				(thickness 0.12)
+			)
+		)
+	)
+	(property "Value" "INA226AIDGSR"
+		(at 0 3.97 0)
+		(layer "F.Fab")
+		(uuid "07a7b6d0-9489-4992-b6e6-5de440fdd6b1")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.12)
+			)
+		)
+	)
+	(property "Datasheet" "https://www.lcsc.com/product-detail/C49851.html"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "29febc7a-2744-45d4-8276-7eca87c235fa")
+		(effects
+			(font
+				(size 1 1)
+			)
+		)
+	)
+	(property "Description" "-40℃~+125℃ 0.1uV/℃ 0V~36V 100pA 140dB 2.5uV 2.7V~5.5V 330uA High-side detection、Low-side detection、Bidirectional detection、Power monitoring、Digital output interface、Programmable threshold alarm、Enable"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "d869b839-2a72-40c1-b161-6f9cd6b49738")
+		(effects
+			(font
+				(size 1 1)
+			)
+		)
+	)
+	(property "LCSC" "C49851"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "70ba43f0-efb9-4832-853d-ef9107b30165")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "MPN" "INA226AIDGSR"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "ff57b8fc-95e1-4ce0-8587-0099550244ed")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Manufacturer" "Texas Instruments"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "71221899-fc64-40d1-89ef-1cf922dbb21c")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -1.5762 -1.0714)
+		(end 1.5762 -1.0714)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "6dfbfe93-0764-4719-a3d6-553c69128c4e")
+	)
+	(fp_line
+		(start -1.5762 1.0714)
+		(end -1.5762 -1.0714)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "b22abb96-5dc8-4e14-8ad3-e0a45bc7c584")
+	)
+	(fp_line
+		(start 1.5762 -1.0714)
+		(end 1.5762 1.0714)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "b46cc415-cb7c-4fb6-8e3d-7efca5734118")
+	)
+	(fp_line
+		(start 1.5762 1.0714)
+		(end -1.5762 1.0714)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "d6a1ef5f-29b4-4237-8f9b-9327d7cfffc9")
+	)
+	(fp_circle
+		(center -1 0.319)
+		(end -0.8499 0.319)
+		(stroke
+			(width 0.3)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "002b3566-b2a9-48fc-bdcc-fd66d58ee314")
+	)
+	(fp_rect
+		(start -1.75 -3.17)
+		(end 1.75 3.17)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "1e77f9b7-90cd-422b-a0ea-61f15cbe4063")
+	)
+	(fp_line
+		(start -1.5 -1.5)
+		(end 1.5 -1.5)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "4291097d-f181-4f76-a55c-5f5f4fa538c6")
+	)
+	(fp_line
+		(start -1.5 1.5)
+		(end -1.5 -1.5)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "b69dda6e-428f-4705-8dfb-4ce0fee9beff")
+	)
+	(fp_line
+		(start 1.5 -1.5)
+		(end 1.5 1.5)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "59b5b972-a3c2-4d56-adab-704485a422a6")
+	)
+	(fp_line
+		(start 1.5 1.5)
+		(end -1.5 1.5)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "e3983178-b388-41ab-b68b-6bef971c64b1")
+	)
+	(fp_circle
+		(center -1.4999 2.4501)
+		(end -1.4399 2.4501)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "cfb080ff-eaac-4bca-8e5b-a1499c8e8e0b")
+	)
+	(fp_circle
+		(center -1.016 2.794)
+		(end -0.916 2.794)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "f97f99d8-dc57-4b2d-9524-fb8af9192306")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "4f1f9610-2b52-4999-a2c1-0e56758274dd")
+		(effects
+			(font
+				(size 0.6 0.6)
+				(thickness 0.1)
+			)
+		)
+	)
+	(pad "1" smd oval
+		(at -1 2.11)
+		(size 0.28 1.62)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "b72d3ff7-b41c-4dd4-b40a-67da7eec695c")
+	)
+	(pad "2" smd oval
+		(at -0.4999 2.11)
+		(size 0.28 1.62)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "6e5ffe65-3c3f-4a9d-b646-423046b2b463")
+	)
+	(pad "3" smd oval
+		(at 0 2.11)
+		(size 0.28 1.62)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "16828604-10fd-4823-8bfb-33251adc216d")
+	)
+	(pad "4" smd oval
+		(at 0.5001 2.11)
+		(size 0.28 1.62)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "a81dc41c-a255-4d30-9c6f-1b0900c4ccdc")
+	)
+	(pad "5" smd oval
+		(at 1 2.11)
+		(size 0.28 1.62)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "1f9e1281-d457-45a1-abb6-fe4d203e397c")
+	)
+	(pad "6" smd oval
+		(at 1 -2.11)
+		(size 0.28 1.62)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "20cd5651-378a-4558-a5bc-4652ed23ec79")
+	)
+	(pad "7" smd oval
+		(at 0.5001 -2.11)
+		(size 0.28 1.62)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "4beb2ea5-2f94-43b7-a199-1ec6b7419c0c")
+	)
+	(pad "8" smd oval
+		(at 0 -2.11)
+		(size 0.28 1.62)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "2c8ff245-2dac-463a-bfac-27d19ae6ac1a")
+	)
+	(pad "9" smd oval
+		(at -0.4999 -2.11)
+		(size 0.28 1.62)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "82b98abf-aed8-40dd-b8a5-95cb8b5374c2")
+	)
+	(pad "10" smd oval
+		(at -1 -2.11)
+		(size 0.28 1.62)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "f4eddb05-9fad-4b9e-b6b2-03c76b13c393")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/3dmodels/MSOP-10_L3.0-W3.0-H1.1-LS5.0-P0.50.step"
+		(offset
+			(xyz 0.00004 -0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

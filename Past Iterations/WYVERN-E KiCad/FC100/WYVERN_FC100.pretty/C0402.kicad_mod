@@ -1,0 +1,225 @@
+(footprint "C0402"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0 1.065 0)
+		(layer "F.SilkS")
+		(uuid "eef22a2b-30d9-401e-89ae-af84a23c29d4")
+		(effects
+			(font
+				(size 0.7 0.7)
+				(thickness 0.12)
+			)
+		)
+	)
+	(property "Value" "100nF"
+		(at 0 1.32 0)
+		(layer "F.Fab")
+		(uuid "4058b13a-9e72-4234-960a-7e3fa5ebfc54")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.12)
+			)
+		)
+	)
+	(property "Datasheet" "https://www.lcsc.com/product-detail/C1525.html"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "8f34d790-7812-4837-8048-37d79f1d5933")
+		(effects
+			(font
+				(size 1 1)
+			)
+		)
+	)
+	(property "Description" "100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "0f2afa9b-00ca-4a7f-b793-cdd0252bf611")
+		(effects
+			(font
+				(size 1 1)
+			)
+		)
+	)
+	(property "LCSC" "C1525"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "1f1e6169-8b60-4e5b-8cff-60b359440aac")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "MPN" "CL05B104KO5NNNC"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "9f66ea44-cc7f-4d45-aa72-db6d95d4b444")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Manufacturer" "Samsung Electro-Mechanics"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "293359b1-d3da-4c71-96ae-e311bcc81838")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -0.7214 -0.4975)
+		(end -0.2214 -0.4975)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "bedb7543-5fff-45d4-bc5c-4c85ea57db78")
+	)
+	(fp_line
+		(start -0.2214 0.4996)
+		(end -0.7214 0.4996)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "c3968cae-a648-457b-bfdf-ed152331a1cd")
+	)
+	(fp_line
+		(start 0.2214 -0.4996)
+		(end 0.7214 -0.4996)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "2abb8e72-7508-4b06-9dd2-82d697481235")
+	)
+	(fp_line
+		(start 0.7214 0.4975)
+		(end 0.2214 0.4975)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "bef682bb-3570-4453-9fcb-a03123830efd")
+	)
+	(fp_rect
+		(start -0.92 -0.52)
+		(end 0.92 0.52)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "21e9018e-3c19-462b-a88d-33a7f73fa517")
+	)
+	(fp_line
+		(start -0.5 -0.25)
+		(end 0.5 -0.25)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "9df89266-5fe0-477f-9f1b-9790f8e1ff30")
+	)
+	(fp_line
+		(start -0.5 0.25)
+		(end -0.5 -0.25)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "1754deab-1e22-4147-9f1c-0655d142d5c3")
+	)
+	(fp_line
+		(start 0.5 -0.25)
+		(end 0.5 0.25)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "24348816-1900-4988-8407-5a72de5a0664")
+	)
+	(fp_line
+		(start 0.5 0.25)
+		(end -0.5 0.25)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "f9b5cfb9-31ef-4340-ab0e-d66f1dd244ce")
+	)
+	(fp_circle
+		(center -0.4999 0.2499)
+		(end -0.4399 0.2499)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "f80e65c5-aefe-4266-93fa-53bd04c95cf6")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "46b3d53d-b855-4b36-8ce8-8d1c0459a0bf")
+		(effects
+			(font
+				(size 0.6 0.6)
+				(thickness 0.1)
+			)
+		)
+	)
+	(pad "1" smd rect
+		(at -0.4201 0)
+		(size 0.5 0.54)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "6f97960e-7cbd-4d00-b135-b9b54074d8c6")
+	)
+	(pad "2" smd rect
+		(at 0.4201 0)
+		(size 0.5 0.54)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "e3fe651c-1776-47e1-9615-18d713857fcf")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/3dmodels/C0402_L1.0-W0.5-H0.5.step"
+		(offset
+			(xyz 0 -0 0.25)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

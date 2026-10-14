@@ -1,0 +1,205 @@
+(footprint "IND-SMD_L2.5-W2.0_MHCHL2520"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0 0 270)
+		(layer "F.Fab")
+		(uuid "97e1195d-5053-495d-a37d-59e1be1070cb")
+		(effects
+			(font
+				(size 0.7 0.7)
+				(thickness 0.12)
+			)
+		)
+	)
+	(property "Value" "2.2uH"
+		(at 0 2.15 0)
+		(layer "F.Fab")
+		(uuid "c20a1c26-d6a7-46f6-9471-0e0f39ce3cb8")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.12)
+			)
+		)
+	)
+	(property "Datasheet" "https://www.lcsc.com/product-detail/C5832372.html"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "fabeabe6-5e24-4c84-a16e-57de0f838c4b")
+		(effects
+			(font
+				(size 1 1)
+			)
+		)
+	)
+	(property "Description" "2.2uH 3.8A 3A 55mΩ ±20% 1008 Molding Power Inductors"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "29cd7d59-98e1-4fb5-9494-b8a85e037ea4")
+		(effects
+			(font
+				(size 1 1)
+			)
+		)
+	)
+	(property "LCSC" "C5832372"
+		(at 0 0 90)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e8cb03f3-18e2-4b97-a466-3390e511a0f6")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "MPN" "FTC252012S2R2MBCA"
+		(at 0 0 90)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "c937088a-73f5-419e-b43a-ce62a562201f")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Manufacturer" "cjiang (Changjiang Microelectronics Tech)"
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "10ac4a30-9342-4e2c-ab7f-6c4306ed5744")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -0.35 -1)
+		(end 0.35 -1)
+		(stroke
+			(width 0.2)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "d31e3c86-8d20-49cc-93fd-f51b9fc5d745")
+	)
+	(fp_line
+		(start -0.35 1)
+		(end 0.35 1)
+		(stroke
+			(width 0.2)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "3f7ae8a2-3f8f-4a2a-8ac3-ec527e8e6755")
+	)
+	(fp_rect
+		(start -2.35 -1.35)
+		(end 2.35 1.35)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "7aaade75-4c13-40b2-a3f9-81a68a792e2e")
+	)
+	(fp_line
+		(start -1.25 -1)
+		(end 1.25 -1)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "6ec14872-02fa-42b6-bd2a-c63d4689dcda")
+	)
+	(fp_line
+		(start -1.25 1)
+		(end -1.25 -1)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "6baa4b99-b0ac-4117-a612-1ca5f35e2b76")
+	)
+	(fp_line
+		(start 1.25 -1)
+		(end 1.25 1)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "a4ccd003-bd67-4d8d-8130-becadf13c7b5")
+	)
+	(fp_line
+		(start 1.25 1)
+		(end -1.25 1)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "eef908ce-9286-48c0-b4a8-0296251b7c6d")
+	)
+	(fp_circle
+		(center -1.2498 1)
+		(end -1.1898 1)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "2ec452f7-0d84-4e4a-83a1-ad530502d19b")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "13faab14-397c-4f4f-8e94-5bcc4f5bf5ec")
+		(effects
+			(font
+				(size 0.6 0.6)
+				(thickness 0.1)
+			)
+		)
+	)
+	(pad "1" smd rect
+		(at -1 0 90)
+		(size 2.2 0.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "050e3533-6925-4e79-8f5f-94bf2c367969")
+	)
+	(pad "2" smd rect
+		(at 1 0 90)
+		(size 2.2 0.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "35fa326b-6164-471e-95fd-0c561bd7b5e1")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/3dmodels/IND-SMD_L2.5-W2.0_MHCHL2520.step"
+		(offset
+			(xyz 0 -0 1.16)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

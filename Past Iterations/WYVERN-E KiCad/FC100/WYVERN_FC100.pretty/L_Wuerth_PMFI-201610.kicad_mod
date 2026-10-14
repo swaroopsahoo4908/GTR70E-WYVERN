@@ -1,0 +1,181 @@
+(footprint "L_Wuerth_PMFI-201610"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "Inductor, Wuerth, PMFI-201610, 2.0x1.6x1.0mm, (https://www.we-online.com/components/products/datasheet/74479320165110.pdf)")
+	(tags "Würth SMT")
+	(property "Reference" "REF**"
+		(at 0 0 270)
+		(layer "F.Fab")
+		(uuid "d264d299-a551-42c7-aaa0-5b469afb043d")
+		(effects
+			(font
+				(size 0.7 0.7)
+				(thickness 0.12)
+			)
+		)
+	)
+	(property "Value" "3.3uH"
+		(at 0 1.85 0)
+		(layer "F.Fab")
+		(uuid "43a1e1fa-63ef-42ee-ad47-8b24cb9219ee")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" "https://www.lcsc.com/product-detail/C42411119.html"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "fff08b9c-3bfa-40ef-86d0-e9609d10ecc4")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Description" "0806 Molding Power Inductors"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "2be36410-3bc0-49c5-924d-d4470126b4b9")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "KiLib_Generator" "inductor/SMD"
+		(at 0 0 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "f00c0296-040c-45e9-9b9f-9fefaac3bfb5")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "LCSC" "C42411119"
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "7d803284-04a2-4d8e-91d9-7c796ce38c0f")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "MPN" "AOTA-B201610S3R3-101-T"
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e43f2d01-a148-42f2-8988-d813d1d9fe07")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Manufacturer" "Abracon LLC"
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "88996fa8-9fcc-4767-a448-27c2b0bc1b3a")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -1.11 -1.16)
+		(end 1.11 -1.16)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "6ec775d3-45c3-4d77-b72a-26f8cb74d22c")
+	)
+	(fp_line
+		(start 1.11 1.16)
+		(end -1.11 1.16)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "b322983d-c151-44fc-9330-3d73b71c6795")
+	)
+	(fp_rect
+		(start -1.5 -1.15)
+		(end 1.5 1.15)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "a23ae534-3078-4fb5-a331-64274c8d61bd")
+	)
+	(fp_rect
+		(start -1 -0.8)
+		(end 1 0.8)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "8f398caa-bbbb-466f-a789-a51372dfe26c")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "c054c267-7f35-4877-8dba-cdb31c8d81f0")
+		(effects
+			(font
+				(size 0.5 0.5)
+				(thickness 0.08)
+			)
+		)
+	)
+	(pad "1" smd roundrect
+		(at -0.75 0)
+		(size 1 1.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
+		(uuid "67ebe1e7-45bf-47d9-9745-de069e11c722")
+	)
+	(pad "2" smd roundrect
+		(at 0.75 0)
+		(size 1 1.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
+		(uuid "a40b8dcc-bdb4-4071-b35a-bf49808895c4")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/3dmodels/IND-SMD_L2.0-W1.6_AOTA-B201610S3R3-101-T.step"
+		(offset
+			(xyz 0 0.005 0.05)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

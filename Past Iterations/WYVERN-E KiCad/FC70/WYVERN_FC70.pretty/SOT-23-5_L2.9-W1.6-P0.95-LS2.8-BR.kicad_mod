@@ -1,0 +1,237 @@
+(footprint "SOT-23-5_L2.9-W1.6-P0.95-LS2.8-BR"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0 -2.245 0)
+		(layer "F.SilkS")
+		(uuid "2840329f-3fa1-4ef9-b00e-d388c399c1b6")
+		(effects
+			(font
+				(size 0.7 0.7)
+				(thickness 0.12)
+			)
+		)
+	)
+	(property "Value" "AP2112K-3.3"
+		(at 0 2.5 0)
+		(layer "F.Fab")
+		(uuid "82852863-bb97-41c8-9560-92bb02bd0a1e")
+		(effects
+			(font
+				(size 0.8 0.8)
+				(thickness 0.12)
+			)
+		)
+	)
+	(property "Datasheet" "https://www.lcsc.com/product-detail/C23380830.html"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "6b353046-f314-44a3-9f2c-aae816a24680")
+		(effects
+			(font
+				(size 1 1)
+			)
+		)
+	)
+	(property "Description" "-40℃~+85℃@(Ta) 1 10uA 3.3V 320mV@(600mA) 5.5V 600mA 75dB@(1kHz) Fixed Over Temperature Protection Positive SOT-23-5 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "b8025f37-9a79-4c03-a419-d2546087a09a")
+		(effects
+			(font
+				(size 1 1)
+			)
+		)
+	)
+	(property "LCSC" "C23380830"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "a8796fe3-2e66-4281-91ca-35ce29bae3d1")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "MPN" "AP2112K-3.3TRG1"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "4b7ed1e5-df0f-4c5f-9970-f4fddf0b07d7")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Manufacturer" "TECH PUBLIC"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "230c6e4b-7728-496e-ad17-f4917e7afbe2")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -0.889 0.3731)
+		(end -0.889 -0.3731)
+		(stroke
+			(width 0.254)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "035e7749-0fcb-4ba0-aa17-e11a01f5097d")
+	)
+	(fp_line
+		(start -0.568726 1.524)
+		(end 0.571571 1.524)
+		(stroke
+			(width 0.254)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "0fde0005-7afa-4764-9292-a98824039234")
+	)
+	(fp_line
+		(start -0.366146 -1.397)
+		(end 0.366105 -1.397)
+		(stroke
+			(width 0.254)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "b10179ab-4579-45c2-a548-12aed1e282a5")
+	)
+	(fp_rect
+		(start -1.85 -1.7)
+		(end 1.85 1.7)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "f6cb4c65-5946-4d16-ba3f-98314ffd91d2")
+	)
+	(fp_line
+		(start -0.8 -1.45)
+		(end 0.8 -1.45)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "11e8aa6a-90fe-4990-ae26-e0e2a6c84faf")
+	)
+	(fp_line
+		(start -0.8 1.45)
+		(end -0.8 -1.45)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "bee184e7-8d61-4446-a854-1483c72c0cec")
+	)
+	(fp_line
+		(start 0.8 -1.45)
+		(end 0.8 1.45)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "2f4798a5-bff8-455a-a14a-ab313f764c15")
+	)
+	(fp_line
+		(start 0.8 1.45)
+		(end -0.8 1.45)
+		(stroke
+			(width 0.0508)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "b989a49e-be4f-4a27-b617-8b71f257c79b")
+	)
+	(fp_circle
+		(center 1.1099 1.2501)
+		(end 1.26 1.2501)
+		(stroke
+			(width 0.3)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "769be8b5-f9e0-437e-82d3-0bb2dd5cf529")
+	)
+	(fp_circle
+		(center 1.4 1.4502)
+		(end 1.46 1.4502)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "232b1691-cb69-4b35-82be-ef780a70302d")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "e66951f3-51f7-4019-b669-c5ccfd0fe8cc")
+		(effects
+			(font
+				(size 0.6 0.6)
+				(thickness 0.1)
+			)
+		)
+	)
+	(pad "1" smd rect
+		(at 1.1 0.9498 90)
+		(size 0.6 1)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "b8bc2a0f-e7d1-45f8-bc24-9ab8afb85ea1")
+	)
+	(pad "2" smd rect
+		(at 1.1 0.0001 90)
+		(size 0.6 1)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "66a41e7e-5a7f-4f37-a3f5-91becb8744d6")
+	)
+	(pad "3" smd rect
+		(at 1.1 -0.9498 90)
+		(size 0.6 1)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "9124c7bf-0110-4c07-bf2c-1f88002f2c19")
+	)
+	(pad "4" smd rect
+		(at -1.1002 -0.9501 90)
+		(size 0.6 1)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "907c9202-c103-408b-b9fe-364e78eeba7f")
+	)
+	(pad "5" smd rect
+		(at -1.1002 0.9501 90)
+		(size 0.6 1)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "ac40f06a-54b8-452e-ac5f-49cd8337e3a3")
+	)
+	(embedded_fonts no)
+
+  (model "${KIPRJMOD}/3dmodels/SOT-23-5_L2.9-W1.6-P0.95-LS2.8-BR.step" (offset (xyz -0.0001 -0.0000 0.7000)) (scale (xyz 1 1 1)) (rotate (xyz 0 0 270)))
+
+  (model "${KIPRJMOD}/3dmodels/SOT-23-5_L2.9-W1.6-P0.95-LS2.8-BR.step" (offset (xyz -0.0001 -0.0000 0.7000)) (scale (xyz 1 1 1)) (rotate (xyz 0 0 270)))
+)
