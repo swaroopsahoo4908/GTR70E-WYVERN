@@ -1,0 +1,11 @@
+case,what,force_N,quantity,moment_Nm,moment_about,cp_mm_aft_of_hinge,q_Pa,ref_area_m2,note
+A1,"NACA0006 H40 delta 0 deg, 12 m/s, one fin on the plate",0.0,fin normal force Fz (fin + hub faces),0.0,hinge axis (Y) at the origin,7.68,86.7,0.0012,potential-flow model + Polhamus vortex lift; no stall
+A2,"NACA0006 H40 delta 5 deg, 12 m/s, one fin on the plate",0.02451,fin normal force Fz (fin + hub faces),0.000188,hinge axis (Y) at the origin,7.68,86.7,0.0012,potential-flow model + Polhamus vortex lift; no stall
+A3,"NACA0006 H40 delta 10 deg, 12 m/s, one fin on the plate",0.04971,fin normal force Fz (fin + hub faces),0.000382,hinge axis (Y) at the origin,7.68,86.7,0.0012,potential-flow model + Polhamus vortex lift; no stall
+A4,"NACA0006 H40 delta 15 deg, 12 m/s, one fin on the plate",0.0742,fin normal force Fz (fin + hub faces),0.00057,hinge axis (Y) at the origin,7.68,86.7,0.0012,potential-flow model + Polhamus vortex lift; no stall
+A5,"double_wedge H40 delta 10 deg, 12 m/s, one fin on the plate",0.05523,fin normal force Fz (fin + hub faces),0.000424,hinge axis (Y) at the origin,7.68,86.7,0.0012,potential-flow model + Polhamus vortex lift; no stall
+A6,"NACA0012 H40 delta 10 deg, 12 m/s, one fin on the plate",0.04758,fin normal force Fz (fin + hub faces),0.000366,hinge axis (Y) at the origin,7.68,86.7,0.0012,potential-flow model + Polhamus vortex lift; no stall
+A7,"flat_plate H40 delta 10 deg, 12 m/s, one fin on the plate",0.05112,fin normal force Fz (fin + hub faces),0.000393,hinge axis (Y) at the origin,7.68,86.7,0.0012,potential-flow model + Polhamus vortex lift; no stall
+R1,"full rocket, alpha 0, pitch pair (az 0/180) at +10 deg, stabilizers on, 60 m/s",3.1956,side force on the whole rocket (pair + vortex load on the stabilizers),0.5148,"CG, station 359.7 mm (z = 332.3)",,2167.2,0.0026421,"pair alone 3.545 N; stabilizer interference -0.349 N (ratio -0.099); K_W(B) 1.341, BL 0.901"
+R2,"as R1, stabilizers removed",3.545,side force on the whole rocket,0.60931,"CG, station 359.7 mm",,2167.2,0.0026421,R1 minus R2 isolates the stabilizer vortex load (SQ1)
+R3,"full rocket, alpha 4 deg (pitched about the CG), fins neutral, 60 m/s",2.8993,normal force on the whole rocket,-0.16996,CG (restoring),,2167.2,0.0026421,"CN_alpha 7.25 /rad, CP station 418.3 mm, margin 1.01 cal (Barrowman + K_W(B) + interference)"

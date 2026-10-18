@@ -1,0 +1,91 @@
+{
+  "idle_mA": 103.40622009569378,
+  "flight_mA": 816.8751196172249,
+  "mission_mAh": 56.700510366826165,
+  "required_with_derating_mAh": 104.22887935078339,
+  "pack_mAh": 450,
+  "margin_x": 4.31742145557874,
+  "max_pad_hold_min_on_pack": 169.65251088520674,
+  "loads": [
+    {
+      "name": "RP2040 @125 MHz + Feather 3V3 LDO quiescent",
+      "rail": "5V",
+      "idle_mA": 26.0,
+      "flight_mA": 30.0,
+      "idle_at_pack_mA": 19.44,
+      "flight_at_pack_mA": 22.43
+    },
+    {
+      "name": "RFM95W 915 MHz: pad 2 Hz / flight 20 Hz @ +20 dBm, 21.8 ms packets",
+      "rail": "5V",
+      "idle_mA": 6.88,
+      "flight_mA": 54.4,
+      "idle_at_pack_mA": 5.14,
+      "flight_at_pack_mA": 40.67
+    },
+    {
+      "name": "BNO085 (game rotation vector 400 Hz + accel/gyro)",
+      "rail": "5V",
+      "idle_mA": 12.0,
+      "flight_mA": 12.0,
+      "idle_at_pack_mA": 8.97,
+      "flight_at_pack_mA": 8.97
+    },
+    {
+      "name": "BME688 (T/P/H 50 Hz, gas heater off)",
+      "rail": "5V",
+      "idle_mA": 0.9,
+      "flight_mA": 0.9,
+      "idle_at_pack_mA": 0.67,
+      "flight_at_pack_mA": 0.67
+    },
+    {
+      "name": "ADXL375 high-g accel, 800 Hz ODR",
+      "rail": "5V",
+      "idle_mA": 0.14,
+      "flight_mA": 0.14,
+      "idle_at_pack_mA": 0.1,
+      "flight_at_pack_mA": 0.1
+    },
+    {
+      "name": "microSD write (avg; 100 Hz frames, 512 B blocks)",
+      "rail": "5V",
+      "idle_mA": 8.0,
+      "flight_mA": 30.0,
+      "idle_at_pack_mA": 5.98,
+      "flight_at_pack_mA": 22.43
+    },
+    {
+      "name": "status LED / buzzer (pad beacon, 10 % duty)",
+      "rail": "5V",
+      "idle_mA": 2.0,
+      "flight_mA": 0.0,
+      "idle_at_pack_mA": 1.5,
+      "flight_at_pack_mA": 0.0
+    },
+    {
+      "name": "Pololu 2810 switch (on-state ~210 uA/V)",
+      "rail": "PACK",
+      "idle_mA": 1.6,
+      "flight_mA": 1.6,
+      "idle_at_pack_mA": 1.6,
+      "flight_at_pack_mA": 1.6
+    },
+    {
+      "name": "4 x KST X08 Plus idle hold (digital, PWM active)",
+      "rail": "PACK",
+      "idle_mA": 60.0,
+      "flight_mA": 0.0,
+      "idle_at_pack_mA": 60.0,
+      "flight_at_pack_mA": 0.0
+    },
+    {
+      "name": "4 x KST X08 Plus active (avg over 1 min, bench-calibrate)",
+      "rail": "PACK",
+      "idle_mA": 0.0,
+      "flight_mA": 720.0,
+      "idle_at_pack_mA": 0.0,
+      "flight_at_pack_mA": 720.0
+    }
+  ]
+}

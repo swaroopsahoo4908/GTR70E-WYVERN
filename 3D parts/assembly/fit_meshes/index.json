@@ -1,0 +1,450 @@
+{
+ "01_nose_tangent_ogive_150_ASAAero": {
+  "group": "printed",
+  "color": [
+   0.8,
+   0.82,
+   0.86
+  ]
+ },
+ "02_recovery_bay_tube_ASAAero": {
+  "group": "printed",
+  "color": [
+   0.8,
+   0.82,
+   0.86
+  ]
+ },
+ "03_rb_floor_coupler_PCFR": {
+  "group": "printed",
+  "color": [
+   0.72,
+   0.42,
+   0.12
+  ]
+ },
+ "04_control_tube_servo_ring_ASAAero": {
+  "group": "printed",
+  "color": [
+   0.8,
+   0.82,
+   0.86
+  ]
+ },
+ "05_spine_deck_PETGCF": {
+  "group": "printed",
+  "color": [
+   0.2,
+   0.22,
+   0.25
+  ]
+ },
+ "05b_avionics_spine_PETGCF": {
+  "group": "printed",
+  "color": [
+   0.2,
+   0.22,
+   0.25
+  ]
+ },
+ "07_motor_bay_tube_ASAAero": {
+  "group": "printed",
+  "color": [
+   0.8,
+   0.82,
+   0.86
+  ]
+ },
+ "08_plenum_bulkhead_PCFR": {
+  "group": "printed",
+  "color": [
+   0.72,
+   0.42,
+   0.12
+  ]
+ },
+ "09_motor_mount_tube_aft_ring_PCFR": {
+  "group": "printed",
+  "color": [
+   0.72,
+   0.42,
+   0.12
+  ]
+ },
+ "10_motor_retainer_cap_PCFR": {
+  "group": "printed",
+  "color": [
+   0.72,
+   0.42,
+   0.12
+  ]
+ },
+ "servo_hub_az0": {
+  "group": "printed",
+  "color": [
+   0.2,
+   0.22,
+   0.25
+  ]
+ },
+ "control_fin_az0": {
+  "group": "fin",
+  "color": [
+   0.76,
+   0.25,
+   0.05
+  ]
+ },
+ "servo_hub_az90": {
+  "group": "printed",
+  "color": [
+   0.2,
+   0.22,
+   0.25
+  ]
+ },
+ "control_fin_az90": {
+  "group": "fin",
+  "color": [
+   0.76,
+   0.25,
+   0.05
+  ]
+ },
+ "servo_hub_az180": {
+  "group": "printed",
+  "color": [
+   0.2,
+   0.22,
+   0.25
+  ]
+ },
+ "control_fin_az180": {
+  "group": "fin",
+  "color": [
+   0.76,
+   0.25,
+   0.05
+  ]
+ },
+ "servo_hub_az270": {
+  "group": "printed",
+  "color": [
+   0.2,
+   0.22,
+   0.25
+  ]
+ },
+ "control_fin_az270": {
+  "group": "fin",
+  "color": [
+   0.76,
+   0.25,
+   0.05
+  ]
+ },
+ "stabilizer_0": {
+  "group": "printed",
+  "color": [
+   0.12,
+   0.16,
+   0.22
+  ]
+ },
+ "stabilizer_1": {
+  "group": "printed",
+  "color": [
+   0.12,
+   0.16,
+   0.22
+  ]
+ },
+ "stabilizer_2": {
+  "group": "printed",
+  "color": [
+   0.12,
+   0.16,
+   0.22
+  ]
+ },
+ "stabilizer_3": {
+  "group": "printed",
+  "color": [
+   0.12,
+   0.16,
+   0.22
+  ]
+ },
+ "rail_button_spacer_lower": {
+  "group": "printed",
+  "color": [
+   0.2,
+   0.22,
+   0.25
+  ]
+ },
+ "rail_button_spacer_upper": {
+  "group": "printed",
+  "color": [
+   0.2,
+   0.22,
+   0.25
+  ]
+ },
+ "KST_X08_Plus_az0": {
+  "group": "servo",
+  "color": [
+   0.12,
+   0.3,
+   0.75
+  ]
+ },
+ "servo_horn_az0": {
+  "group": "servo",
+  "color": [
+   0.85,
+   0.85,
+   0.85
+  ]
+ },
+ "KST_X08_Plus_az90": {
+  "group": "servo",
+  "color": [
+   0.12,
+   0.3,
+   0.75
+  ]
+ },
+ "servo_horn_az90": {
+  "group": "servo",
+  "color": [
+   0.85,
+   0.85,
+   0.85
+  ]
+ },
+ "KST_X08_Plus_az180": {
+  "group": "servo",
+  "color": [
+   0.12,
+   0.3,
+   0.75
+  ]
+ },
+ "servo_horn_az180": {
+  "group": "servo",
+  "color": [
+   0.85,
+   0.85,
+   0.85
+  ]
+ },
+ "KST_X08_Plus_az270": {
+  "group": "servo",
+  "color": [
+   0.12,
+   0.3,
+   0.75
+  ]
+ },
+ "servo_horn_az270": {
+  "group": "servo",
+  "color": [
+   0.85,
+   0.85,
+   0.85
+  ]
+ },
+ "bno085": {
+  "group": "vendor",
+  "color": [
+   0.05,
+   0.35,
+   0.55
+  ]
+ },
+ "feather": {
+  "group": "vendor",
+  "color": [
+   0.1,
+   0.1,
+   0.12
+  ]
+ },
+ "bme688": {
+  "group": "vendor",
+  "color": [
+   0.05,
+   0.35,
+   0.55
+  ]
+ },
+ "microsd": {
+  "group": "vendor",
+  "color": [
+   0.05,
+   0.35,
+   0.55
+  ]
+ },
+ "adxl375": {
+  "group": "vendor",
+  "color": [
+   0.05,
+   0.35,
+   0.55
+  ]
+ },
+ "lipo_2S_450": {
+  "group": "cots",
+  "color": [
+   0.85,
+   0.65,
+   0.1
+  ]
+ },
+ "perfboard_16x62": {
+  "group": "cots",
+  "color": [
+   0.55,
+   0.35,
+   0.15
+  ]
+ },
+ "pololu_2810_switch": {
+  "group": "vendor",
+  "color": [
+   0.1,
+   0.45,
+   0.2
+  ]
+ },
+ "pololu_D24V10F5_buck": {
+  "group": "vendor",
+  "color": [
+   0.1,
+   0.45,
+   0.2
+  ]
+ },
+ "screw_switch_standoff_M2": {
+  "group": "cots",
+  "color": [
+   0.8,
+   0.65,
+   0.2
+  ]
+ },
+ "piezo_12mm_lowprofile": {
+  "group": "cots",
+  "color": [
+   0.15,
+   0.15,
+   0.15
+  ]
+ },
+ "cap_470uF_under_board": {
+  "group": "cots",
+  "color": [
+   0.1,
+   0.1,
+   0.4
+  ]
+ },
+ "whip_915MHz_78mm": {
+  "group": "cots",
+  "color": [
+   0.1,
+   0.45,
+   0.85
+  ]
+ },
+ "AeroTech_F42-6T": {
+  "group": "cots",
+  "color": [
+   0.45,
+   0.2,
+   0.7
+  ]
+ },
+ "bypass_tube_3_8in_Al": {
+  "group": "cots",
+  "color": [
+   0.7,
+   0.7,
+   0.72
+  ]
+ },
+ "oring_plenum": {
+  "group": "cots",
+  "color": [
+   0.05,
+   0.05,
+   0.05
+  ]
+ },
+ "oring_rb_floor": {
+  "group": "cots",
+  "color": [
+   0.05,
+   0.05,
+   0.05
+  ]
+ },
+ "M5_eyebolt": {
+  "group": "cots",
+  "color": [
+   0.7,
+   0.7,
+   0.72
+  ]
+ },
+ "chute_24in_packed": {
+  "group": "recovery",
+  "color": [
+   0.95,
+   0.55,
+   0.1
+  ]
+ },
+ "nomex_wrap": {
+  "group": "recovery",
+  "color": [
+   0.85,
+   0.75,
+   0.3
+  ]
+ },
+ "shock_cord_bundle": {
+  "group": "recovery",
+  "color": [
+   0.95,
+   0.85,
+   0.3
+  ]
+ },
+ "nose_ballast_pour": {
+  "group": "cots",
+  "color": [
+   0.35,
+   0.35,
+   0.38
+  ]
+ },
+ "rail_button_1010_lower": {
+  "group": "cots",
+  "color": [
+   0.95,
+   0.95,
+   0.95
+  ]
+ },
+ "rail_button_1010_upper": {
+  "group": "cots",
+  "color": [
+   0.95,
+   0.95,
+   0.95
+  ]
+ }
+}

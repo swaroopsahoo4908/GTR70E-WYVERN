@@ -1,116 +1,568 @@
-[
- [
-  "01_nose_cone_ellipsoid_ASAAero",
-  32.2,
-  20.9,
-  "ASAAERO"
- ],
- [
-  "02_upper_bt_avionics_ASAAero",
-  68.1,
-  44.3,
-  "ASAAERO"
- ],
- [
-  "02b_fc_card_carrier_fwd_ASAAero",
-  8.1,
-  5.2,
-  "ASAAERO"
- ],
- [
-  "02b_fc_card_carrier_aft_ASAAero",
-  8.1,
-  5.2,
-  "ASAAERO"
- ],
- [
-  "03_lower_bt_chute_tvc_ASAAero",
-  120.3,
-  78.2,
-  "ASAAERO"
- ],
- [
-  "04_bulkhead_joint_PETGCF",
-  13.2,
-  17.2,
-  "PETGCF"
- ],
- [
-  "05_motor_mount_29mm_PCFR",
-  48.1,
-  57.7,
-  "PCFR"
- ],
- [
-  "06_tvc_gimbal_2axis_PCFR",
-  88.0,
-  105.6,
-  "PCFR"
- ],
- [
-  "07_fin_single_PETGCF",
-  13.6,
-  17.7,
-  "PETGCF"
- ],
- [
-  "TVC_balance_base",
-  466.9,
-  607.0,
-  "PETGCF"
- ],
- [
-  "TVC_balance_thrust_block",
-  177.3,
-  230.5,
-  "PETGCF"
- ],
- [
-  "TVC_balance_flexure_template",
-  0.2,
-  0.3,
-  "PETGCF"
- ],
- [
-  "TVC_balance_hx711_mount",
-  2.7,
-  3.5,
-  "PETGCF"
- ],
- [
-  "TS_base_plate",
-  247.2,
-  321.4,
-  "PETGCF"
- ],
- [
-  "TS_motor_tower",
-  83.5,
-  108.5,
-  "PETGCF"
- ],
- [
-  "TS_loadcell_bracket",
-  17.3,
-  22.5,
-  "PETGCF"
- ],
- [
-  "08_rail_button_1010_x2",
-  1.0,
-  1.2,
-  "PETGCF"
- ],
- [
-  "static_blast_deflector",
-  281.5,
-  366.0,
-  "PETGCF"
- ],
- [
-  "00_full_assembly",
-  236.1,
-  306.9,
-  "PETGCF"
- ]
-]
+{
+  "generator": "gen_wyvern_fin.py",
+  "L_total_mm": 692.0,
+  "interference": {},
+  "parts": [
+    {
+      "name": "01_nose_tangent_ogive_150_ASAAero",
+      "mat": "ASAAERO",
+      "qty": 1,
+      "vol_cm3": 43.76,
+      "mass_g": 28.44,
+      "x_cg_mm": 120.7,
+      "length_mm": 185.0,
+      "flight": true,
+      "folder": "flight"
+    },
+    {
+      "name": "02_recovery_bay_tube_ASAAero",
+      "mat": "ASAAERO",
+      "qty": 1,
+      "vol_cm3": 70.83,
+      "mass_g": 46.04,
+      "x_cg_mm": 274.9,
+      "length_mm": 250.0,
+      "flight": true,
+      "folder": "flight"
+    },
+    {
+      "name": "03_rb_floor_coupler_PCFR",
+      "mat": "PCFR",
+      "qty": 1,
+      "vol_cm3": 19.19,
+      "mass_g": 23.03,
+      "x_cg_mm": 401.1,
+      "length_mm": 40.0,
+      "flight": true,
+      "folder": "flight"
+    },
+    {
+      "name": "04_control_tube_servo_ring_ASAAero",
+      "mat": "ASAAERO",
+      "qty": 1,
+      "vol_cm3": 60.94,
+      "mass_g": 39.61,
+      "x_cg_mm": 496.0,
+      "length_mm": 173.0,
+      "flight": true,
+      "folder": "flight"
+    },
+    {
+      "name": "05_spine_deck_PETGCF",
+      "mat": "PETGCF",
+      "qty": 1,
+      "vol_cm3": 5.48,
+      "mass_g": 7.12,
+      "x_cg_mm": 514.3,
+      "length_mm": 5.5,
+      "flight": true,
+      "folder": "flight"
+    },
+    {
+      "name": "05b_avionics_spine_PETGCF",
+      "mat": "PETGCF",
+      "qty": 1,
+      "vol_cm3": 10.25,
+      "mass_g": 13.32,
+      "x_cg_mm": 460.7,
+      "length_mm": 91.0,
+      "flight": true,
+      "folder": "flight"
+    },
+    {
+      "name": "06_servo_hub_PETGCF_x4",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 0.41,
+      "mass_g": 2.14,
+      "x_cg_mm": 528.6,
+      "length_mm": 13.0,
+      "flight": true,
+      "folder": "flight"
+    },
+    {
+      "name": "07_motor_bay_tube_ASAAero",
+      "mat": "ASAAERO",
+      "qty": 1,
+      "vol_cm3": 39.08,
+      "mass_g": 25.4,
+      "x_cg_mm": 622.1,
+      "length_mm": 139.0,
+      "flight": true,
+      "folder": "flight"
+    },
+    {
+      "name": "08_plenum_bulkhead_PCFR",
+      "mat": "PCFR",
+      "qty": 1,
+      "vol_cm3": 18.67,
+      "mass_g": 22.4,
+      "x_cg_mm": 593.8,
+      "length_mm": 26.0,
+      "flight": true,
+      "folder": "flight"
+    },
+    {
+      "name": "09_motor_mount_tube_aft_ring_PCFR",
+      "mat": "PCFR",
+      "qty": 1,
+      "vol_cm3": 21.38,
+      "mass_g": 25.66,
+      "x_cg_mm": 656.9,
+      "length_mm": 87.0,
+      "flight": true,
+      "folder": "flight"
+    },
+    {
+      "name": "10_motor_retainer_cap_PCFR",
+      "mat": "PCFR",
+      "qty": 1,
+      "vol_cm3": 10.59,
+      "mass_g": 12.71,
+      "x_cg_mm": 692.0,
+      "length_mm": 11.0,
+      "flight": true,
+      "folder": "flight"
+    },
+    {
+      "name": "12_rect_fin_PETGCF_x4",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 5.66,
+      "mass_g": 29.41,
+      "x_cg_mm": 650.5,
+      "length_mm": 81.0,
+      "flight": true,
+      "folder": "flight"
+    },
+    {
+      "name": "13_rail_button_spacer_PETGCF_x2",
+      "mat": "PETGCF",
+      "qty": 2,
+      "vol_cm3": 0.26,
+      "mass_g": 0.68,
+      "x_cg_mm": 672.0,
+      "length_mm": 11.0,
+      "flight": true,
+      "folder": "flight"
+    },
+    {
+      "name": "control fins x4 (NACA0006 H45, nominal)",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 8.89,
+      "mass_g": 11.55,
+      "x_cg_mm": 535.7,
+      "length_mm": 60.0,
+      "flight": true,
+      "folder": "control_fins"
+    },
+    {
+      "name": "cfin_flat_plate_H20_PETGCF",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 1.45,
+      "mass_g": 7.52,
+      "x_cg_mm": 541.0,
+      "length_mm": 60.0,
+      "flight": false,
+      "folder": "control_fins/flat_plate"
+    },
+    {
+      "name": "cfin_flat_plate_H25_PETGCF",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 1.8,
+      "mass_g": 9.34,
+      "x_cg_mm": 541.1,
+      "length_mm": 60.0,
+      "flight": false,
+      "folder": "control_fins/flat_plate"
+    },
+    {
+      "name": "cfin_flat_plate_H30_PETGCF",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 2.15,
+      "mass_g": 11.16,
+      "x_cg_mm": 541.2,
+      "length_mm": 60.0,
+      "flight": false,
+      "folder": "control_fins/flat_plate"
+    },
+    {
+      "name": "cfin_flat_plate_H35_PETGCF",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 2.5,
+      "mass_g": 12.98,
+      "x_cg_mm": 541.2,
+      "length_mm": 60.0,
+      "flight": false,
+      "folder": "control_fins/flat_plate"
+    },
+    {
+      "name": "cfin_flat_plate_H40_PETGCF",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 2.85,
+      "mass_g": 14.8,
+      "x_cg_mm": 541.2,
+      "length_mm": 60.0,
+      "flight": false,
+      "folder": "control_fins/flat_plate"
+    },
+    {
+      "name": "cfin_flat_plate_H45_PETGCF",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 3.2,
+      "mass_g": 16.62,
+      "x_cg_mm": 541.2,
+      "length_mm": 60.0,
+      "flight": false,
+      "folder": "control_fins/flat_plate"
+    },
+    {
+      "name": "cfin_double_wedge_H20_PETGCF",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 0.79,
+      "mass_g": 4.12,
+      "x_cg_mm": 538.3,
+      "length_mm": 60.0,
+      "flight": false,
+      "folder": "control_fins/double_wedge"
+    },
+    {
+      "name": "cfin_double_wedge_H25_PETGCF",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 0.96,
+      "mass_g": 4.99,
+      "x_cg_mm": 538.7,
+      "length_mm": 60.0,
+      "flight": false,
+      "folder": "control_fins/double_wedge"
+    },
+    {
+      "name": "cfin_double_wedge_H30_PETGCF",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 1.13,
+      "mass_g": 5.89,
+      "x_cg_mm": 538.8,
+      "length_mm": 60.0,
+      "flight": false,
+      "folder": "control_fins/double_wedge"
+    },
+    {
+      "name": "cfin_double_wedge_H35_PETGCF",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 1.31,
+      "mass_g": 6.81,
+      "x_cg_mm": 539.0,
+      "length_mm": 60.0,
+      "flight": false,
+      "folder": "control_fins/double_wedge"
+    },
+    {
+      "name": "cfin_double_wedge_H40_PETGCF",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 1.49,
+      "mass_g": 7.73,
+      "x_cg_mm": 539.0,
+      "length_mm": 60.0,
+      "flight": false,
+      "folder": "control_fins/double_wedge"
+    },
+    {
+      "name": "cfin_double_wedge_H45_PETGCF",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 1.67,
+      "mass_g": 8.66,
+      "x_cg_mm": 539.1,
+      "length_mm": 60.0,
+      "flight": false,
+      "folder": "control_fins/double_wedge"
+    },
+    {
+      "name": "cfin_NACA0006_H20_PETGCF",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 1.0,
+      "mass_g": 5.21,
+      "x_cg_mm": 535.6,
+      "length_mm": 60.0,
+      "flight": false,
+      "folder": "control_fins/NACA0006"
+    },
+    {
+      "name": "cfin_NACA0006_H25_PETGCF",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 1.24,
+      "mass_g": 6.46,
+      "x_cg_mm": 535.6,
+      "length_mm": 60.0,
+      "flight": false,
+      "folder": "control_fins/NACA0006"
+    },
+    {
+      "name": "cfin_NACA0006_H30_PETGCF",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 1.49,
+      "mass_g": 7.73,
+      "x_cg_mm": 535.6,
+      "length_mm": 60.0,
+      "flight": false,
+      "folder": "control_fins/NACA0006"
+    },
+    {
+      "name": "cfin_NACA0006_H35_PETGCF",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 1.73,
+      "mass_g": 9.0,
+      "x_cg_mm": 535.7,
+      "length_mm": 60.0,
+      "flight": false,
+      "folder": "control_fins/NACA0006"
+    },
+    {
+      "name": "cfin_NACA0006_H40_PETGCF",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 1.98,
+      "mass_g": 10.27,
+      "x_cg_mm": 535.7,
+      "length_mm": 60.0,
+      "flight": false,
+      "folder": "control_fins/NACA0006"
+    },
+    {
+      "name": "cfin_NACA0006_H45_PETGCF",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 2.22,
+      "mass_g": 11.55,
+      "x_cg_mm": 535.7,
+      "length_mm": 60.0,
+      "flight": false,
+      "folder": "control_fins/NACA0006"
+    },
+    {
+      "name": "cfin_NACA0012_H20_PETGCF",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 1.81,
+      "mass_g": 9.42,
+      "x_cg_mm": 536.0,
+      "length_mm": 60.0,
+      "flight": false,
+      "folder": "control_fins/NACA0012"
+    },
+    {
+      "name": "cfin_NACA0012_H25_PETGCF",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 2.29,
+      "mass_g": 11.91,
+      "x_cg_mm": 536.0,
+      "length_mm": 60.0,
+      "flight": false,
+      "folder": "control_fins/NACA0012"
+    },
+    {
+      "name": "cfin_NACA0012_H30_PETGCF",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 2.77,
+      "mass_g": 14.42,
+      "x_cg_mm": 535.9,
+      "length_mm": 60.0,
+      "flight": false,
+      "folder": "control_fins/NACA0012"
+    },
+    {
+      "name": "cfin_NACA0012_H35_PETGCF",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 3.26,
+      "mass_g": 16.95,
+      "x_cg_mm": 535.8,
+      "length_mm": 60.0,
+      "flight": false,
+      "folder": "control_fins/NACA0012"
+    },
+    {
+      "name": "cfin_NACA0012_H40_PETGCF",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 3.75,
+      "mass_g": 19.47,
+      "x_cg_mm": 535.8,
+      "length_mm": 60.0,
+      "flight": false,
+      "folder": "control_fins/NACA0012"
+    },
+    {
+      "name": "cfin_NACA0012_H45_PETGCF",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 4.23,
+      "mass_g": 22.01,
+      "x_cg_mm": 535.8,
+      "length_mm": 60.0,
+      "flight": false,
+      "folder": "control_fins/NACA0012"
+    },
+    {
+      "name": "WT_nose_fairing_ogive100_ASA",
+      "mat": "ASA",
+      "qty": 1,
+      "vol_cm3": 30.45,
+      "mass_g": 32.58,
+      "x_cg_mm": 664.2,
+      "length_mm": 120.0,
+      "flight": false,
+      "folder": "wind_tunnel"
+    },
+    {
+      "name": "WT_tail_fairing_sting_socket_ASA",
+      "mat": "ASA",
+      "qty": 1,
+      "vol_cm3": 52.88,
+      "mass_g": 56.58,
+      "x_cg_mm": 729.7,
+      "length_mm": 100.0,
+      "flight": false,
+      "folder": "wind_tunnel"
+    },
+    {
+      "name": "WT_adapter_228sq_to_200sq_x2_PETG",
+      "mat": "PETGCF",
+      "qty": 2,
+      "vol_cm3": 143.33,
+      "mass_g": 372.65,
+      "x_cg_mm": 686.0,
+      "length_mm": 12.0,
+      "flight": false,
+      "folder": "wind_tunnel"
+    },
+    {
+      "name": "WT_strut_fairing_ASA",
+      "mat": "ASA",
+      "qty": 1,
+      "vol_cm3": 12.67,
+      "mass_g": 13.55,
+      "x_cg_mm": 637.0,
+      "length_mm": 110.0,
+      "flight": false,
+      "folder": "wind_tunnel"
+    },
+    {
+      "name": "WT_diffuser_200sq_to_8in_round_PETG",
+      "mat": "PETGCF",
+      "qty": 1,
+      "vol_cm3": 427.73,
+      "mass_g": 556.05,
+      "x_cg_mm": 613.6,
+      "length_mm": 150.0,
+      "flight": false,
+      "folder": "wind_tunnel"
+    },
+    {
+      "name": "WTA_reflection_plane_wall_panel_PETG",
+      "mat": "PETGCF",
+      "qty": 1,
+      "vol_cm3": 68.17,
+      "mass_g": 88.62,
+      "x_cg_mm": 694.0,
+      "length_mm": 4.0,
+      "flight": false,
+      "folder": "wind_tunnel"
+    },
+    {
+      "name": "WTA_servo_balance_cradle_PETG",
+      "mat": "PETGCF",
+      "qty": 1,
+      "vol_cm3": 14.67,
+      "mass_g": 19.07,
+      "x_cg_mm": 715.6,
+      "length_mm": 22.3,
+      "flight": false,
+      "folder": "wind_tunnel"
+    },
+    {
+      "name": "WTA_diffuser_100sq_to_8in_round_PETG",
+      "mat": "PETGCF",
+      "qty": 1,
+      "vol_cm3": 539.36,
+      "mass_g": 701.17,
+      "x_cg_mm": 548.0,
+      "length_mm": 250.0,
+      "flight": false,
+      "folder": "wind_tunnel"
+    },
+    {
+      "name": "WTB_stabilizer_tail_section_ASA",
+      "mat": "ASA",
+      "qty": 1,
+      "vol_cm3": 40.93,
+      "mass_g": 43.79,
+      "x_cg_mm": 741.6,
+      "length_mm": 142.0,
+      "flight": false,
+      "folder": "wind_tunnel"
+    },
+    {
+      "name": "WTB_stabilizer_blade_span20_PETGCF_x4",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 4.15,
+      "mass_g": 21.6,
+      "x_cg_mm": 732.5,
+      "length_mm": 81.0,
+      "flight": false,
+      "folder": "wind_tunnel"
+    },
+    {
+      "name": "WTB_stabilizer_blade_span30_PETGCF_x4",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 6.1,
+      "mass_g": 31.71,
+      "x_cg_mm": 732.5,
+      "length_mm": 81.0,
+      "flight": false,
+      "folder": "wind_tunnel"
+    },
+    {
+      "name": "WTB_stabilizer_blade_span40_PETGCF_x4",
+      "mat": "PETGCF",
+      "qty": 4,
+      "vol_cm3": 8.04,
+      "mass_g": 41.82,
+      "x_cg_mm": 732.5,
+      "length_mm": 81.0,
+      "flight": false,
+      "folder": "wind_tunnel"
+    },
+    {
+      "name": "WTB_slot_plug_x8_PETG",
+      "mat": "PETGCF",
+      "qty": 8,
+      "vol_cm3": 0.4,
+      "mass_g": 4.19,
+      "x_cg_mm": 707.0,
+      "length_mm": 30.0,
+      "flight": false,
+      "folder": "wind_tunnel"
+    }
+  ]
+}

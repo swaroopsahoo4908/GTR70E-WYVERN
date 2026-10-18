@@ -1,119 +1,96 @@
-# GTR70E WYVERN
+# GTR70E WYVERN — fin-controlled research rocket
 
-**Authors:** Swaroop Sahoo, Chris Liu, Allison Hong  
-**Program:** GTR70E WYVERN
+Authors: Swaroop Sahoo, Chris Liu, Allison Hong
 
+A single-stage, 58 mm, actively stabilised rocket. Four servo-driven triangular fins sit in one ring just above the motor, all at the same station, and steer it on ascent; four fixed rectangular stabilizers run the length of the motor and keep it passively stable. The motor's ejection gas reaches the recovery bay through an aluminium tube on the centreline, and the avionics ride on a square spine around that tube. The flight computer is an Adafruit Feather RP2040 with an onboard 915 MHz LoRa radio, which streams telemetry live to a ground station. The thrust-vector-control revision lives, complete, in `TVC ARCHIVED/`.
 
-A single-stage, 70 mm, finned active-TVC sustainer built around a **Raspberry Pi Pico 2 W** on a
-20 x 24 (50 x 70 mm) perfboard, mounted as an axial card in the avionics bay, powered by an
-**Estes F15-4**.
+![vehicle](Documentation/diagrams/D0_cad_renders.png)
 
-The vehicle answers five research questions, run across computational simulation, ground-based
-instrumented testing, and powered flight:
+## Key numbers (`Documentation/CANONICAL_NUMBERS.md` is the full, generated list)
 
-- **RQ1, actuator class.** Magnetic-solenoid vs. servo thrust-vector control, compared on two
-  physically separate, instrumentally identical three-axis load balances. The vehicle flies servo.
-- **RQ2, zoned materials.** ASA-Aero, PETG-CF, and PC-FR allocated by section (upper body, lower
-  body/fins, TVC assembly), justified by bend-to-fracture and thermal data, plus a blast-shield
-  materials screen on the static-fire stand.
-- **RQ3, fin aerofoil selection.** Bench wind-tunnel measurement of candidate fin sections,
-  cross-checked against a 2D vortex-panel CFD solver.
-- **RQ4, wind-tunnel-vs-flight calibration.** Barrowman-predicted stability checked against both
-  tunnel measurement and reconstructed flight telemetry.
-- **RQ5, control-gain sensitivity.** Closed-loop PID gain sets compared across repeated flights on
-  the single-controller avionics architecture.
-
-## Vehicle summary
-
-Single stage, one Pico 2 W as flight computer and real-time controller: dual-core RP2350, one core
-dedicated to the 500 Hz TVC loop, no Linux, native hardware PWM. Telemetry is logged to microSD as
-the data of record; the onboard CYW43439 radio is used for bench telemetry on the ground stand. The magnetic-vs-servo comparison
-runs on the ground (two matched three-axis load balances) rather than in flight, since that gives a
-repeatable, directly-measured thrust vector instead of a single noisy flight-to-flight data point.
-
-**Materials.** ASA-Aero forms the upper body that houses avionics (nose, recovery bay tube, FC bay
-tube) and the lower body tube (chute/TVC bay); PETG-CF forms the fins and the bulkhead joint; PC-FR
-forms the TVC assembly proper (motor mount, gimbal). Zoning follows thermal exposure and structural
-role, not a single blanket material.
-
-## Key numbers (see `Simulations/we4_sim.py` → `plots4/`)
-
-| | value |
+| | |
 |---|---|
-| Liftoff / dry mass | **720 g / 660 g** (finned 87 mm, no ballast) |
-| T/W | 2.04 avg / 3.58 peak |
-| Overall length | **672 mm** (Upper BT 198.4 · bulkhead 4 · Lower BT 350 · nose 120) |
-| CG / CP / margin | 45.0 cm / 53.3 cm / **+1.14 cal** |
-| Gimbal pivot / control arm | 54.8 cm / 9.9 cm from nose |
-| Pitch inertia Iyy | 0.0201 kg·m² |
-| Pitch authority | 17.2 rad/s² at the ±8° limit |
-| Burnout | 3.45 s · 70.1 m · 34.4 m/s |
-| Apogee | ~409 ft / 124.6 m @ 6.72 s (RK4+Barrowman) |
-| Recovery | F15-4 motor ejection; deploys t≈7.45 s (+0.71 s past apogee) @ ~7.1 m/s; 24″ chute → 4.8 m/s descent |
-| TVC | gimbal stays within ±8°; control authority positive throughout the burn |
-| FAA class | Class 1, no waiver (720 g < 1500 g, F-class motor) |
-| Flight computer | Pico 2 W on a 20×24 (50×70 mm) perfboard, axial card in the Upper BT |
-| Sensors | BNO085 ×2 (bay 0x4B, gimbal 0x4A) · BME688 0x76 · BMP388 0x77 · microSD on SPI1 |
-| Power | 2S 450 mAh LiPo → PPTC → arming switch → 5 V 3 A switching UBEC |
-| Launch window | Nov 7–8 2026 primary, Nov 14–15 contingency; data close-out Dec 1 |
+| Length / OD | 692 mm / 58 mm, four printed sections (each fits a 256 mm printer), only the nose separates |
+| Liftoff mass | 806.7 g on an AeroTech Econojet F42-4T (T/W 4.6 avg; 4 motors $87.98, no certification) |
+| CG / CP / margin | 360 / 418 mm, 1.01 cal at liftoff, 1.18 at burnout; 214 g nose ballast, stabilizers 81 x 20 mm at 45°, H45 flight fins |
+| Rail exit | 14.8 m/s off the 6 ft Estes Pro Series II rail (an 8 ft rail would add margin) |
+| Apogee | 167 m (549 ft, under the 600 ft cap) at 6.2 s; motor ejection (4 s delay) via the central 3/8 in bypass tube |
+| Control | 4 x KST X08 Plus in one ring, bases 5 mm from the axis, ±15°, q-scheduled PID at 200 Hz; gust case 0.44° RMS tilt vs 10.4° with fins locked; fins active from rail exit until q̄ < 15 Pa (88 % of the ascent); in-flight authority manoeuvre (doublets + 1° steps) |
+| Avionics | Feather RP2040 RFM95, BNO085 + ADXL375 (core 0 bus), BME688 (core 1 bus) and microSD on a square spine around the bypass tube; a second Feather RP2040 RFM95 is the ground station |
+| Power | 2S 450 mAh, internal screw switch on a MOSFET switch; 26-min mission uses 57 mAh (4.3x margin) |
+| Telemetry | LoRa SF7 / 500 kHz: 42-byte state frames at 20 Hz, manoeuvre result after coast; 57 dB margin at worst slant range |
 
-## Repository structure
+## Research questions (`Documentation/Research_Plan.md`)
+
+Main question: how do aerofoil section (flat plate, 6 % double wedge, NACA 0006, NACA 0012) and fin height (20-40 mm) set the control authority of a servo-actuated triangular fin, and which combination gives the most? Tunnel Phase A (one fin on a reflection plane) plus simulation.
+
+- SQ1: how much do the rectangular stabilizers reduce installed authority, as a function of span and azimuth? `wf_stabilizer.py` plus tunnel Phase B (full finset, stabilizers off / 30 / 40 mm).
+- SQ2: how well do the simulations predict the tunnel, and how far does that carry to flight? Three launches of the best section at H* - 5, H*, H* + 5.
+
+## Repository
 
 ```
 GTR70E WYVERN/
-├── README.md ← this file
-├── .gitignore
-├── Documentation/ ← all engineering docs, BOM, and build readiness
-│ ├── README.md ← documentation index
-│ ├── WYVERN_E4_BUILD_READINESS.md ← GO/NO-GO reconciliation report
-│ ├── WYVERN_E4_Mathematics.md ← mass/CG/inertia, T/W, trajectory, TVC, recovery
-│ ├── WYVERN_E4_Stability_FinSizing.md
-│ ├── WYVERN_E4_FEA_Structural.md
-│ ├── WYVERN_E4_Recovery.md
-│ ├── WYVERN_E4_Camera_Solution.md
-│ ├── WYVERN_E4_GSE_TestStands.md
-│ ├── WYVERN_E4_PID_AUTOTUNE_REPORT.md
-│ ├── WYVERN_E4_BOM.xlsx ← master BOM + purchase links
-│ ├── WYVERN_E4_Timeline_3Month.md ← build-to-flight schedule
-│ ├── WYVERN_E4_Build_Guide.md ← print/bench/assembly/ground-test/range procedures
-│ ├── CANONICAL_NUMBERS.md ← single source of truth for every vehicle number
-│ ├── FLIGHT_READINESS.md
-│ ├── COMPATIBILITY.md
-│ └── CONFLICTS.md ← defect log and design-decision record
-├── Flight Computer/ ← Pico 2 W spec, firmware, perfboard wiring, GSE test rigs
-│ ├── README.md
-│ ├── 01_FlightComputer_Spec.md ← architecture, pin map, power, separation
-│ ├── firmware/wyvern4_tvc/ ← flight + ground-stand firmware (one image, role flag)
-│ └── wiring/ ← perfboard wiring + bay layout diagrams
-├── Simulations/ ← Python RK4 suite, OpenRocket, dataset generator
-│ ├── we4_flight_reduce.py ← post-flight SD log → RQ3/RQ4 results (--selftest first)
-│ ├── README.md
-│ └── wyvern_datagen/ ← Monte Carlo atmospheric dataset generator + GUI
-│ └── README.md
-├── 3D parts/ ← airframe + gimbal STL/STEP
-├── Motor Test Stand/ ← static thrust stand + 3-axis TVC balances
-├── Wind Tunnel/ ← bench aerofoil rig
-├── Senior Research/ ← standalone research proposal (MD / DOCX / PDF)
-├── Data/ ← flight and motor data (populated during testing)
-└── Paper/ ← final research paper
+├── README.md
+├── Documentation/
+│   ├── Design_Overview.md          architecture, servo ring, spine, stability/ballast, motor, bypass sizing
+│   ├── Research_Plan.md            main RQ + SQ1/SQ2, single fin vs four, test matrix, selection rule
+│   ├── Wind_Tunnel_Adaptation.md   Phase A half-model (stock section), Phase B 200 x 200 x 750 + stabilizer tail
+│   ├── Electronics_Telemetry.md    board choice, pin map, power + battery budget, LoRa, firmware
+│   ├── Build_and_Test.md           print settings, assembly stages, sign check, ejection test, pad procedure
+│   ├── Decisions_and_Risks.md      decision log + risk register
+│   ├── CANONICAL_NUMBERS.md        generated by gen_canonical_md.py
+│   ├── WYVERN_FIN_BOM.xlsx         built by build_bom.py (to-buy flight, to-buy tunnel, on hand, retired)
+│   └── diagrams/                   D0 renders, D1 layout, D2 sections, D3 assembly, D4 tunnel, D5 research plan, D6 fit check
+├── 3D parts/
+│   ├── _generator/                 gen_wyvern_fin.py (CadQuery), gen_fit_assembly.py (fit check), mass_report.json
+│   ├── vendor/                     Adafruit + Pololu STEP models of the bought boards
+│   ├── flight/                     STEP + STL for every printed flight part
+│   ├── control_fins/<profile>/     4 profiles x H20-45
+│   ├── wind_tunnel/                WTA_* Phase A panel/cradle/transition, WTB_* stabilizer tail + blades, WT_* Phase B
+│   └── assembly/                   full assembly STEP + STL, fit-check assembly + FIT_REPORT.md
+├── Simulations/
+│   ├── wf_core.py                  single source of truth (geometry, masses, motors, aero, spine board layout)
+│   ├── motors/                     RASP .eng curves from thrustcurve.org (F67W, F67C, G74W, F50T, G40W)
+│   ├── wf_flightsim.py             3-DOF closed-loop flight sim + motor trade + gain tuning + authority manoeuvre
+│   ├── wf_fin_authority.py         4 x 8 profile/height authority sweep (main RQ)
+│   ├── wf_stabilizer.py            stabilizer span x azimuth sweep (SQ1)
+│   ├── wf_stabilizer_planform_trade.py  equal-span / AIM-54 layout trade (S4 plot)
+│   ├── wf_apogee_cap_trade.py      rev 3d: 600 ft cap without losing authority (C plot)
+│   ├── wf_motor_study.py           F42-4T vs F27R-4 / F20W-4 / F20W-7 on 6-10 ft rails (D plot)
+│   ├── wf_bypass.py · wf_power.py · wf_link_budget.py
+│   ├── wyvern_finsim/              GUI simulation & dataset suite (run_gui.py), headless datagen.py
+│   └── CFD/                        vortex-panel 2D + vlm.py 3D vortex lattice + simscale/ RANS package (10 cases)
+├── Flight Computer/
+│   ├── firmware/wyvern_fin/        flight firmware (arduino-pico, compiles)
+│   ├── ground_station/             second Feather RP2040 RFM95 receiver, host recorder
+│   ├── test_code/                  t1 I2C scan, t2 servo cal / tunnel sweep, t3 LoRa range
+│   └── wiring/                     gen_wiring.py -> W1 wiring, W2 power tree, W3 system, W4 spine + perfboard
+├── Wind Tunnel/                    Jerrod H STLs (unchanged) + wt_balance_daq firmware
+├── Motor Test Stand/               static thrust stand (reused)
+├── Data/                           Flight / Motor / Wind Tunnel (empty until testing)
+├── Paper/
+└── TVC ARCHIVED/                   everything from the TVC revision that is not reused
 ```
 
-## Ground test program
+## Re-running the cascade
 
-Four purpose-built stands: a static-fire stand (thrust-curve calibration, engine-bay thermal
-verification, and the RQ2 jetvane blast-shield screen), a servo TVC stand, a physically separate
-magnetic TVC stand, and a bench wind tunnel for RQ3/RQ4 aerofoil work. See
-`Documentation/WYVERN_E4_GSE_TestStands.md` for the full build-out and instrumentation. The ground
-rigs' load-cell DAQ runs on separate off-the-shelf boards. The TVC balance, however, reuses the
-*same* Pico 2 W avionics stack and the *same* firmware image as the flight vehicle, built with
-`-DWYVERN_GROUND_TEST=1` so the bay IMU is not required and launch-detect and recovery compile
-out — the gimbal IMU is the sensor the stand exists to measure.
+```bash
+pip install cadquery numpy-stl matplotlib openpyxl
+cd "3D parts/_generator" && python3 gen_wyvern_fin.py          # CAD + mass_report.json (~25 s)
+python3 gen_fit_assembly.py                                     # fit check with vendor models (~2 min)
+cd ../../Simulations
+python3 wf_core.py --report                                    # canonical_numbers.json
+python3 CFD/run_airfoil_cfd.py && python3 CFD/vlm.py
+python3 wf_flightsim.py            # add --retune after any mass/geometry change
+python3 wf_fin_authority.py        # ~1 min
+python3 wf_stabilizer.py           # ~20 s
+python3 wf_stabilizer_planform_trade.py
+python3 wf_apogee_cap_trade.py && python3 wf_motor_study.py
+python3 wf_bypass.py && python3 wf_power.py && python3 wf_link_budget.py
+cd ../Documentation && python3 gen_canonical_md.py && python3 build_bom.py
+cd diagrams && python3 gen_vehicle_drawings.py && python3 gen_cad_renders.py && python3 gen_tunnel_research.py && python3 gen_fit_render.py
+cd "../../Flight Computer/wiring" && python3 gen_wiring.py
+```
 
-Design and decision history, including why specific numbers or scope changed, lives in
-`Documentation/CONFLICTS.md` rather than here.
-
-## References
-
-Raspberry Pi Ltd. (2024). *RP2350 datasheet*. https://datasheets.raspberrypi.com/rp2350/rp2350-datasheet.pdf
-
-Estes Industries. (n.d.). *F15-4 engines* [Product specification]. Retrieved August 12, 2026, from https://estesrockets.com/products/f15-4-engines
+Then re-run `python3 "Flight Computer/firmware/sil_host/sil_check.py"` (firmware vs sim manoeuvre metrics) and `python3 Simulations/CFD/simscale/gen_simscale.py` if the geometry changed. Copy any changed gains or limits into `Flight Computer/firmware/wyvern_fin/fc_config.h` and run `python3 sync_headers.py`.

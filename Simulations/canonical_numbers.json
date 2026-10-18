@@ -1,0 +1,98 @@
+{
+  "geometry": {
+    "L_total_mm": 692.0,
+    "OD_mm": 58.0,
+    "nose_L": 150.0,
+    "L_RB": 250.0,
+    "L_CT": 173.0,
+    "L_MB": 119.0,
+    "x_hinge_A": 528.6,
+    "x_hinge_B": 528.6,
+    "x_imu": 497.0,
+    "x_rect_le": 610.0,
+    "rect_fin": {
+      "n": 4,
+      "root": 81.0,
+      "tip": 81.0,
+      "span": 20.0,
+      "t": 2.4,
+      "sweep": 0.0,
+      "az0_deg": 45.0,
+      "mat": "PETGCF"
+    },
+    "cfin": {
+      "root": 60.0,
+      "hinge_frac": 0.45,
+      "gap": 1.0,
+      "hub_d": 8.0,
+      "hub_flange_d": 13.0,
+      "hub_flange_t": 1.6,
+      "root_boss_d": 10.0,
+      "root_boss_L": 6.0,
+      "mat": "PETGCF",
+      "defl_max_deg": 15.0
+    },
+    "cfin_heights": [
+      20.0,
+      25.0,
+      30.0,
+      35.0,
+      40.0
+    ],
+    "bypass": {
+      "od": 9.525,
+      "id": 7.75,
+      "mat": "6061-T6 aluminium, 3/8 in OD x 0.035 in wall",
+      "r_center": 0.0,
+      "az_deg": 0.0,
+      "density": 2.7,
+      "L": 199.0
+    },
+    "servo_base_r": 5.0,
+    "ballast_g": 214.0
+  },
+  "vehicles": {
+    "F67-6W": {
+      "liftoff_g": 810.7,
+      "burnout_g": 780.7,
+      "cg_liftoff_mm": 361.2,
+      "cg_burnout_mm": 350.0,
+      "cp_mm": 418.3,
+      "margin_liftoff_cal": 0.99,
+      "margin_burnout_cal": 1.18,
+      "Iyy_kgm2": 0.04734,
+      "TW_avg": 8.35,
+      "TW_peak": 10.66,
+      "arm_A_mm": 167.4,
+      "arm_B_mm": 167.4
+    },
+    "F42-4T": {
+      "liftoff_g": 806.7,
+      "burnout_g": 779.7,
+      "cg_liftoff_mm": 359.7,
+      "cg_burnout_mm": 349.7,
+      "cp_mm": 418.3,
+      "margin_liftoff_cal": 1.01,
+      "margin_burnout_cal": 1.18,
+      "Iyy_kgm2": 0.047,
+      "TW_avg": 4.55,
+      "TW_peak": 8.22,
+      "arm_A_mm": 168.9,
+      "arm_B_mm": 168.9
+    },
+    "G74-6W": {
+      "liftoff_g": 817.7,
+      "burnout_g": 778.4,
+      "cg_liftoff_mm": 363.6,
+      "cg_burnout_mm": 349.1,
+      "cp_mm": 418.3,
+      "margin_liftoff_cal": 0.94,
+      "margin_burnout_cal": 1.19,
+      "Iyy_kgm2": 0.04792,
+      "TW_avg": 8.66,
+      "TW_peak": 11.04,
+      "arm_A_mm": 165.0,
+      "arm_B_mm": 165.0
+    }
+  }
+}
