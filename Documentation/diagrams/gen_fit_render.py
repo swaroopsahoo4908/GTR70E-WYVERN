@@ -14,7 +14,7 @@ sys.path.insert(0, os.path.join(ROOT, "Simulations")); import wf_core as C
 MD = os.path.join(ROOT, "3D parts", "assembly", "fit_meshes")
 IDX = json.load(open(os.path.join(MD, "index.json")))
 REP = json.load(open(os.path.join(ROOT, "3D parts", "assembly", "fit_report.json")))
-SHELLS = ("01_nose", "02_recovery", "03_rb_floor", "04_control_tube", "07_motor_bay", "nomex")
+SHELLS = ("01_nose", "02_recovery", "03_rb_floor", "04_control_tube", "07_motor_bay")
 
 def load(name):
     return mesh.Mesh.from_file(os.path.join(MD, name + ".stl")).vectors.copy()
@@ -61,7 +61,7 @@ fig = plt.figure(figsize=(18, 14))
 gs = fig.add_gridspec(3, 3, height_ratios=[1.0, 1.5, 1.2])
 # A: full vehicle, near half of every shell removed, seen from -Y
 items = [(cut(v, n, axis=0), col) for n, (v, col, g) in PARTS.items()]
-draw(fig.add_subplot(gs[0, :]), items, 0, 0, "A  whole vehicle, near half of the shells removed: nose ballast, packed chute + cord, RB floor + eyebolt, spine with boards, servo ring, motor", horizontal=True)
+draw(fig.add_subplot(gs[0, :]), items, 0, 0, "A  whole vehicle, near half of the shells removed: nose ballast, packed chute + cord, RB floor + printed cord anchor, spine with boards, servo ring, motor", horizontal=True)
 # B: control tube close-up (oblique)
 zlo = L - C.X_CT_BOT - 10; zhi = L - C.X_CT_TOP + 25
 ct_items = []
@@ -73,7 +73,7 @@ for n, (v, col, g) in PARTS.items():
     if n.startswith(SHELLS) or n.startswith("05_spine_deck"):
         mm = vv[..., 1].min(axis=1) >= -0.3; vv = vv[mm]
     ct_items.append((vv, col))
-draw(fig.add_subplot(gs[1, 0:2]), ct_items, 18, -35, "B  control tube cut-away: X08 Plus ring at one station, spine with the vendor BNO085 / Feather / BME688 / microSD / Pololu models, LiPo, bypass")
+draw(fig.add_subplot(gs[1, 0:2]), ct_items, 18, -35, "B  control tube cut-away: ES9251 II ring at one station, spine with the BNO085 / Pico 2 W / BME688 / BMP388 / 4682 microSD / Pololu models, LiPo, bypass")
 # C/D/E: slabs looking down the axis
 def slab(ax, z0, z1, title):
     draw(ax, zband(z0, z1), 90, 0, title)
@@ -83,7 +83,7 @@ zr = L - C.X_CT_BOT + C.SERVO_RING_Z
 slab(fig.add_subplot(gs[1, 2]), zr - 13, zr + 13, f"C  slab through the servo ring (red dashed = {2*C.RI:.1f} mm bore)")
 zs = L - C.X_CT_BOT + C.SPINE_Z0
 slab(fig.add_subplot(gs[2, 0]), zs + 14, zs + 30, "D  slab through the spine: BNO085, BME688, LiPo, perfboard")
-slab(fig.add_subplot(gs[2, 1]), zs + 44, zs + 66, "E  slab through the spine: Feather, microSD, LiPo, perfboard")
+slab(fig.add_subplot(gs[2, 1]), zs + 44, zs + 66, "E  slab through the spine: Pico 2 W, BMP388, LiPo, perfboard")
 ax = fig.add_subplot(gs[2, 2]); ax.axis("off")
 f = REP["interference_faults"]; d = REP["designed_contacts"]
 txt = [f"Fit check ({REP['components']} components)", "",

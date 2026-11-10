@@ -9,7 +9,7 @@ cascade:
     Simulations/wf_core.py --report          -> canonical_numbers.json
     Simulations/wf_flightsim.py              -> trajectories, control, motor trade
     Simulations/wf_fin_authority.py          -> VLM + panel CFD sweep (RQ1/RQ2 predictions)
-    Simulations/wf_bypass.py, wf_power.py, wf_link_budget.py
+    Simulations/wf_bypass.py, wf_power.py
     Documentation/*                          -> quote canonical_numbers.json, never retype
 
 Conventions
@@ -45,23 +45,29 @@ NOSE = dict(type="tangent_ogive", L=150.0, shoulder=35.0, wall=1.6,
             ballast_bay_L=40.0)  # ballast bay = solid-ish tip region, fill per BALLAST_G below
 
 # Section lengths (exposed tube lengths, joints are internal couplers)
-L_RB = float(os.environ.get("WYV_L_RB", 250.0))   # <= 256 so it prints upright on a 256 mm printer   # recovery bay: chute, Nomex, shock cord. Only the nose separates.
+L_RB = float(os.environ.get("WYV_L_RB", 250.0))   # <= 256 so it prints upright on a 256 mm printer   # recovery bay: chute, shock cord (rev 4b: no Nomex). Only the nose separates.
 L_MB = COUPLER_L / 2 + 6.0 + 10.0 + 83.0   # motor bay: shoulder + plenum + gallery + 83 mm motor (aft-flush)
 
 
 
-# ---- Servo: KST X08 Plus (V2) -- 23.5 x 8 x 16.8 mm, coreless, steel gears, aluminium case,
-# 3.8-8.4 V (runs straight off 2S), 5.3 kg-cm / 0.09 s per 60 deg at 8.4 V, 333 Hz frame.
+# ---- Servo: EMAX ES9251 II (rev 3f; was the KST X08 Plus) -- 18.02 x 7.91 x 16.8 mm, digital, coreless,
+# plastic gears, 4.5-6.0 V, 0.27 kg-cm / 0.08 s per 60 deg at 4.8 V. Same 8 mm thickness and 16.8 mm height as
+# the KST, so the ring, bore and OD are unchanged; it runs on its own 5 V MPM3610 rail.
+# Worst-case hinge moment (H45, 15 deg at max q) is ~0.14 kg-cm, about half its stall torque; flight peaks ~0.02.
 # Mounted DIRECTLY to the control-tube wall: its ears bolt to a pad printed into the wall, the
 # output shaft points radially out through the wall into the fin hub. Short height (16.8 mm) is
 # what lets all FOUR servos sit at ONE station around a central bypass tube.
-SERVO = dict(name="KST X08 Plus", L=23.5, W=8.0, H=16.8, mass_g=9.0,
-             torque_kgcm={3.8: 2.4, 6.0: 3.85, 7.4: 4.85, 8.4: 5.3},
-             speed_s60={3.8: 0.18, 6.0: 0.15, 7.4: 0.12, 8.4: 0.09},
-             v_range=(3.8, 8.4),
-             # VERIFY-WITH-CALIPERS (vendor pages give only the case size):
-             ear_span=30.3, ear_t=1.5, ear_from_top=4.0, spline_len=3.0,
-             shaft_from_end=5.5, hole_pitch=26.5)
+SERVO = dict(name="EMAX ES9251 II", L=18.02, W=7.91, H=16.8, mass_g=4.0,
+             # vendor: 0.27 kgf.cm / 0.08 s per 60 deg at 4.8 V; 0.30 / 0.07 at 6.0 V (EMAX, ReadyMadeRC, Amazon B07R3S2NBY)
+             torque_kgcm={4.8: 0.27, 6.0: 0.30},
+             speed_s60={4.8: 0.08, 6.0: 0.07},
+             v_range=(4.5, 6.0), v_rail=5.0,   # rev 3f: on its own MPM3610 5 V rail, not the 2S pack
+             # vendor (Unmanned Tech): mounting holes 21.9 mm apart, tab underside 10.15 mm above the case bottom.
+             # VERIFY-WITH-CALIPERS before printing: ear_span, ear_t, shaft_from_end, horn sizes, ear_screw_d.
+             # spline_len is held at 3.0 so the bore, the hub and the 58 mm OD do not move.
+             ear_span=25.4, ear_t=1.2, ear_from_top=16.8 - 10.15 - 1.2, spline_len=3.0,
+             shaft_from_end=4.5, hole_pitch=21.9, hole_across=0.0, ear_screw_d=1.3,
+             horn_type="arm", horn_disc_d=5.6, horn_arm_w=3.8, horn_arm_L=12.0, horn_hole_r=4.0)
 SERVO_BASE_R = 5.0                                           # inner end of each servo (set by Sky, rev 3)
 SERVO_TOP_R = SERVO_BASE_R + SERVO["H"]                      # 21.8: servo output face
 SPLINE_TOP_R = SERVO_TOP_R + SERVO["spline_len"]             # 24.8: spline tip; horn in the hub-flange pocket
@@ -76,44 +82,59 @@ SERVO_RING_Z = COUPLER_L / 2 + 3.0 + SERVO["ear_span"] / 2   # servo body centre
 HINGE_Z = SERVO_RING_Z + SERVO["L"] / 2 - SERVO["shaft_from_end"]   # shaft toward the nose end
 IMU_DECK_Z = SERVO_RING_Z + SERVO["ear_span"] / 2 + 4.0
 SPINE_Z0 = IMU_DECK_Z + 4.0                                  # avionics spine around the bypass tube
-SPINE_L = 88.0                                               # rev 3c: +4 mm for the high-g accel row on -Y
+SPINE_L = 94.0                                               # rev 4b: the 4682 microSD ends 86 mm up the -Y face
 SPINE_FLAT = 7.0                                             # spine faces 7 mm from the axis
 # board planes (distance of the board's inner face from the axis), chosen so no board corner meets
 # a neighbour and everything stays inside the 27.4 mm bore (checked in gen_fit_assembly.py):
-BOARD_PLANE = dict(px=9.0,      # +X: BNO085 + Feather on 2 mm standoffs
+BOARD_PLANE = dict(px=9.0,      # +X: BNO085 + Pico 2 W on 2 mm standoffs
                    nx=7.5,      # -X: 2S LiPo on foam tape straight on the face
                    py=16.0,     # +Y: power perfboard on 9 mm pillars
-                   ny=16.0)     # -Y: BME688 + microSD on 9 mm pillars
+                   ny=16.0)     # -Y: BME688 + BMP388 on 9 mm pillars, 4682 microSD on 7 mm
 # Every board on the spine: face, z0 above the spine foot, axial length, width, mass (g),
 # mounting holes (lateral, axial) relative to the board's lower-left corner, vendor STEP model.
 # Board sizes and hole grids are read from the vendor STEP files in 3D parts/vendor/.
-SCREW_SWITCH_V = 27.0                 # screw switch, mm up the perfboard (under the 3 mm wall hole)
+# Rev 3e: no screw switch. The Pololu 2810 (15.24 x 15.24 mm, 2.42 mm tall, no mounting holes; its
+# slide knob sticks 0.9 mm out of one edge, per the vendor STEP) moves off the perfboard into a printed
+# cradle on the control-tube wall at +Y, component side facing out, so the knob sits 0.3 mm under a
+# 4 x 12 mm wall slot. The slide travels around the airframe (at right angles to boost and ejection
+# loads) and is flipped with a toothpick. Three 22 AWG leads (VIN, VOUT, GND) run to the perfboard.
+SWITCH = dict(z0=76.0, size=15.24, h=2.42, knob_out=0.9, slot_w=4.0, slot_L=12.0)   # z0: above the spine foot
+# Rev 4: arming moves from the radio uplink to a pushbutton. A 6 x 6 x 5 mm tactile switch
+# (Adafruit 367) and a 3 mm red LED (SparkFun COM-00533) share one printed cradle on the control-tube wall
+# at -Y, the mirror of the 2810 cradle at +Y. The plunger (3.5 mm) sits 0.3 mm under a 4.0 mm wall hole,
+# so it cannot be bumped on the rail but a pen tip reaches it; the LED looks out through a 3.2 mm hole
+# 8 mm above it. The plunger travel is radial, at right angles to boost and ejection loads.
+BUTTON = dict(z0=76.0, body=6.0, h=5.0, plunger_d=3.5, hole_d=4.0, led_d=3.0, led_hole_d=3.2, led_dz=8.0,
+              cradle_L=20.0, cradle_W=10.0)                          # z0: switch body bottom above the spine foot
 SPINE_BOARDS = [
     dict(key="bno085", name="BNO085 IMU (Adafruit 4754)", face="px", z0=2.0, L=25.4, W=22.86, mass=3.0,
          holes=[(2.54, 2.54), (20.32, 2.54), (2.54, 22.86), (20.32, 22.86)], step="adafruit_4754_bno085.step"),
-    dict(key="feather", name="Feather RP2040 RFM95 (Adafruit 5714)", face="px", z0=31.0, L=50.8, W=22.86, mass=8.0,
-         holes=[(2.54, 2.54), (20.32, 2.54), (2.54, 48.26), (20.32, 48.26)],
-         step="adafruit_5712_feather_rp2040_rfm_formfactor.step"),
-    # -Y boards use ONE line of holes each, shifted (offset) so the pillars run up between the
-    # Feather standoffs and the battery / high-g accel (pillar centres within x = -7.5 .. +6.7)
+    # Rev 4b: Raspberry Pi Pico 2 W, 51 x 21 mm, four 2.1 mm holes 11.4 mm apart across and 47.0 mm along
+    # (Raspberry Pi Pico 2 W datasheet). Leads soldered straight into the castellated pads, no headers.
+    # Antenna end up (toward the nose), USB down. Mass is an estimate: weigh it on arrival.
+    dict(key="pico2w", name="Raspberry Pi Pico 2 W (radio unused)", face="px",
+         z0=31.0, L=51.0, W=21.0, mass=4.0, holes=[(4.8, 2.0), (16.2, 2.0), (4.8, 49.0), (16.2, 49.0)], step=None),
+    # -Y boards use ONE line of holes each, shifted (offset) so the pillars clear the +X boards and
+    # the battery (pillar centres within x = -7.5 .. +6.7)
     dict(key="bme688", name="BME688 (Adafruit 5046)", face="ny", z0=5.0, L=25.4, W=17.78, mass=1.5, offset=6.85,
          holes=[(2.54, 2.54), (2.54, 22.86)], step="adafruit_5046_bme688.step"),
-    dict(key="microsd", name="microSD 3V breakout (Adafruit 4682) + card", face="ny", z0=33.0, L=25.4, W=22.86, mass=3.8,
-         offset=-4.89, holes=[(20.32, 2.54), (20.32, 22.86)], step="adafruit_4682_microsd.step"),
-    # rev 3c: the boost can pass the BNO085's 8 g accelerometer range, so the vertical channel uses
-    # this +/-200 g part during boost (Wire1 with the BNO, core 0). Rev 3d: it takes the -Y slot the
-    # GPS had (GPS removed), one line of screws like the other -Y boards.
-    dict(key="adxl375", name="ADXL375 +/-200 g accel (Adafruit 5374)", face="ny", z0=61.0, L=25.4, W=17.78, mass=1.0,
-         offset=6.85, holes=[(2.54, 2.54), (2.54, 22.86)],
-         step="adafruit_4097_adxl343_formfactor_for_5374_adxl375.step"),
-    dict(key="battery", name="2S 450 mAh LiPo", face="nx", z0=14.0, L=57.0, W=30.0, mass=27.0, holes=[], step=None),
-    dict(key="perfboard", name="power perfboard 16 x 62 mm (Pololu 2810 + D24V10F5, screw switch, divider, buzzer, 470 uF)",
+    # Rev 4: primary altimeter. Adafruit 3966 is the same 0.7 x 1.0 in STEMMA QT outline and hole grid as
+    # the 5046, so it reuses that vendor model. It takes the slot the 254 microSD breakout had.
+    dict(key="bmp388", name="BMP388 barometer (Adafruit 3966)", face="ny", z0=33.0, L=25.4, W=17.78, mass=1.4, offset=6.85,
+         holes=[(2.54, 2.54), (2.54, 22.86)], step="adafruit_5046_bme688.step"),
+    # Rev 4b: flight log on an Adafruit 4682 (25.4 x 22.86 mm, 2.5 g; two 2.5 mm holes in one line along
+    # the board's long edge, from the vendor STEP), lowest plane on -Y (14 mm) so the card clears the
+    # arm-button cradle on the wall above it. Card socket at the upper end.
+    dict(key="microsd", name="microSD breakout (Adafruit 4682) + 32 GB card", face="ny", z0=62.0, L=25.4, W=22.86, mass=2.8,
+         offset=-4.0, plane=14.0, holes=[(20.3, 2.5), (20.3, 22.9)], step="adafruit_4682_microsd.step"),
+    dict(key="battery", name="2S 450 mAh LiPo", face="nx", z0=3.0, L=57.0, W=30.0, mass=27.0, holes=[], step=None),
+    dict(key="perfboard", name="power perfboard 16 x 62 mm (2 x Adafruit MPM3610 5 V buck: logic rail + servo rail, divider, 470 uF on the servo rail; the 2810 sits in the wall cradle)",
          face="py", z0=12.0, L=62.0, W=16.0, mass=8.0,
          holes=[(3.5, 2.0), (12.5, 2.0), (3.5, 60.0), (12.5, 60.0)], step=None),
 ]
 def board_plane(bd):
     """Distance of a spine board's inner face from the axis (per-board override, else its face's)."""
-    return bd.get("plane", BOARD_PLANE[bd["face"]])
+    return bd.get("plane") or BOARD_PLANE[bd["face"]]
 L_CT = round(SPINE_Z0 + SPINE_L + 4.0 + COUPLER_L / 2, 0)    # control tube length
 X_HINGE = None             # set after the stations below
 
@@ -160,10 +181,10 @@ CFIN_H_NOMINAL = 45.0      # rev 3d flight fin (top of the H sweep). H* = 40 fro
 
 # ---- Ejection bypass tube (motor plenum -> recovery bay floor) ON THE CENTRELINE, through the
 # middle of the servo ring and the avionics spine; see wf_bypass.py for the diameter trade.
-BYPASS = dict(od=9.525, id=7.75, mat="6061-T6 aluminium, 3/8 in OD x 0.035 in wall",
-              r_center=0.0, az_deg=0.0, density=2.70)
+BYPASS = dict(od=9.5, id=7.5, mat="PC-FR, printed, 1.0 mm wall (rev 3e; was 3/8 in 6061 tube, 7.75 mm ID)",
+              r_center=0.0, az_deg=0.0, density=1.20)
 X_BYPASS_TOP = X_RB_BOT - 2.0          # exits flush with the recovery-bay floor
-X_BYPASS_BOT = X_PLENUM_TOP + 4.0      # seats in an O-ring socket in the plenum bulkhead
+X_BYPASS_BOT = X_PLENUM_TOP + 4.0      # seats in a socket in the plenum bulkhead (high-temp RTV bead)
 BYPASS["L"] = X_BYPASS_BOT - X_BYPASS_TOP
 
 # ---- Rail (Estes Pro Series II launch rail: 6 ft two-piece aluminium, 1010 buttons)
@@ -182,7 +203,7 @@ SECTION_MAT = dict(nose="ASAAERO", rb="ASAAERO", ct="ASAAERO", mb="ASAAERO", cou
 # =============================================================================================
 # 3. COTS MASSES (g) and where they sit (station x, mm)
 # =============================================================================================
-BALLAST_G = float(os.environ.get("WYV_BALLAST", 214.0))  # nose ballast (steel shot in epoxy; may include a <=36 g self-contained camera). Sets the control arm -- see wf_flightsim + Design Overview s.4
+BALLAST_G = float(os.environ.get("WYV_BALLAST", 253.0))  # nose ballast (steel shot in epoxy; may include a <=36 g self-contained camera). Sets the control arm -- see wf_flightsim + Design Overview s.4
 BATTERY = dict(name="OVONIC 2S 7.6 V 450 mAh HV LiPo, XT30", mAh=450, V_nom=7.6,
                V_full=8.7, V_cut=6.4, mass_g=27.0, dims=(57, 30, 14))  # dims VERIFY on hand
 
@@ -192,18 +213,16 @@ def _x_ct(z):  # CT-local height above CT aft end -> station
 COTS = [  # name, mass_g, station_mm, length_mm (for inertia; 0 = point)
     ("nose ballast (steel shot + epoxy)", BALLAST_G, 30.0, 30.0),
     ("parachute 24 in rip-stop (Estes)", 30.0, X_RB_TOP + 90.0, 90.0),
-    ("Nomex blanket 12x12 in", 14.0, X_RB_TOP + 150.0, 40.0),
-    ("aramid shock cord 19 ft + 2 quick links + swivel", 28.0, X_RB_TOP + 175.0, 50.0),
-    ("M5 eyebolt on the RB floor (off-axis, beside the bypass exit)", 6.0, X_RB_BOT - 8.0, 0.0),
+    ("aramid shock cord 19 ft, tied to the printed anchors (no metal hardware)", 22.0, X_RB_TOP + 175.0, 50.0),
     # avionics spine around the central bypass tube (all boards from SPINE_BOARDS)
     *[(bd["name"] + " on spine face " + bd["face"], bd["mass"], _x_ct(SPINE_Z0 + bd["z0"] + bd["L"] / 2), bd["L"]) for bd in SPINE_BOARDS],
-    ("915 MHz 1/4-wave whip (uFL pigtail)", 3.0, _x_ct(SPINE_Z0 + 50), 78.0),
-    ("servo x4 (KST X08 Plus), one ring", 4 * SERVO["mass_g"], X_HINGE, 23.5),
+    ("Pololu 2810 switch in its wall cradle + 3 leads", 3.0, _x_ct(SPINE_Z0 + 84.0), 0.0),
+    ("arm button (Adafruit 367) + 3 mm LED + 220 ohm in the -Y wall cradle, 4 leads", 1.5, _x_ct(SPINE_Z0 + BUTTON["z0"] + 6.0), 0.0),
+    ("servo x4 (EMAX ES9251 II), one ring", 4 * SERVO["mass_g"], X_HINGE, 18.0),
     ("servo horns + M2 hardware x4", 6.0, X_HINGE, 0.0),
     ("harness, connectors, XT30, heat-shrink", 18.0, _x_ct(SPINE_Z0 + 30), 100.0),
     ("heat-set inserts + M3 screws (joints)", 14.0, X_CT_TOP + 0.5 * L_CT, L_TOTAL - 200),
-    ("1010 rail buttons x2 + spacers", 6.0, 0.5 * (X_CT_TOP + X_MB_BOT), 300.0),
-    ("bypass tube O-rings + RTV", 3.0, X_PLENUM_TOP, 0.0),
+    ("bypass tube RTV beads", 2.0, X_PLENUM_TOP, 0.0),
 ]
 
 # =============================================================================================
@@ -241,8 +260,8 @@ MOTORS = {
         "single-use White Lightning 29x83 mm, 30 g propellant; $49.49 per 2-pack (eRockets, "
         "mailable, no hazmat) -> 4 motors $98.98"),
     "F42-4T": _from_eng("AeroTech F42-4T", "AeroTech_F42T.eng", 52.9, [4, 6, 8],
-        "single-use Econojet Blue Thunder 29x83 mm, 27 g propellant; $43.99 per 2-pack "
-        "(New Century Rocketry, 2026-10-16) -> 4 motors $87.98"),
+        "single-use Econojet Blue Thunder 29x83 mm, 27 g propellant; $49.49 per 2-pack "
+        "(eRockets, in stock 2026-10-16; New Century $43.99 was sold out) -> 4 motors $98.98"),
     "G74-6W": _from_eng("AeroTech G74-6W", "AeroTech_G74W.eng", 82.75, [4, 6, 9],
         "single-use Economax 29x83 mm, 39.3 g propellant; price not found online (reference only)"),
 }
@@ -279,7 +298,7 @@ def cd_total(v, h=0.0, cfin_H=CFIN_H_NOMINAL, rect_span=RECT_FIN["span"], motor_
     # blunt fin LE/TE pressure drag (3 mm rounded LE, square TE)
     cd_fin_p = (RECT_FIN["n"] * (RECT_FIN["t"] / 1000) * (rect_span / 1000) * 0.6
                 + 4 * 0.0025 * (cfin_H / 1000) * 0.4) / A_REF
-    cd_prot = 0.03   # rail buttons, fin root bosses, static ports
+    cd_prot = 0.03   # printed rail buttons, fin root bosses, static ports, switch slot
     return cd_fric + cd_nose + cd_base + cd_fin_p + cd_prot
 
 # =============================================================================================
@@ -407,14 +426,18 @@ def mass_properties(motor=None, t=0.0, H=CFIN_H_NOMINAL, ballast_g=None, rect_sp
     motor = motor or FLIGHT_MOTOR
     m = MOTORS[motor]
     items = []
-    cad_span = RECT_FIN["span"]
+    rep = json.load(open(MASS_REPORT)) if os.path.exists(MASS_REPORT) else {}
+    cad = rep.get("cad", {})
+    cad_span = cad.get("rect_span", RECT_FIN["span"]); cad_rroot = cad.get("rect_root", RECT_FIN["root"])
+    cad_H = cad.get("cfin_H", CFIN_H_NOMINAL); cad_croot = cad.get("cfin_root", CFIN["root"])
+    span = RECT_FIN["span"] if rect_span is None else rect_span
     for it in printed_parts():
         name, mg, x, Lc = it
-        if name.startswith("12_rect_fin") and rect_span is not None and rect_span != cad_span:
-            blade = 4 * RECT_FIN["root"] * RECT_FIN["t"] * DENS["PETGCF"] / 1000
-            mg = mg + blade * (rect_span - cad_span)
-        if name.startswith("control fins") and H != CFIN_H_NOMINAL:
-            mg = mg * (H / CFIN_H_NOMINAL) ** 1.0
+        if name.startswith("12_rect_fin"):
+            # blade area changes; the two root tabs stay the same
+            mg = mg + 4 * RECT_FIN["t"] * DENS["PETGCF"] / 1000 * (span * RECT_FIN["root"] - cad_span * cad_rroot)
+        if name.startswith("control fins"):
+            mg = mg * (H * CFIN["root"]) / (cad_H * cad_croot)
         items.append((name, mg, x, Lc))
     cots = [list(c) for c in COTS]
     if ballast_g is not None: cots[0][1] = ballast_g

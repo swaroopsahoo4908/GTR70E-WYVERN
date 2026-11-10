@@ -1,0 +1,5 @@
+./Documentation/diagrams/D4_wind_tunnel_adaptation.png
+./Documentation/diagrams/D4_wind_tunnel_adaptation.svg
+./Documentation/diagrams/D5_research_plan.png
+./Documentation/diagrams/D5_research_plan.svg
+./Documentation/diagrams/gen_tunnel_research.py

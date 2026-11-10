@@ -1,66 +1,58 @@
 {
-  "idle_mA": 103.40622009569378,
-  "flight_mA": 816.8751196172249,
-  "mission_mAh": 56.700510366826165,
-  "required_with_derating_mAh": 104.22887935078339,
+  "idle_mA": 72.73003095975233,
+  "flight_mA": 306.2439628482972,
+  "mission_mAh": 35.40824561403509,
+  "required_with_derating_mAh": 65.08868679050568,
   "pack_mAh": 450,
-  "margin_x": 4.31742145557874,
-  "max_pad_hold_min_on_pack": 169.65251088520674,
+  "margin_x": 6.913643863308676,
+  "max_pad_hold_min_on_pack": 248.22973122536374,
   "loads": [
     {
-      "name": "RP2040 @125 MHz + Feather 3V3 LDO quiescent",
+      "name": "Pico 2 W, RP2350 @ 150 MHz, CYW43 radio off, incl. its RT6150 buck-boost (~30 mA)",
       "rail": "5V",
-      "idle_mA": 26.0,
+      "idle_mA": 30.0,
       "flight_mA": 30.0,
-      "idle_at_pack_mA": 19.44,
-      "flight_at_pack_mA": 22.43
+      "idle_at_pack_mA": 23.22,
+      "flight_at_pack_mA": 23.22
     },
     {
-      "name": "RFM95W 915 MHz: pad 2 Hz / flight 20 Hz @ +20 dBm, 21.8 ms packets",
-      "rail": "5V",
-      "idle_mA": 6.88,
-      "flight_mA": 54.4,
-      "idle_at_pack_mA": 5.14,
-      "flight_at_pack_mA": 40.67
-    },
-    {
-      "name": "BNO085 (game rotation vector 400 Hz + accel/gyro)",
+      "name": "BNO085 (game rotation vector 200 Hz + gyro/accel 400 Hz)",
       "rail": "5V",
       "idle_mA": 12.0,
       "flight_mA": 12.0,
-      "idle_at_pack_mA": 8.97,
-      "flight_at_pack_mA": 8.97
+      "idle_at_pack_mA": 9.29,
+      "flight_at_pack_mA": 9.29
     },
     {
-      "name": "BME688 (T/P/H 50 Hz, gas heater off)",
+      "name": "BMP388 normal mode 50 Hz, pressure x8 (Bosch DS: ~0.7 mA at this rate)",
+      "rail": "5V",
+      "idle_mA": 0.7,
+      "flight_mA": 0.7,
+      "idle_at_pack_mA": 0.54,
+      "flight_at_pack_mA": 0.54
+    },
+    {
+      "name": "BME688 (T/P/H 10 Hz forced, gas heater off)",
       "rail": "5V",
       "idle_mA": 0.9,
       "flight_mA": 0.9,
-      "idle_at_pack_mA": 0.67,
-      "flight_at_pack_mA": 0.67
+      "idle_at_pack_mA": 0.7,
+      "flight_at_pack_mA": 0.7
     },
     {
-      "name": "ADXL375 high-g accel, 800 Hz ODR",
-      "rail": "5V",
-      "idle_mA": 0.14,
-      "flight_mA": 0.14,
-      "idle_at_pack_mA": 0.1,
-      "flight_at_pack_mA": 0.1
-    },
-    {
-      "name": "microSD write (avg; 100 Hz frames, 512 B blocks)",
+      "name": "microSD on SPI, Adafruit 4682 (avg; 10 Hz on the pad unarmed / 100 Hz armed + flight, 512 B sectors)",
       "rail": "5V",
       "idle_mA": 8.0,
       "flight_mA": 30.0,
-      "idle_at_pack_mA": 5.98,
-      "flight_at_pack_mA": 22.43
+      "idle_at_pack_mA": 6.19,
+      "flight_at_pack_mA": 23.22
     },
     {
-      "name": "status LED / buzzer (pad beacon, 10 % duty)",
+      "name": "arm LED 3 mm via 220 ohm (pad blink, ~5 % duty; off in flight)",
       "rail": "5V",
-      "idle_mA": 2.0,
+      "idle_mA": 0.3,
       "flight_mA": 0.0,
-      "idle_at_pack_mA": 1.5,
+      "idle_at_pack_mA": 0.23,
       "flight_at_pack_mA": 0.0
     },
     {
@@ -72,20 +64,20 @@
       "flight_at_pack_mA": 1.6
     },
     {
-      "name": "4 x KST X08 Plus idle hold (digital, PWM active)",
-      "rail": "PACK",
-      "idle_mA": 60.0,
+      "name": "4 x EMAX ES9251 II idle hold (digital, PWM active), 5 V servo rail",
+      "rail": "SRV",
+      "idle_mA": 40.0,
       "flight_mA": 0.0,
-      "idle_at_pack_mA": 60.0,
+      "idle_at_pack_mA": 30.96,
       "flight_at_pack_mA": 0.0
     },
     {
-      "name": "4 x KST X08 Plus active (avg over 1 min, bench-calibrate)",
-      "rail": "PACK",
+      "name": "4 x EMAX ES9251 II active (avg over 1 min, bench-calibrate), 5 V servo rail",
+      "rail": "SRV",
       "idle_mA": 0.0,
-      "flight_mA": 720.0,
+      "flight_mA": 320.0,
       "idle_at_pack_mA": 0.0,
-      "flight_at_pack_mA": 720.0
+      "flight_at_pack_mA": 247.68
     }
   ]
 }

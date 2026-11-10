@@ -3,29 +3,33 @@
 | # | group | from | to | signal | wire | cut length | note |
 |---|---|---|---|---|---|---|---|
 | 1 | power | 2S LiPo XT30 | perfboard XT30 pigtail | BAT+ / BAT- | 16 AWG silicone pair | 60 mm | XT30 mated pair; the only removable power joint |
-| 2 | power | perfboard 2810 VOUT | perfboard VSW bus | VSW | solid 22 AWG bus wire | 40 mm | runs the length of the perfboard edge |
-| 3 | power | perfboard 2810 CTRL | screw-switch standoff | CTRL | on-board | on board | screw closes CTRL to GND = ON |
-| 4 | power | perfboard VSW bus | D24V10F5 VIN | VSW | on-board | on board |  |
-| 5 | power | D24V10F5 VOUT | Feather USB pin | 5V | 24 AWG silicone, red | 90 mm | solder to the USB pad, +Y to +X face around the spine |
-| 6 | power | perfboard GND star | Feather GND | GND | 24 AWG silicone, black | 90 mm | star point is the 2810 GND pad |
-| 7 | power | perfboard VSW bus | 470 µF + 100 nF (underside) | VSW | on-board | on board | servo rail bulk cap |
-| 8 | power | perfboard divider 100k/47k + 100 nF | Feather A0 (GP26) | VBAT_SENSE | 28 AWG silicone, orange | 90 mm | VBAT x 47/147 |
-| 9 | servo | servo 0 A+ (az 0) red / brown | perfboard VSW / GND | VSW / GND | servo lead, shortened | 110 mm | solder; up the +X/+Y diagonal slot |
-| 10 | servo | servo 1 A- (az 180) red / brown | perfboard VSW / GND | VSW / GND | servo lead, shortened | 130 mm | up the -X/-Y slot, round the spine foot |
-| 11 | servo | servo 2 B+ (az 90) red / brown | perfboard VSW / GND | VSW / GND | servo lead, shortened | 100 mm | up the +Y slot |
-| 12 | servo | servo 3 B- (az 270) red / brown | perfboard VSW / GND | VSW / GND | servo lead, shortened | 130 mm |  |
-| 13 | servo | servo 0 orange | Feather D5 (GP5) | PWM A+ | servo lead signal | 120 mm | 200 Hz, 1 µs |
-| 14 | servo | servo 1 orange | Feather D6 (GP6) | PWM A- | servo lead signal | 140 mm |  |
-| 15 | servo | servo 2 orange | Feather D9 (GP9) | PWM B+ | servo lead signal | 120 mm |  |
-| 16 | servo | servo 3 orange | Feather D11 (GP11) | PWM B- | servo lead signal | 140 mm |  |
-| 17 | I2C1 core 0 | Feather STEMMA QT | BNO085 STEMMA QT | 3V3 GND SDA SCL | STEMMA QT 100 mm (4210) | 100 mm | Wire1, 400 kHz |
-| 18 | I2C1 core 0 | BNO085 STEMMA QT (2nd port) | ADXL375 STEMMA QT | 3V3 GND SDA SCL | STEMMA QT 300 mm (5384, owned) | 300 mm | +X low to -Y high; fold the slack under a strap |
-| 19 | I2C1 core 0 | BNO085 INT | Feather D24 (GP24) | INT | 28 AWG silicone | 70 mm | data-ready, active low |
-| 20 | I2C1 core 0 | BNO085 RST | Feather D25 (GP25) | RST | 28 AWG silicone | 70 mm |  |
-| 21 | I2C0 core 1 | BME688 STEMMA QT | Feather TX GP0 / RX GP1 / 3V / GND | SDA0 SCL0 3V3 GND | STEMMA QT to male header 150 mm (4209) | 150 mm | header pins soldered into TX, RX, 3V, GND; blue = SDA, yellow = SCL |
-| 22 | SPI1 | microSD 4682 CLK / SI / SO / CS | Feather SCK GP14 / MO GP15 / MI GP8 / D10 GP10 | SCK MOSI MISO CS | 4 x 28 AWG silicone, twisted with GND | 110 mm | shares SPI1 with the onboard radio; 3V only |
-| 23 | SPI1 | microSD 4682 3V / GND | Feather 3V / GND | 3V3 GND | 2 x 28 AWG | 110 mm |  |
-| 24 | I/O | perfboard 2N3904 base (1k) | Feather D12 (GP12) | BUZZER | 28 AWG silicone | 90 mm | piezo between the 5 V rail and the NPN collector |
-| 25 | RF | Feather ANT pad | 1/4-wave whip | 915 MHz | 78 mm 22 AWG solid | 78 mm | up the wall over the +X face, >= 20 mm from the Al bypass tube |
+| 2 | power | XT30 pigtail (perfboard top) | 2810 VIN (wall cradle) | BAT+ | 22 AWG silicone, red | 50 mm | 2810 sits in the CT-wall cradle at +Y, above the perfboard |
+| 3 | power | 2810 VOUT (wall cradle) | perfboard VSW bus | VSW | 22 AWG silicone, red | 50 mm | the VSW bus runs the length of the perfboard edge |
+| 4 | power | 2810 GND (wall cradle) | perfboard GND star | GND | 22 AWG silicone, black | 50 mm |  |
+| 5 | power | perfboard VSW bus | MPM3610 VIN | VSW | on-board | on board | EN unconnected (enabled by default; tie low to shut off) |
+| 6 | power | MPM3610 5V | 1N5817 anode (on the perfboard) | 5V | on-board | on board | Schottky so USB on the bench can never back-feed the buck (Pico datasheet's external-supply circuit) |
+| 7 | power | 1N5817 cathode | Pico VSYS (pin 39) | 5V | 24 AWG silicone, red | 90 mm | +Y to +X face around the spine |
+| 8 | power | perfboard GND star | Pico GND (pin 38) | GND | 24 AWG silicone, black | 90 mm | star point on the perfboard |
+| 9 | power | perfboard VSW bus | MPM3610 #2 VIN (servo buck) | VSW | on-board | on board | rev 3f: the ES9251 II is a 4.5-6 V servo |
+| 10 | power | MPM3610 #2 5V | perfboard SRV bus | SRV | on-board | on board | servo rail only; EN unconnected |
+| 11 | power | perfboard SRV bus | 470 µF + 100 nF (underside) | SRV | on-board | on board | servo rail bulk cap |
+| 12 | power | perfboard divider 100k/47k + 100 nF | Pico GP26 (ADC0) | VBAT_SENSE | 28 AWG silicone, orange | 90 mm | VBAT x 47/147; 3.3 V max at the pin |
+| 13 | servo | servo 0 A+ (az 0) red / brown | perfboard SRV / GND | SRV / GND | servo lead, shortened | 110 mm | solder; up the +X/+Y diagonal slot |
+| 14 | servo | servo 1 A- (az 180) red / brown | perfboard SRV / GND | SRV / GND | servo lead, shortened | 130 mm | up the -X/-Y slot, round the spine foot |
+| 15 | servo | servo 2 B+ (az 90) red / brown | perfboard SRV / GND | SRV / GND | servo lead, shortened | 100 mm | up the +Y slot |
+| 16 | servo | servo 3 B- (az 270) red / brown | perfboard SRV / GND | SRV / GND | servo lead, shortened | 130 mm |  |
+| 17 | servo | servo 0 orange | Pico GP10 | PWM A+ | servo lead signal | 110 mm | 200 Hz, 1 µs |
+| 18 | servo | servo 1 orange | Pico GP11 | PWM A- | servo lead signal | 130 mm |  |
+| 19 | servo | servo 2 orange | Pico GP12 | PWM B+ | servo lead signal | 110 mm |  |
+| 20 | servo | servo 3 orange | Pico GP13 | PWM B- | servo lead signal | 130 mm |  |
+| 21 | I2C0 | BNO085 STEMMA QT | Pico GP4 SDA / GP5 SCL / 3V3 / GND | SDA SCL 3V3 GND | STEMMA QT to male header 150 mm (4209) | 150 mm | header pins soldered into the Pico's holes; blue = SDA, yellow = SCL |
+| 22 | I2C0 | BNO085 INT | Pico GP6 | INT | 28 AWG silicone | 60 mm | data-ready, active low |
+| 23 | I2C0 | BNO085 RST | Pico GP7 | RST | 28 AWG silicone | 60 mm |  |
+| 24 | I2C1 | BMP388 STEMMA QT | Pico GP2 SDA / GP3 SCL / 3V3 / GND | SDA1 SCL1 3V3 GND | STEMMA QT to male header 150 mm (4209) | 150 mm | close the BMP388's ADDR jumper first (0x76) |
+| 25 | I2C1 | BMP388 STEMMA QT (2nd port) | BME688 STEMMA QT | SDA1 SCL1 3V3 GND | STEMMA QT 100 mm (4210) | 100 mm | both on -Y; BME688 stays at 0x77 |
+| 26 | SPI0 | 4682 CLK / DI / DO / CS | Pico GP18 / GP19 / GP16 / GP17 | SCK MOSI MISO CS | 4 x 28 AWG silicone, twisted with GND | 110 mm | -Y top to +X; 3 V only, no level shifter needed |
+| 27 | SPI0 | 4682 3V / GND | Pico 3V3 OUT / GND | 3V3 GND | 2 x 28 AWG | 110 mm |  |
+| 28 | arm | 6 mm tactile switch (wall cradle, -Y) | Pico GP14 / GND | BUTTON | 2 x 28 AWG silicone | 110 mm | internal pull-up; switch to GND |
+| 29 | arm | 3 mm LED anode via 220 R (wall cradle) | Pico GP15 | LED | 28 AWG silicone | 110 mm | resistor on the LED leg, heat-shrunk; cathode to the button's GND |
 
-Wire to cut (single conductors, before service loops): 16 AWG silicone pair: 60 mm, solid 22 AWG bus wire: 40 mm, 24 AWG silicone, red: 90 mm, 24 AWG silicone, black: 90 mm, 28 AWG silicone, orange: 90 mm, 28 AWG silicone: 230 mm, 4 x 28 AWG silicone, twisted with GND: 110 mm, 2 x 28 AWG: 110 mm, 78 mm 22 AWG solid: 78 mm.
+Wire to cut (single conductors, before service loops): 16 AWG silicone pair: 60 mm, 22 AWG silicone, red: 100 mm, 22 AWG silicone, black: 50 mm, 24 AWG silicone, red: 90 mm, 24 AWG silicone, black: 90 mm, 28 AWG silicone, orange: 90 mm, 28 AWG silicone: 230 mm, 4 x 28 AWG silicone, twisted with GND: 110 mm, 2 x 28 AWG: 110 mm, 2 x 28 AWG silicone: 110 mm.

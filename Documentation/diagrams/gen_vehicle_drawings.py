@@ -61,16 +61,16 @@ def vehicle_layout():
     ax.add_patch(Rectangle((C.X_RB_BOT - 1.5, -C.RI), 3, 2 * C.RI, fc=COL["plenum"], ec=INK, lw=0.4, zorder=3))
     # chute bundle, nomex, cord
     ax.add_patch(FancyBboxPatch((C.X_RB_TOP + 55, -24), 95, 48, boxstyle="round,pad=2", fc=COL["chute"], ec=INK, lw=0.5, alpha=0.55))
-    ax.text(C.X_RB_TOP + 102, 0, "24 in chute\n+ Nomex", ha="center", va="center", fontsize=7)
+    ax.text(C.X_RB_TOP + 102, 0, "24 in chute", ha="center", va="center", fontsize=7)
     tt = np.linspace(C.X_RB_TOP + 165, C.X_RB_BOT - 12, 80)
     ax.plot(tt, 6 * np.sin((tt - tt[0]) / 7), color="#92400e", lw=0.9)
-    ax.text(C.X_RB_BOT - 85, 16, "aramid shock cord (nose <-> RB-floor M5 eyebolt)", fontsize=6.5, ha="center")
+    ax.text(C.X_RB_BOT - 85, 16, "aramid shock cord (nose bar <-> printed RB-floor anchor, tied)", fontsize=6.5, ha="center")
     # ballast
     ax.add_patch(Polygon([[12, -4], [12, 4], [45, 10], [45, -10]], fc="#525252", ec=INK, lw=0.4))
     ax.text(30, -26, f"ballast {C.BALLAST_G:.0f} g", fontsize=6.5, ha="center")
     # bypass tube on the centreline
     ax.add_patch(Rectangle((C.X_BYPASS_TOP, -C.BYPASS["od"] / 2), C.BYPASS["L"], C.BYPASS["od"], fc=COL["bypass"], ec=INK, lw=0.5, alpha=0.95, zorder=4))
-    ax.annotate("ejection bypass tube on the centreline\n3/8 in OD Al, plenum -> RB floor", xy=(C.X_BYPASS_TOP + 30, 4), xytext=(C.X_BYPASS_TOP - 60, R + 62),
+    ax.annotate("ejection bypass tube on the centreline\nprinted PC-FR 9.5 mm OD, plenum -> RB floor", xy=(C.X_BYPASS_TOP + 30, 4), xytext=(C.X_BYPASS_TOP - 60, R + 62),
                 fontsize=7, arrowprops=dict(arrowstyle="-", lw=0.5), ha="center")
     zb = C.X_CT_BOT
     xs0 = zb - C.SPINE_Z0 - C.SPINE_L
@@ -83,12 +83,10 @@ def vehicle_layout():
         x0b = zb - C.SPINE_Z0 - bd["z0"] - bd["L"]
         col = COL["batt"] if bd["key"] == "battery" else (COL["imu"] if bd["key"] == "bno085" else COL["fc"])
         ax.add_patch(Rectangle((x0b, sgn * P if sgn > 0 else -P - th), bd["L"], th, fc=col, ec=INK, lw=0.5, zorder=5))
-        lab = dict(bno085="BNO085", feather="Feather RFM95", battery="2S 450 mAh", adxl375="ADXL375", gps="GPS", bme688="BME688", microsd="microSD").get(bd["key"], bd["key"])
+        lab = dict(bno085="BNO085", pico2w="Pico 2 W", battery="2S 450 mAh", bmp388="BMP388", bme688="BME688", microsd="microSD").get(bd["key"], bd["key"])
         ax.text(x0b + bd["L"] / 2, sgn * (P + th + 4) if sgn > 0 else -P - th / 2, lab, fontsize=5.8, ha="center", va="center", color="white" if sgn < 0 else col, weight="bold", zorder=6)
-    ax.annotate("avionics spine around the tube:\n+Y power perfboard (switch, buck, screw sw.)\n-Y BME688 + microSD", xy=(xs0 + 35, -5), xytext=(xs0 - 70, -R - 40),
+    ax.annotate("avionics spine around the tube:\n+Y power perfboard (2 bucks, divider); 2810 in a wall cradle\n-Y BME688, BMP388, 4682 microSD; arm button + LED in the -Y wall", xy=(xs0 + 35, -5), xytext=(xs0 - 70, -R - 40),
                 fontsize=6.5, arrowprops=dict(arrowstyle="-", lw=0.5), ha="center", color="#166534")
-    ax.plot([xs0 + 5, xs0 + 70], [C.RI - 3, C.RI - 3], color="#0284c7", lw=1.2)
-    ax.text(xs0 + 2, C.RI - 3, "915 MHz whip", fontsize=6, ha="right", va="center", color="#0284c7")
     ax.plot([xs0 + 3, xs0 + 3], [R - 1.6, R], color="red", lw=2)
     ax.annotate("BNO085: lowest board on the spine, right above the servo ring", xy=(C.X_IMU, 12), xytext=(C.X_IMU + 10, R + 40), fontsize=7,
                 arrowprops=dict(arrowstyle="-", lw=0.5), ha="center", color=COL["imu"])
@@ -186,7 +184,7 @@ def cross_sections():
         rect(ax, C.SPLINE_TOP_R, 42, C.CFIN["hub_d"], az, fc="#94a3b8", ec=INK, lw=0.4, zorder=4)
         rect(ax, R + C.CFIN["gap"], R + C.CFIN["gap"] + H, 2.4, az, fc=COL["cfin"], ec=INK, lw=0.5, zorder=4)
     bypass(ax)
-    ax.annotate(f"servo bases at r = {C.SERVO_BASE_R:.1f} mm, {C.SERVO_BASE_R - C.BYPASS['od']/2:.2f} mm\nclear of the 3/8 in tube; leads run up the diagonal gaps", xy=(-6, -6), xytext=(-55, -72), fontsize=6.5, arrowprops=dict(arrowstyle="-", lw=0.4), ha="center")
+    ax.annotate(f"servo bases at r = {C.SERVO_BASE_R:.1f} mm, {C.SERVO_BASE_R - C.BYPASS['od']/2:.2f} mm\nclear of the bypass tube; leads run up the diagonal gaps", xy=(-6, -6), xytext=(-55, -72), fontsize=6.5, arrowprops=dict(arrowstyle="-", lw=0.4), ha="center")
     ax.annotate(f"{sv['name']}\n{sv['L']:.1f} x {sv['W']:.0f} x {sv['H']:.1f} mm", xy=(18, 3), xytext=(30, 44), fontsize=6.5, arrowprops=dict(arrowstyle="-", lw=0.4), color=COL["servo"])
     ax.annotate("wall pad: ears bolt to its inner face,\nservo top through the window", xy=(27, -7), xytext=(30, -66), fontsize=6.3, arrowprops=dict(arrowstyle="-", lw=0.4))
     def spine_slab(ax, zrel, title):
@@ -199,7 +197,7 @@ def cross_sections():
             P = C.board_plane(bd); th = 14.0 if bd["key"] == "battery" else 1.6
             comp = 0 if bd["key"] == "battery" else (3.5 if bd["key"] != "perfboard" else 6.0)
             off = bd.get("offset", 0.0)
-            col = dict(battery=COL["batt"], bno085=COL["imu"], feather=COL["fc"], perfboard="#7c2d12").get(bd["key"], "#0891b2")
+            col = dict(battery=COL["batt"], bno085=COL["imu"], pico2w=COL["fc"], perfboard="#7c2d12").get(bd["key"], "#0891b2")
             az = dict(px=0, py=90, nx=180, ny=270)[bd["face"]]
             rect(ax, P, P + th, bd["W"], az, fc=col, ec=INK, lw=0.5, zorder=4) if off == 0 else None
             if off:
@@ -211,7 +209,7 @@ def cross_sections():
                 a_ = math.radians(az); ca, sa = math.cos(a_), math.sin(a_)
                 pts = [(P + th, off - cw / 2), (P + th + comp, off - cw / 2), (P + th + comp, off + cw / 2), (P + th, off + cw / 2)]
                 ax.add_patch(Polygon([(x * ca - y * sa, x * sa + y * ca) for x, y in pts], fc=col, ec=INK, lw=0.3, alpha=0.35, zorder=4))
-            name = dict(battery="2S LiPo", bno085="BNO085", feather="Feather RFM95", perfboard="perfboard", bme688="BME688", microsd="microSD", gps="GPS", adxl375="ADXL375")[bd["key"]]
+            name = dict(battery="2S LiPo", bno085="BNO085", pico2w="Pico 2 W", perfboard="perfboard", bme688="BME688", bmp388="BMP388", microsd="microSD")[bd["key"]]
             lx, ly = {0: (44, 8), 90: (0, R + 20), 180: (-46, 8), 270: (0, -R - 20)}[az]
             ax.text(lx, ly, name, fontsize=6.5, ha="center", color=col, weight="bold")
         ax.text(0, -R - 40, "board positions from wf_core.SPINE_BOARDS;\nvendor-model check in D6", fontsize=6, ha="center", color=MUTED)
@@ -245,7 +243,7 @@ def assembly_stages():
     fig, ax = plt.subplots(figsize=(17, 6.8)); ax.set_aspect("equal"); ax.axis("off")
     gap = 70
     parts = [("Nose cone", 0, C.NOSE["L"] + C.NOSE["shoulder"], COL["nose"], "ballast bay, shock-cord bar,\nonly part that separates"),
-             ("Recovery bay tube", C.X_RB_TOP, C.L_RB, COL["rb"], "chute, Nomex, cord;\nRB-floor coupler bonded in its aft end"),
+             ("Recovery bay tube", C.X_RB_TOP, C.L_RB, COL["rb"], "chute, cord;\nRB-floor coupler bonded in its aft end"),
              ("Control tube", C.X_CT_TOP, C.L_CT, COL["ct"], "servo-ring pads printed in;\nspine above, 4 servos + hubs at one station"),
              ("Motor bay tube", C.X_MB_TOP - 20, C.L_MB + 20, COL["mb"], "integral shoulder, plenum + gallery,\nMMT, 4 stabilizers, retainer")]
     x = 0
@@ -258,7 +256,7 @@ def assembly_stages():
         x += L + gap
     # bypass tube drawn separately
     ax.add_patch(Rectangle((C.NOSE["L"] + 50, R + 60), C.BYPASS["L"], 12, fc=COL["bypass"], ec=INK, lw=0.6))
-    ax.text(C.NOSE["L"] + 50 + C.BYPASS["L"] / 2, R + 78, f"5. bypass tube ({C.BYPASS['L']:.0f} mm, O-ring both ends) — goes in LAST from the top, before the chute is packed",
+    ax.text(C.NOSE["L"] + 50 + C.BYPASS["L"] / 2, R + 78, f"5. bypass tube ({C.BYPASS['L']:.0f} mm, RTV bead both ends) — goes in LAST from the top, before the chute is packed",
             ha="center", fontsize=7.5)
     steps = ["STAGE 1  Motor bay: bond MMT + stabilizers (TTW tabs) + plenum skirt (central socket); inserts in aft ring",
              "STAGE 2  Control tube: servos out through the pad windows, ears screwed; hubs on; IMU deck; avionics spine (wired on the bench)",
@@ -266,7 +264,7 @@ def assembly_stages():
              "STAGE 4  Join recovery bay (with RB-floor coupler) -> control tube (3 x M3)",
              "STAGE 5  Drop the bypass tube down the axis: RB floor -> spine -> IMU deck -> plenum socket; RTV the top land",
              "STAGE 6  Fit control fins on the hubs (M2 cross-pins) — swappable per test configuration",
-             "STAGE 7  Pack Nomex + chute + cord, fit nose (2 x #2-56 nylon shear pins), install motor + retainer at the pad"]
+             "STAGE 7  Pack chute + cord, fit nose (2 x #2-56 nylon shear pins), install motor + retainer at the pad"]
     for i, s in enumerate(steps):
         ax.text(0, -R - 70 - i * 14, s, fontsize=7.8, family="DejaVu Sans Mono", color=INK)
     ax.set_xlim(-20, x); ax.set_ylim(-R - 180, R + 95)

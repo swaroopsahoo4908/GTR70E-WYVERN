@@ -106,7 +106,7 @@ if __name__ == "__main__":
     exp = [(n, v.copy(), c, g) for n, v, c, g in hp]
     for n, v, c, g in exp: v[..., 0] += {3: 330, 2: 220, 1: 110}.get(g, 0) if n != "rbc" else 220
     draw(fig.add_subplot(gs[1, :]), exp, 0, 18, 10, "exploded: retainer | motor bay | control tube | RB-floor coupler + recovery bay | nose")
-    draw(fig.add_subplot(gs[2, 0]), cutaway(pl + internals()), 0, 20, 35, "control tube cut-away: servo ring (4 x X08 Plus, one station), spine deck, avionics spine, central bypass tube")
+    draw(fig.add_subplot(gs[2, 0]), cutaway(pl + internals()), 0, 20, 35, "control tube cut-away: servo ring (4 x ES9251 II, one station), spine deck, avionics spine, central bypass tube")
     mb = [p for p in pl if p[0] in ("mb", "plenum", "mmt", "ret", "rfin")]
     mb = [(n, v[v[..., 1].min(axis=1) >= -0.5] if n in ("mb", "plenum") else v, c, g) for n, v, c, g in mb]
     draw(fig.add_subplot(gs[2, 1]), mb, 0, 20, 35, "motor bay cut-away: plenum + gas gallery (central bypass socket), MMT, through-wall stabilizers, retainer")

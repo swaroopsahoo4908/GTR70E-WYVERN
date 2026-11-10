@@ -2,13 +2,13 @@
 """GTR70E WYVERN -- ejection bypass tube: diameter trade, lumped-volume gas dynamics.
 
 The motor's ejection charge fires into a small PC-FR plenum over the motor cap, runs up an
-central aluminium bypass tube up the vehicle axis, through the servo ring and the avionics spine, and pressurises the recovery bay,
+central printed PC-FR bypass tube up the vehicle axis, through the servo ring and the avionics spine, and pressurises the recovery bay,
 which pushes the nose off. Nothing else separates.
 
 Three control volumes, ideal gas with BP-product properties, isentropic orifice flow
 (choked/unchoked) between them, convective wall heat loss in each, and a 1.5 mm vent from the bay:
 
-   plenum (V_p, PC-FR walls)  --tube inlet-->  tube (V_t = pi/4 d^2 L, Al wall)  --exit-->  bay (V_b)
+   plenum (V_p, PC-FR walls)  --tube inlet-->  tube (V_t = pi/4 d^2 L, PC-FR wall)  --exit-->  bay (V_b)
 
 Charge: m_bp grams of black powder burned over ~5 ms (triangular rate), lumped with the rocketry
 convention R*T = 22.16 ft-lbf/lbm-R x 3307 R = 219 J per gram of powder, gamma 1.25; wall heat loss
@@ -39,7 +39,7 @@ H_BAY = 150.0   # W/m2K, bay mixing; tuned so a closed bay reaches ~60 % of the 
 V_PLENUM = (math.pi * (C.RI - 2.0) ** 2 * C.GALLERY_H) * 1e-9  # full-bore gas gallery
 BAY_L = (C.X_RB_BOT - 1.5) - (C.X_RB_TOP + C.NOSE["shoulder"])            # free bay length, mm
 V_BAY_GROSS = math.pi * C.RI ** 2 * BAY_L * 1e-9
-V_PACKED = 230e-6      # chute + Nomex + cord + quick links, m^3 (measure; ~1/3 of the bay)
+V_PACKED = 230e-6      # chute + cord, m^3 (measure; ~1/3 of the bay). Rev 4b dropped the Nomex; kept as a conservative volume
 V_BAY = V_BAY_GROSS - V_PACKED
 A_BAY = math.pi * C.RI ** 2 * 1e-6                                         # nose piston area
 SHEAR_PINS = dict(n=2, size="#2-56 nylon", F_each_N=110.0)                 # ~25 lbf each (measure)

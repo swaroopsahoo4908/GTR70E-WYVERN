@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """GTR70E WYVERN -- battery budget: 25 min pad idle + ~1 min powered/coast flight, 2S LiPo.
+Rev 4b: Pico 2 W flight computer + Adafruit 4682 microSD, no radio, no high-g accelerometer.
 
 Current draws are datasheet/typical values (sources in Documentation/Electronics_Power.md) at the
-loads' own rails, referred to the pack through the D24V10F5 buck (eta 0.88) or directly (servos are
-HV and run straight off the switched 2S rail). Bench-measure the servo idle current: digital
-coreless servos vary 5-40 mA idle at 7.4 V depending on hold behaviour.
+loads' own rails, referred to the pack through the Adafruit MPM3610 bucks (eta ~0.85): one for the logic,
+a second for the four EMAX ES9251 II servos at 5.0 V (rev 3f). Bench-measure the servo currents: the vendor
+gives about 100 mA moving and 300 mA stalled at 3.6 V for the coreless motor.
 """
 import json, os
 import numpy as np
@@ -13,24 +14,25 @@ import matplotlib.pyplot as plt
 import wf_core as C
 
 OUT = os.path.join(C.HERE, "plots_power"); os.makedirs(OUT, exist_ok=True)
-V_PACK = 7.6; ETA_BUCK = 0.88; V_LOGIC = 5.0
+V_PACK = 7.6; ETA_BUCK = 0.85; V_LOGIC = 5.0; V_SERVO = 5.0; ETA_SERVO = 0.85
 # (name, rail, idle_mA, flight_mA)
 LOADS = [
-    ("RP2040 @125 MHz + Feather 3V3 LDO quiescent", "5V", 26.0, 30.0),
-    ("RFM95W 915 MHz: pad 2 Hz / flight 20 Hz @ +20 dBm, 21.8 ms packets", "5V", 0.044 * 120 + 1.6, 0.44 * 120 + 1.6),
-    ("BNO085 (game rotation vector 400 Hz + accel/gyro)", "5V", 12.0, 12.0),
-    ("BME688 (T/P/H 50 Hz, gas heater off)", "5V", 0.9, 0.9),
-    ("ADXL375 high-g accel, 800 Hz ODR", "5V", 0.14, 0.14),
-    ("microSD write (avg; 100 Hz frames, 512 B blocks)", "5V", 8.0, 30.0),
-    ("status LED / buzzer (pad beacon, 10 % duty)", "5V", 2.0, 0.0),
+    ("Pico 2 W, RP2350 @ 150 MHz, CYW43 radio off, incl. its RT6150 buck-boost (~30 mA)", "5V", 30.0, 30.0),
+    ("BNO085 (game rotation vector 200 Hz + gyro/accel 400 Hz)", "5V", 12.0, 12.0),
+    ("BMP388 normal mode 50 Hz, pressure x8 (Bosch DS: ~0.7 mA at this rate)", "5V", 0.7, 0.7),
+    ("BME688 (T/P/H 10 Hz forced, gas heater off)", "5V", 0.9, 0.9),
+    ("microSD on SPI, Adafruit 4682 (avg; 10 Hz on the pad unarmed / 100 Hz armed + flight, 512 B sectors)", "5V", 8.0, 30.0),
+    ("arm LED 3 mm via 220 ohm (pad blink, ~5 % duty; off in flight)", "5V", 0.3, 0.0),
     ("Pololu 2810 switch (on-state ~210 uA/V)", "PACK", 1.6, 1.6),
-    ("4 x KST X08 Plus idle hold (digital, PWM active)", "PACK", 4 * 15.0, 0.0),
-    ("4 x KST X08 Plus active (avg over 1 min, bench-calibrate)", "PACK", 0.0, 4 * 180.0),
+    ("4 x EMAX ES9251 II idle hold (digital, PWM active), 5 V servo rail", "SRV", 4 * 10.0, 0.0),
+    ("4 x EMAX ES9251 II active (avg over 1 min, bench-calibrate), 5 V servo rail", "SRV", 0.0, 4 * 80.0),
 ]
 T_IDLE_MIN, T_FLIGHT_MIN = 25.0, 1.0
 
 def at_pack(mA, rail):
-    return mA if rail == "PACK" else mA * V_LOGIC / (V_PACK * ETA_BUCK)
+    if rail == "PACK": return mA
+    if rail in ("6V", "SRV"): return mA * V_SERVO / (V_PACK * ETA_SERVO)
+    return mA * V_LOGIC / (V_PACK * ETA_BUCK)
 
 if __name__ == "__main__":
     idle = sum(at_pack(l[2], l[1]) for l in LOADS)

@@ -10,7 +10,6 @@
 | `wf_stabilizer.py` | `plots_stabilizer/`: SQ1 sweep of stabilizer span (0-60 mm) x azimuth offset (0 / 22.5 / 45°): margin, interference ratio, installed / isolated authority, closed-loop gust case with fins active and locked, tunnel Phase B load predictions |
 | `wf_bypass.py` | `plots_bypass/`: ejection-gas lumped model, tube diameter trade |
 | `wf_power.py` | `plots_power/`: 25 min idle + 1 min flight battery budget |
-| `wf_link_budget.py` | `plots_link/`: LoRa time-on-air, sensitivity, range |
 | `CFD/run_airfoil_cfd.py` | 2D vortex-panel polars for the four sections (method carried over from the TVC revision) |
 | `CFD/vlm.py` | 3D horseshoe vortex-lattice model of the triangular fin (CNα, CP, hinge arm) |
 

@@ -9,7 +9,7 @@ Forces : thrust on the body axis; drag on the air-relative velocity; component-w
          its pitch damping without a separate C_mq term.
 Control: PID on tilt with rate feedback, gains scheduled on dynamic pressure (K ~ q_ref / q),
          servo = rate-limited first-order lag whose slew rate drops linearly with hinge-moment
-         load (KST X08 Plus torque-speed line). Control engages at rail exit.
+         load (servo torque-speed line, wf_core.SERVO). Control engages at rail exit.
 Wind   : power-law mean wind + 1-cosine discrete gust + Dryden-like first-order turbulence.
 
 Run:  python3 wf_flightsim.py            -> plots_flight/*.png + flight_summary.json
@@ -35,13 +35,16 @@ SERVO_TAU = 0.020           # s, digital-servo position loop lag
 HINGE_ARM_FRAC = 0.14       # (x_cp - x_hinge)/c_root from CFD/vlm.py at H = 30 mm (0.155 @20 .. 0.128 @40)
 
 def servo_rate_max(v_batt=7.6):
+    # rev 3f: the ES9251 II servos sit on a regulated 5 V rail (SERVO["v_rail"]); v_batt only matters if it sags below it
+    v = min(v_batt, C.SERVO.get("v_rail", v_batt))
     sp = C.SERVO["speed_s60"]; vs = sorted(sp)
-    s60 = float(np.interp(v_batt, vs, [sp[k] for k in vs]))
+    s60 = float(np.interp(v, vs, [sp[k] for k in vs]))
     return (60 * D2R) / s60
 
 def servo_stall_Nm(v_batt=7.6):
+    v = min(v_batt, C.SERVO.get("v_rail", v_batt))
     tq = C.SERVO["torque_kgcm"]; vs = sorted(tq)
-    return float(np.interp(v_batt, vs, [tq[k] for k in vs])) * 0.0980665
+    return float(np.interp(v, vs, [tq[k] for k in vs])) * 0.0980665
 
 class Vehicle:
     # Per-flight dispersion hooks (Monte-Carlo suite, wyvern_finsim/engine.py). Defaults = nominal.
@@ -67,7 +70,7 @@ class Vehicle:
         import sys as _s; _s.path.insert(0, os.path.join(C.HERE, "CFD"))
         from vlm import fin_vlm
         # ONE control fin, normal-force slope referenced to A_REF (VLM, ref S_f -> ref A)
-        self.cna_1 = fin_vlm(H)["CNa"] * (g["area"] / (math.pi * C.OD ** 2 / 4)) * profile_eta
+        self.cna_1 = fin_vlm(H, c=g["root"], hinge_frac=C.CFIN["hinge_frac"])["CNa"] * (g["area"] / (math.pi * C.OD ** 2 / 4)) * profile_eta
         self.interf = C.vortex_interference(H, rect_span)   # fixed-fin vortex interference ratio
         self.Kc = C.K_WB(C.R / (C.R + H))
         self.k_defl = self.Kc if k_defl is None else k_defl   # deflection: slender-body k_W(B)+k_B(W) = K_W(B)

@@ -18,7 +18,7 @@ Tabs
   6. Authority Manoeuvre doublet + attitude-step programme: nominal response and Monte-Carlo spread
   7. Fin Authority / SQ1 authority matrix, stabilizer span x offset trade, planform trade (plots
                          from wf_fin_authority / wf_stabilizer / wf_stabilizer_planform_trade)
-  8. Wind Tunnel Bench   Phase A sweep on two TAL221 cells through the NAU7802 chain, profile
+  8. Wind Tunnel Bench   Phase A sweep on two 1 kg bar cells through the HX711 chain, profile
                          comparison, raw vs calibrated
   9. Static Motor Tester .eng curves on the motor stand through the HX711 chain
  10. Super Combined      live N-flight run: apogee, landing scatter, tilt, authority fits
@@ -53,7 +53,6 @@ ENGINES = [
     ("Stabilizer planform trade", ["wf_stabilizer_planform_trade.py"]),
     ("Ejection bypass", ["wf_bypass.py"]),
     ("Battery budget", ["wf_power.py"]),
-    ("LoRa link budget", ["wf_link_budget.py"]),
     ("2D airfoil polars (vortex panel)", [os.path.join("CFD", "run_airfoil_cfd.py")]),
     ("SimScale CFD package (STEP/STL + setup)", [os.path.join("CFD", "simscale", "gen_simscale.py")]),
 ]
@@ -442,7 +441,7 @@ class Suite(tk.Tk):
         self.pid_txt.delete("1.0", "end")
         self.pid_txt.insert("end", f"tilt rms {r['tilt_rms_deg']:.2f} deg (firmware {r0['tilt_rms_deg']:.2f}, locked {rl['tilt_rms_deg']:.2f})\n"
                             f"tilt max {r['tilt_max_deg']:.2f} deg\nservo rate-limited {r['servo_rate_sat_s'] * 1000:.0f} ms\n"
-                            f"peak hinge {r['max_hinge_Nm'] * 1000:.1f} mN m (X08 Plus stall ~{F.servo_stall_Nm() * 1000:.0f})\n"
+                            f"peak hinge {r['max_hinge_Nm'] * 1000:.1f} mN m ({C.SERVO['name']} stall ~{F.servo_stall_Nm() * 1000:.0f})\n"
                             f"apogee {r['apogee_m']:.1f} m\n\nfc_config.h:\n#define WYV_KP {g['kp']:.2f}f\n#define WYV_KI {g['ki']:.2f}f\n"
                             f"#define WYV_KD {g['kd']:.2f}f\n#define WYV_Q_REF_PA {g['q_ref']:.0f}.0f\n#define WYV_SCHED_MIN {g['k_min']:.2f}f\n"
                             f"#define WYV_SCHED_MAX {g['k_max']:.2f}f\n")
@@ -611,7 +610,7 @@ class Suite(tk.Tk):
         f = ttk.Frame(nb); nb.add(f, text="Wind Tunnel Bench")
         left = ttk.Frame(f); left.pack(side="left", fill="y", padx=8, pady=6)
         ttk.Label(left, text="Phase A: one fin on the reflection plate", font=("", 12, "bold")).pack(anchor="w")
-        ttk.Label(left, justify="left", text="Servo cradle on two 100 g TAL221 cells, 60 mm apart\nalong the chord, NAU7802 at 80 SPS. t2 sweep: -15..+15 deg,\n0.5 deg steps, 3 s dwell, last 2 s averaged.").pack(anchor="w")
+        ttk.Label(left, justify="left", text="Servo cradle on two 1 kg bar cells, 60 mm apart\nalong the chord, HX711 at 10 SPS on the tunnel Metro M4. Sweep: -15..+15 deg,\n0.5 deg steps, 3 s dwell, last 2 s averaged.").pack(anchor="w")
         self.tb = {}
         r = ttk.Frame(left); r.pack(fill="x", pady=2); ttk.Label(r, text="profile", width=14).pack(side="left")
         self.tb["profile"] = tk.StringVar(value="NACA0006")
@@ -729,7 +728,7 @@ class Suite(tk.Tk):
         except Exception: cn = {}
         m = cn.get("motors", cn).get(C.FLIGHT_MOTOR, {}) if isinstance(cn, dict) else {}
         t.insert("end", "GTR70E WYVERN, fin-controlled research rocket: simulation & dataset suite\n\n"
-                 f"Airframe: {C.OD:.0f} mm OD, {C.L_TOTAL:.0f} mm long, four KST X08 Plus servo-driven control fins at one station, "
+                 f"Airframe: {C.OD:.0f} mm OD, {C.L_TOTAL:.0f} mm long, four {C.SERVO['name']} servo-driven control fins at one station, "
                  f"four {C.RECT_FIN['span']:.0f} mm stabilizers at {C.RECT_FIN['az0_deg']:.0f} deg.\n"
                  f"Motor: {C.FLIGHT_MOTOR}. Liftoff {m.get('liftoff_g', '?')} g, margin {m.get('margin_liftoff_cal', '?')} cal at liftoff, "
                  f"{m.get('margin_burnout_cal', '?')} at burnout.\n"

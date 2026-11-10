@@ -5,7 +5,8 @@
 //  * From launch: the fusion's accelerometer tilt-correction is wrong under thrust (specific force
 //    is along the body axis, not "down"), so we propagate our own quaternion from the BNO085's
 //    calibrated gyro at 400 Hz. Gyro-only drift over a ~10 s ascent is a fraction of a degree.
-// BNO085 accelerometer full scale is +/-8 g; the F42-4T ignition spike (~8.2 g) touches it for a few ms (highg.h covers the axial channel).
+// BNO085 accelerometer full scale is +/-8 g; the F42-4T's first ~0.2 s (~8.9 g) sits at the clip, and the
+// vertical channel substitutes a thrust-curve model there (fc_config.h, axial channel). Rev 4b: Pico 2 W, Wire (I2C0).
 #include <Adafruit_BNO08x.h>
 #include <math.h>
 #include "fc_config.h"
@@ -25,7 +26,7 @@ class Attitude {
     if (!bno_.begin_I2C(WYV_ADDR_BNO085, &WYV_I2C)) return false;
     return enable_reports_();
   }
-  // Call as fast as possible on core 0; returns true when a new gyro sample was integrated.
+  // Call every loop; returns true when a new gyro sample was integrated.
   bool poll(uint32_t now_us) {
     if (bno_.wasReset()) enable_reports_();
     bool got_gyro = false;
@@ -68,6 +69,9 @@ class Attitude {
   const float* accel() const { return a_; }
   float accel_mag_g() const { return sqrtf(a_[0]*a_[0] + a_[1]*a_[1] + a_[2]*a_[2]) / 9.80665f; }
   Q quat() const { return rel(); }
+  // angle of the body Z axis from the measured gravity vector (pad only: rail angle), deg
+  float grav_tilt_deg() const { float m = sqrtf(a_[0]*a_[0] + a_[1]*a_[1] + a_[2]*a_[2]); return m > 1 ? acosf(fminf(fmaxf(a_[2] / m, -1.f), 1.f)) * 57.29578f : 180.f; }
+  float rate_dps() const { return sqrtf(w_[0]*w_[0] + w_[1]*w_[1] + w_[2]*w_[2]) * 57.29578f; }
 
  private:
   bool enable_reports_() {

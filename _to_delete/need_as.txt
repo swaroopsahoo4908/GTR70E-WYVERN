@@ -1,0 +1,154 @@
+./Documentation/WYVERN_BOM.xlsx
+./Documentation/Decisions_and_Risks.md
+./Documentation/Design_Overview.md
+./Documentation/Build_and_Test.md
+./Documentation/build_bom.py
+./Documentation/Electronics_Telemetry.md
+./Documentation/Wind_Tunnel_Adaptation.md
+./Documentation/Proposal/toc_pages.json
+./Documentation/Proposal/build_proposal.js
+./Documentation/Proposal/gen_proposal_figures.py
+./Documentation/Proposal/figures/Fig2_vehicle_layout.png
+./Documentation/Proposal/figures/Fig8_authority_manoeuvre.png
+./Documentation/Proposal/figures/Fig5_wind_tunnel_parts.png
+./Documentation/Proposal/figures/Fig7_stabilizer_interference.png
+./Documentation/Proposal/GTR70E_WYVERN_Research_Proposal.pdf
+./Documentation/Proposal/GTR70E_WYVERN_Research_Proposal.docx
+./Documentation/CANONICAL_NUMBERS.md
+./Documentation/diagrams/D5_research_plan.svg
+./Documentation/diagrams/D3_assembly_stages.png
+./Documentation/diagrams/D7_wind_tunnel_parts.png
+./Documentation/diagrams/D1_vehicle_layout.png
+./Documentation/diagrams/D3_assembly_stages.svg
+./Documentation/diagrams/D6_fit_check.png
+./Documentation/diagrams/D1_vehicle_layout.svg
+./Documentation/diagrams/D10_wt_angle_sensor.png
+./Documentation/diagrams/gen_vehicle_drawings.py
+./Documentation/diagrams/gen_fit_render.py
+./Documentation/diagrams/D4_wind_tunnel_adaptation.svg
+./Documentation/diagrams/D2_cross_sections.svg
+./Simulations/plots_stabilizer/S4_planform_trade.png
+./Simulations/plots_stabilizer/planform_trade.json
+./Simulations/plots_stabilizer/stabilizer_sweep.csv
+./Simulations/plots_stabilizer/S1_margin_interference.png
+./Simulations/plots_stabilizer/S2_closed_loop.png
+./Simulations/plots_stabilizer/stabilizer_sweep.json
+./Simulations/plots_authority/B_net_authority_vs_H.png
+./Simulations/plots_authority/authority_matrix.json
+./Simulations/plots_authority/authority_matrix.csv
+./Simulations/plots_authority/C_closed_loop_vs_H.png
+./Simulations/wf_bypass.py
+./Simulations/CFD/simscale/predictions.csv
+./Simulations/CFD/simscale/geometry/R3_part_stab_az315.stl
+./Simulations/CFD/simscale/geometry/A2_solids.step
+./Simulations/CFD/simscale/geometry/A7_fluid.step
+./Simulations/CFD/simscale/geometry/A4_fluid.step
+./Simulations/CFD/simscale/geometry/R1_solids.step
+./Simulations/CFD/simscale/geometry/R3_part_cfin_az0.stl
+./Simulations/CFD/simscale/geometry/R3_part_cfin_az180.stl
+./Simulations/CFD/simscale/geometry/R1_fluid.step
+./Simulations/CFD/simscale/geometry/R3_part_stab_az135.stl
+./Simulations/CFD/simscale/geometry/R3_part_cfin_az90.stl
+./Simulations/CFD/simscale/geometry/R3_part_stab_az45.stl
+./Simulations/CFD/simscale/geometry/A3_solids.step
+./Simulations/CFD/simscale/geometry/R3_part_body.stl
+./Simulations/CFD/simscale/geometry/R3_part_stab_az225.stl
+./Simulations/CFD/simscale/geometry/A1_solids.step
+./Simulations/CFD/simscale/geometry/R2_solids.step
+./Simulations/CFD/simscale/geometry/R3_fluid.stl
+./Simulations/CFD/simscale/geometry/R3_fluid.step
+./Simulations/CFD/simscale/geometry/A7_solids.step
+./Simulations/CFD/simscale/geometry/A6_fluid.step
+./Simulations/CFD/simscale/geometry/A3_fluid.step
+./Simulations/CFD/simscale/geometry/A5_fluid.step
+./Simulations/CFD/simscale/geometry/R2_fluid.step
+./Simulations/CFD/simscale/geometry/A1_fluid.step
+./Simulations/CFD/simscale/geometry/R3_part_cfin_az270.stl
+./Simulations/CFD/simscale/geometry/A2_fluid.step
+./Simulations/CFD/simscale/geometry/A5_solids.step
+./Simulations/CFD/simscale/geometry/A4_solids.step
+./Simulations/CFD/simscale/geometry/A6_solids.step
+./Simulations/CFD/simscale/geometry/R3_solids.step
+./Simulations/CFD/simscale/manifest.json
+./Simulations/canonical_numbers.json
+./Simulations/plots_flight/A_motor_trade.png
+./Simulations/plots_flight/maneuver_prediction.json
+./Simulations/plots_flight/B_authority_maneuver.png
+./Simulations/plots_flight/D_motor_study.png
+./Simulations/plots_flight/apogee_cap_trade.json
+./Simulations/plots_flight/C_apogee_cap_trade.png
+./Simulations/plots_flight/flight_summary.json
+./Simulations/plots_flight/motor_study.json
+./Simulations/wf_core.py
+./3D parts/assembly/fit_meshes/nose_ballast_pour.stl
+./3D parts/assembly/fit_meshes/index.json
+./3D parts/assembly/FIT_REPORT.md
+./3D parts/assembly/fit_report.json
+./3D parts/assembly/GTR70E_WYVERN_fit_assembly.step
+./3D parts/assembly/GTR70E_WYVERN_fin_assembly.step
+./3D parts/wind_tunnel/WT_adapter_228sq_to_200sq_x2_PETG.step
+./3D parts/wind_tunnel/WTA_servo_balance_cradle_PETG.stl
+./3D parts/wind_tunnel/WT_tail_fairing_sting_socket_ASA.step
+./3D parts/wind_tunnel/WTB_stabilizer_blade_span20_PETGCF_x4.step
+./3D parts/wind_tunnel/WTA_sensor_gear20_m1_PETGCF.stl
+./3D parts/wind_tunnel/WTA_diffuser_100sq_to_6in_round_PETG.step
+./3D parts/wind_tunnel/WTA_servo_balance_cradle_PETG.step
+./3D parts/wind_tunnel/WT_diffuser_200sq_to_8in_round_PETG.step
+./3D parts/wind_tunnel/WTB_stabilizer_blade_span30_PETGCF_x4.step
+./3D parts/wind_tunnel/WTA_sensor_gear20_m1_PETGCF.step
+./3D parts/wind_tunnel/WTB_stabilizer_tail_section_ASA.step
+./3D parts/wind_tunnel/WTA_inclined_manometer_ramp_PETG.step
+./3D parts/wind_tunnel/WTA_reflection_plane_wall_panel_PETG.step
+./3D parts/wind_tunnel/WTA_calibration_pulley_wheel_PETG.step
+./3D parts/wind_tunnel/WTA_calibration_pulley_bracket_PETG.step
+./3D parts/wind_tunnel/WT_nose_fairing_ogive100_ASA.step
+./3D parts/wind_tunnel/WTA_hub_gear40_m1_PETGCF.step
+./3D parts/wind_tunnel/WT_strut_fairing_ASA.step
+./3D parts/wind_tunnel/WTB_slot_plug_x8_PETG.step
+./3D parts/wind_tunnel/WTA_inclined_manometer_lid_PETG.step
+./3D parts/wind_tunnel/WTA_hub_gear40_m1_PETGCF.stl
+./3D parts/wind_tunnel/WTB_stabilizer_blade_span40_PETGCF_x4.step
+./3D parts/flight/02_recovery_bay_tube_ASAAero.step
+./3D parts/flight/05_spine_deck_PETGCF.step
+./3D parts/flight/09_motor_mount_tube_aft_ring_PCFR.step
+./3D parts/flight/12_rect_fin_PETGCF_x4.step
+./3D parts/flight/04_control_tube_servo_ring_ASAAero.step
+./3D parts/flight/06_servo_hub_PETGCF_x4.step
+./3D parts/flight/10_motor_retainer_cap_PCFR.step
+./3D parts/flight/03_rb_floor_coupler_PCFR.step
+./3D parts/flight/13_rail_button_1010_printed_PETGCF_x2.step
+./3D parts/flight/14_bypass_tube_PCFR.step
+./3D parts/flight/08_plenum_bulkhead_PCFR.step
+./3D parts/flight/05b_avionics_spine_PETGCF.step
+./3D parts/flight/01_nose_tangent_ogive_150_ASAAero.step
+./3D parts/flight/07_motor_bay_tube_ASAAero.step
+./3D parts/control_fins/NACA0012/cfin_NACA0012_H45_PETGCF.step
+./3D parts/control_fins/NACA0012/cfin_NACA0012_H25_PETGCF.step
+./3D parts/control_fins/NACA0012/cfin_NACA0012_H20_PETGCF.step
+./3D parts/control_fins/NACA0012/cfin_NACA0012_H40_PETGCF.step
+./3D parts/control_fins/NACA0012/cfin_NACA0012_H35_PETGCF.step
+./3D parts/control_fins/NACA0012/cfin_NACA0012_H30_PETGCF.step
+./3D parts/control_fins/flat_plate/cfin_flat_plate_H25_PETGCF.step
+./3D parts/control_fins/flat_plate/cfin_flat_plate_H20_PETGCF.step
+./3D parts/control_fins/flat_plate/cfin_flat_plate_H40_PETGCF.step
+./3D parts/control_fins/flat_plate/cfin_flat_plate_H45_PETGCF.step
+./3D parts/control_fins/flat_plate/cfin_flat_plate_H30_PETGCF.step
+./3D parts/control_fins/flat_plate/cfin_flat_plate_H35_PETGCF.step
+./3D parts/control_fins/NACA0006/cfin_NACA0006_H35_PETGCF.step
+./3D parts/control_fins/NACA0006/cfin_NACA0006_H30_PETGCF.step
+./3D parts/control_fins/NACA0006/cfin_NACA0006_H40_PETGCF.step
+./3D parts/control_fins/NACA0006/cfin_NACA0006_H20_PETGCF.step
+./3D parts/control_fins/NACA0006/cfin_NACA0006_H45_PETGCF.step
+./3D parts/control_fins/NACA0006/cfin_NACA0006_H25_PETGCF.step
+./3D parts/control_fins/double_wedge/cfin_double_wedge_H30_PETGCF.step
+./3D parts/control_fins/double_wedge/cfin_double_wedge_H35_PETGCF.step
+./3D parts/control_fins/double_wedge/cfin_double_wedge_H25_PETGCF.step
+./3D parts/control_fins/double_wedge/cfin_double_wedge_H20_PETGCF.step
+./3D parts/control_fins/double_wedge/cfin_double_wedge_H40_PETGCF.step
+./3D parts/control_fins/double_wedge/cfin_double_wedge_H45_PETGCF.step
+./3D parts/_generator/mass_report.json
+./3D parts/_generator/gen_wyvern_fin.py
+./3D parts/_generator/gen_fit_assembly.py
+./README.md
+./Wind Tunnel/wt_balance_daq/wt_balance_daq.ino
+./Wind Tunnel/README.md

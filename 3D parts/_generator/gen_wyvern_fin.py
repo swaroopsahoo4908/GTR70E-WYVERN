@@ -11,12 +11,12 @@ Outputs (folders relative to "3D parts/"):
   control_fins/<prof>/  4 aerofoil blocks x 5 heights (RQ1 x RQ2 test matrix), PETG-CF
   wind_tunnel/          tunnel nose + tail fairings for the control-tube test article,
                         sting adapter, 228 mm junction-ring <-> 200 mm square adapters,
-                        8 in duct-fan transition
+                        6 in fan transition (Phase A), 8 in (Phase B)
   assembly/             full flight assembly STEP + STL, preview PNGs
   _generator/mass_report.json   printed-part masses + CG stations -> wf_core.mass_properties()
 
 Fits are named, never accidental: FIT_SLIP (0.20 mm radial) for tube/coupler/disk slides, the
-bypass tube runs in 13.5 mm clearance holes and seals with O-rings at both ends.
+printed PC-FR bypass tube (rev 4) slips into its sockets and seals with a high-temp RTV bead at each end.
 Hardware interfaces tagged VERIFY-WITH-CALIPERS (servo flange, Feather hole pattern, battery
 outline) are typical-class figures for the purchased parts; confirm on the bench before the final
 print run.
@@ -75,11 +75,34 @@ def radial_hole(d, z, az_deg, r_in=C.RI - 3, r_out=C.R + 3):
 def box(dx, dy, dz, cx=0, cy=0, cz=0):
     return cq.Workplane("XY").box(dx, dy, dz).translate((cx, cy, cz))
 
+def spur_gear(m, z, t, z0=0.0, cx=0.0, cy=0.0, pa_deg=20.0, backlash=0.10):
+    """Involute spur gear, module m, z teeth, face width t, standing on z0 at (cx, cy). Tooth thickness is
+    thinned by `backlash` (mm, at the pitch circle) so two printed gears mesh without binding."""
+    pa = math.radians(pa_deg); rp = m * z / 2; ra = rp + m; rf = rp - 1.25 * m; rb = rp * math.cos(pa)
+    inv = lambda a: math.tan(a) - a
+    half = math.pi / (2 * z) - backlash / (2 * rp)
+    r0 = max(rb, rf); n = 8
+    flank = []
+    for i in range(n + 1):
+        r = r0 + (ra - r0) * i / n
+        a = math.acos(min(1.0, rb / r))
+        flank.append((r, half + inv(pa) - inv(a)))
+    pts = []
+    for k in range(z):
+        c = 2 * math.pi * k / z
+        th0 = flank[0][1]
+        pts.append((rf * math.cos(c - th0), rf * math.sin(c - th0)))
+        for r, th in flank: pts.append((r * math.cos(c - th), r * math.sin(c - th)))
+        for r, th in reversed(flank): pts.append((r * math.cos(c + th), r * math.sin(c + th)))
+        pts.append((rf * math.cos(c + th0), rf * math.sin(c + th0)))
+    return cq.Workplane("XY").workplane(offset=z0).polyline(pts).close().extrude(t).translate((cx, cy, 0))
+
 def bypass_xy():
     a = math.radians(C.BYPASS["az_deg"]); r = C.BYPASS["r_center"]
     return r * math.cos(a), r * math.sin(a)
 
-def bypass_hole(z0, h, d=13.5):
+def bypass_hole(z0, h, d=None):
+    d = C.BYPASS["od"] + 0.6 if d is None else d
     bx, by = bypass_xy()
     return cq.Workplane("XY").workplane(offset=z0).center(bx, by).circle(d / 2).extrude(h)
 
@@ -121,7 +144,7 @@ def nose():
     s = s.union(floor).union(bar)
     # ballast fill port (M8 grub-screw plug) into the tip void
     s = s.cut(cq.Workplane("XY").workplane(offset=zs - 1).circle(3.4).extrude(30))
-    return save(s, DIRS["flight"], "01_nose_tangent_ogive_150_ASAAero", "ASAAERO")
+    return save(s, DIRS["flight"], f"01_nose_tangent_ogive_{int(Ln)}_ASAAero", "ASAAERO")
 
 # ------------------------------------------------------------------------------- recovery bay
 def rb_tube():
@@ -132,24 +155,25 @@ def rb_tube():
 
 def rb_floor_coupler():
     """Coupler between RB and CT with the gas-tight recovery-bay floor (3 mm) at the joint plane,
-    the CENTRAL bypass-tube exit socket (O-ring groove), and an off-axis M5 eyebolt for the cord."""
+    the CENTRAL bypass-tube exit socket (slip fit + high-temp RTV bead), and a printed cord-anchor
+    bar beside the exit (rev 4: no eyebolt; the aramid cord is tied through the bar)."""
     zj = zx(C.X_RB_BOT)
     ro = C.RI - C.FIT_SLIP; ri = ro - C.COUPLER_WALL
     s = tube(ro, ri, zj - C.COUPLER_L / 2, C.COUPLER_L)
     s = s.union(disk(ri + 0.1, zj - 1.5, 3.0))
     s = s.cut(screw_ring(zj + 10, 3, 0, M3_PILOT)).cut(screw_ring(zj - 10, 3, 60, M3_PILOT))
-    # M5 eyebolt boss at r = 20 mm, az 180 (clear of the central exit)
-    s = s.union(cq.Workplane("XY").workplane(offset=zj - 7).center(-20, 0).circle(5.5).extrude(6))
-    s = s.cut(cq.Workplane("XY").workplane(offset=zj - 8).center(-20, 0).circle(2.6).extrude(12))
-    # central bypass socket: boss under the floor, through-hole, O-ring groove
-    s = s.union(cq.Workplane("XY").workplane(offset=zj - 14).circle(9.5).extrude(12))
+    # printed cord-anchor arch on top of the floor, off-axis (az 180), 6 x 6 mm section, 10 mm window
+    ra = 0.5 * (C.BYPASS["od"] / 2 + ri)
+    arch = box(6, 22, 12, -ra, 0, zj + 1.5 + 6).cut(box(8, 10, 6.5, -ra, 0, zj + 1.5 + 3.25))
+    s = s.union(arch)
+    # central bypass socket: boss under the floor, through-hole (slip fit + RTV)
+    s = s.union(cq.Workplane("XY").workplane(offset=zj - 14).circle(C.BYPASS["od"] / 2 + 3.0).extrude(12))
     s = s.cut(cq.Workplane("XY").workplane(offset=zj - 16).circle(C.BYPASS["od"] / 2 + 0.15).extrude(25))
-    s = s.cut(cq.Workplane("XY").workplane(offset=zj - 14.5).circle(C.BYPASS["od"] / 2 + 1.6).extrude(2.0))
     return save(s, DIRS["flight"], "03_rb_floor_coupler_PCFR", "PCFR")
 
 # ------------------------------------------------------------------------------- control tube
 def ct_tube():
-    """Control tube. ONE servo ring: four KST X08 Plus servos, each bolted by its ears to a pad
+    """Control tube. ONE servo ring: four EMAX ES9251 II servos, each bolted by its ears to a pad
     printed into the tube wall, output shaft radial through the wall into the fin hub. All four
     fins share one station. The bypass tube runs up the centre; the avionics spine (separate part)
     sits on the IMU deck above the ring. Vertical pads/corbels print without supports nose-up."""
@@ -161,11 +185,12 @@ def ct_tube():
     pad_h = sv["ear_span"] + 4.0
     depth = C.RI - C.PAD_INNER_R + 0.5
     for az in (0, 90, 180, 270):
-        p = box(depth, 16.0, pad_h, C.PAD_INNER_R + depth / 2, 0, zc)
+        p = box(depth, sv["W"] + 8.0, pad_h, C.PAD_INNER_R + depth / 2, 0, zc)
         p = p.intersect(disk(C.RI + 0.4, zc - pad_h, 2 * pad_h))
         p = p.cut(box(depth + 2, sv["W"] + 0.4, sv["L"] + 0.4, C.PAD_INNER_R + depth / 2, 0, zc))   # servo window
         for dz in (-sv["hole_pitch"] / 2, sv["hole_pitch"] / 2):
-            p = p.cut(cyl_x(1.8, depth + 1, C.PAD_INNER_R - 0.5, 0, zc + dz))                       # M2 ear screws
+            for dy in (-sv["hole_across"] / 2, sv["hole_across"] / 2):
+                p = p.cut(cyl_x(sv.get("ear_screw_d", 1.8), depth + 1, C.PAD_INNER_R - 0.5, dy, zc + dz))   # ear screws (M2 self-tap)
         p = p.cut(cyl_x(C.CFIN["hub_flange_d"] + 1.0, C.RI - C.SPLINE_TOP_R + 0.8, C.SPLINE_TOP_R - 0.3, 0, zh))   # hub-flange pocket
         s = s.union(p.rotate((0, 0, 0), (0, 0, 1), az))
         s = s.cut(radial_hole(C.CFIN["hub_d"] + 0.4, zh, az))                                      # hub through the wall
@@ -175,12 +200,34 @@ def ct_tube():
         cb = box(6, 8, 6, C.RI - 2.5, 0, zd - 3).rotate((0, 0, 0), (0, 0, 1), az)
         cb = cb.cut(cq.Workplane("XY").workplane(offset=zd - 7).center(C.RI - 2.5, 0).circle(M2_PILOT / 2).extrude(8).rotate((0, 0, 0), (0, 0, 1), az))
         s = s.union(cb.intersect(disk(C.RI + 0.4, zd - 7, 8)))
-    # static ports for the BME688, screw-switch access over the +Y (power perfboard) spine face
+    # static ports for the BME688
     bme = [b for b in C.SPINE_BOARDS if b["key"] == "bme688"][0]
-    perf = [b for b in C.SPINE_BOARDS if b["key"] == "perfboard"][0]
     for az in (20, 110, 200, 290):
         s = s.cut(radial_hole(1.2, zb + C.SPINE_Z0 + bme["z0"] + bme["L"] / 2, az))
-    s = s.cut(radial_hole(3.0, zb + C.SPINE_Z0 + perf["z0"] + C.SCREW_SWITCH_V, 90))
+    # rev 3e: Pololu 2810 cradle on the wall at +Y (replaces the screw switch). Pocket holds the
+    # 15.24 mm board component-side out; the slide knob (0.9 mm past the lower edge) sits 0.3 mm
+    # under a 4 x 12 mm slot that runs around the airframe. Glue the board in with a dab of hot glue.
+    sw = C.SWITCH; a = sw["size"]; zsw = zb + C.SPINE_Z0 + sw["z0"]          # board lower edge
+    r_out = C.RI - 0.3; r_in = r_out - sw["h"] - 0.2                          # board back face
+    cr = box(C.RI - r_in + 2.6, a + 4.0, a + sw["knob_out"] + 4.0, (C.RI + r_in - 2.6) / 2 + 0.2, 0, zsw + (a - sw["knob_out"]) / 2)
+    cr = cr.intersect(disk(C.RI + 0.4, zsw - 10, a + 20))
+    pocket = box(C.RI - r_in + 3.0, a + 0.4, a + sw["knob_out"] + 0.6, (C.RI + r_in - 3.0) / 2, 0, zsw + (a - sw["knob_out"]) / 2)
+    cr = cr.cut(pocket)
+    s = s.union(cr.rotate((0, 0, 0), (0, 0, 1), 90))
+    slot = box(6.0, sw["slot_L"], sw["slot_w"], C.R - 1.0, 0, zsw - sw["knob_out"] / 2)
+    s = s.cut(slot.rotate((0, 0, 0), (0, 0, 1), 90))
+    # rev 4: arm button + LED cradle at -Y (az 270). 6 x 6 mm tactile switch pushed in from the inside,
+    # plunger out through a 4.0 mm hole with its tip 0.3 mm under the skin; 3 mm LED 8 mm above it in
+    # a 3.2 mm hole. Both drop into their pockets from the bore side and are held with a dab of hot glue.
+    bt = C.BUTTON; zbt = zb + C.SPINE_Z0 + bt["z0"] + bt["body"] / 2           # switch centre height
+    zled = zbt + bt["led_dz"]; depth = 6.5
+    cb = box(depth + 0.6, bt["cradle_W"], bt["cradle_L"], C.RI - depth / 2 + 0.3, 0, zbt + bt["led_dz"] / 2)
+    cb = cb.intersect(disk(C.RI + 0.4, zbt - bt["cradle_L"], 2 * bt["cradle_L"]))
+    body_top = C.RI - 0.2                                                    # switch body face against the wall
+    cb = cb.cut(box(depth + 1.0, bt["body"] + 0.3, bt["body"] + 0.3, body_top - (depth + 1.0) / 2, 0, zbt))
+    cb = cb.cut(cyl_x(bt["led_d"] + 0.15, depth + 1.0, C.RI - depth - 0.5, 0, zled))
+    s = s.union(cb.rotate((0, 0, 0), (0, 0, 1), 270))
+    s = s.cut(radial_hole(bt["hole_d"], zbt, 270)).cut(radial_hole(bt["led_hole_d"], zled, 270))
     s = s.cut(screw_ring(zb + C.L_CT - 10, 3, 60)).cut(screw_ring(zb + 10, 3, 30))
     return save(s, DIRS["flight"], "04_control_tube_servo_ring_ASAAero", "ASAAERO")
 
@@ -192,7 +239,7 @@ def imu_deck():
     s = disk(C.RI - C.FIT_SLIP, zd, 2.5)
     s = s.cut(cq.Workplane("XY").workplane(offset=zd - 1).circle(C.BYPASS["od"] / 2 + 0.4).extrude(5))
     for az in (45, 135, 225, 315):
-        s = s.cut(cq.Workplane("XY").workplane(offset=zd - 1).center(17.0, 0).rect(9, 5).extrude(5).rotate((0, 0, 0), (0, 0, 1), az))
+        s = s.cut(cq.Workplane("XY").workplane(offset=zd - 1).center(C.SERVO_BASE_R + 12.0, 0).rect(9, 5).extrude(5).rotate((0, 0, 0), (0, 0, 1), az))
     for az in (45, 165, 285):
         s = s.cut(cq.Workplane("XY").workplane(offset=zd - 1).center(C.RI - 2.5, 0).circle(M2_CLR / 2).extrude(5).rotate((0, 0, 0), (0, 0, 1), az))
     f = C.SPINE_FLAT
@@ -208,10 +255,10 @@ def avionics_spine():
     wf_core.SPINE_BOARDS gets standoffs or pillars up to its face's BOARD_PLANE, at the hole grid
     read from the vendor STEP. Board planes keep every corner clear of its neighbours inside the
     27.4 mm bore (gen_fit_assembly.py checks it with the vendor models in place).
-      +X BNO085 (lowest, nearest the fins) + Feather RP2040 RFM95, 2 mm standoffs
+      +X BNO085 (lowest, nearest the fins) + Pico 2 W (rev 4b), 2 mm standoffs
       -X 2S LiPo on foam tape, two strap slots
-      +Y 16 x 60 mm power perfboard on 9 mm pillars (screw switch under the wall hole)
-      -Y BME688 + 3V microSD on 9 mm pillars
+      +Y 16 x 62 mm power perfboard on 9 mm pillars (the 2810 is in the +Y wall cradle)
+      -Y BME688 + BMP388 on 9 mm pillars, Adafruit 4682 microSD (rev 4b) on 7 mm pillars
     A 3-spoke spider at the top keeps it centred in the bore."""
     z0 = zx(C.X_CT_BOT) + C.SPINE_Z0
     f = C.SPINE_FLAT; bore = C.BYPASS["od"] / 2 + 0.3; BP = C.BOARD_PLANE
@@ -223,12 +270,22 @@ def avionics_spine():
         az = FACE_AZ[bd["face"]]; h = C.board_plane(bd) - f
         for (u, v) in bd["holes"]:          # u across the face (from the board's edge), v along the axis
             t = u - bd["W"] / 2 + bd.get("offset", 0.0); zz = z0 + bd["z0"] + v
-            post = cyl_x(5.0 if h < 4 else 4.0, h + 0.2, f - 0.2, t, zz)
+            post = cyl_x(5.0 if (h < 4 or h > 12) else 4.0, h + 0.2, f - 0.2, t, zz)
             pil = cyl_x(1.7, h + 2.5, f - 2.0, t, zz)
             s = s.union(post.rotate((0, 0, 0), (0, 0, 1), az)).cut(pil.rotate((0, 0, 0), (0, 0, 1), az))
         if bd["face"] == "nx":
             for zz in (bd["z0"] + 6, bd["z0"] + bd["L"] - 6):
                 s = s.cut(box(4.0, 2 * f + 2, 4.0, -f + 1.0, 0, z0 + zz))
+        if bd["key"] == "teensy":        # rev 4 saddle (no mounting holes on the Teensy 4.1)
+            zb0 = z0 + bd["z0"]; Lr = bd["L"] - 4.0
+            sad = None
+            for t in (-5.0, 5.0):
+                r = box(h + 0.2, 2.0, Lr, f + (h + 0.2) / 2 - 0.2, t, zb0 + 2.0 + Lr / 2)
+                r = r.union(box(h + 1.2, 2.0, 2.0, f + (h + 1.2) / 2 - 0.2, t, zb0 - 1.0))     # stop at the USB end
+                for zt in (zb0 + 6.0, zb0 + bd["L"] - 6.0):
+                    r = r.cut(box(1.3, 3.0, 3.2, f + 0.65, t, zt))                              # tie tunnel
+                sad = r if sad is None else sad.union(r)
+            s = s.union(sad.rotate((0, 0, 0), (0, 0, 1), az))
     spider = cq.Workplane("XY").workplane(offset=z0 + C.SPINE_L).circle(C.RI - C.FIT_SLIP).circle(C.RI - C.FIT_SLIP - 1.6).extrude(3)
     for az in (45, 165, 285):
         spider = spider.union(box(C.RI - f, 3, 3, (C.RI + f) / 2 - 1, 0, z0 + C.SPINE_L + 1.5).rotate((0, 0, 0), (0, 0, 1), az))
@@ -238,19 +295,28 @@ def avionics_spine():
     return save(s, DIRS["flight"], "05b_avionics_spine_PETGCF", "PETGCF")
 
 def servo_hub():
-    """Servo-to-fin hub. Flange pocket captures the servo's round horn (2 x M2), D-flat 8 mm shaft
-    passes the wall, M2 cross-pin locks the fin's root boss. Modelled at az 0; all four identical."""
+    """Servo-to-fin hub. Rev 3f (EMAX ES9251 II): the flange pocket captures the servo's single-arm horn
+    (hub disc + arm, VERIFY sizes with calipers), held by the servo's centre screw and one self-tapper
+    through the horn's outer hole; D-flat 8 mm shaft passes the wall, M2 cross-pin locks the fin's root
+    boss. Modelled at az 0; all four identical."""
     zc = zx(C.X_HINGE)
     sp = C.SPLINE_TOP_R
+    sv = C.SERVO
     fl = cyl_x(C.CFIN["hub_flange_d"], C.HUB_FLANGE_T, sp)
-    pocket = cyl_x(11.5, 1.2, sp - 0.1)                           # horn disc pocket (VERIFY)
+    pocket = cyl_x(sv["horn_disc_d"] + 0.4, 1.5, sp - 0.1)                  # horn hub
+    if sv.get("horn_type") == "arm":                                          # horn arm, along the body axis (z)
+        pocket = pocket.union(box(1.5, sv["horn_arm_w"] + 0.4, sv["horn_arm_L"] / 2 + 0.4, sp - 0.1 + 0.75, 0,
+                                  (sv["horn_arm_L"] / 2 + 0.4) / 2))
     r_root = C.R + C.CFIN["gap"]; hub_end = r_root + C.CFIN["root_boss_L"] - 1.0   # stops 0.2 short of the bore bottom
     sh = cyl_x(C.CFIN["hub_d"], hub_end - (sp + C.HUB_FLANGE_T), sp + C.HUB_FLANGE_T)
     s = fl.cut(pocket).union(sh)
     s = s.cut(box(12, 3, 12, hub_end - 4.0, C.CFIN["hub_d"] / 2 + 0.5, 0))      # D-flat (1 mm)
     s = s.cut(cyl_x(2.2, 20, sp - 1))                                 # servo screw access bore
-    for hy in (-3.5, 3.5):
-        s = s.cut(cyl_x(M2_CLR, 4, sp - 1, hy, 0))
+    if sv.get("horn_type") == "arm":
+        s = s.cut(cyl_x(1.0, 5, sp - 1, 0, sv.get("horn_hole_r", 4.0)))   # one 1.0 mm pilot for a self-tapper
+    else:
+        for hy in (-sv.get("horn_hole_r", 3.5), sv.get("horn_hole_r", 3.5)):
+            s = s.cut(cyl_x(M2_CLR, 5, sp - 1, hy, 0))
     s = s.cut(cq.Workplane("XY").workplane(offset=-6).center(r_root + 3.0, 0).circle(1.1).extrude(12))
     s = s.translate((0, 0, zc))
     return save(s, DIRS["flight"], "06_servo_hub_PETGCF_x4", "PETGCF", qty=4)
@@ -298,7 +364,6 @@ def plenum():
     bx, by = bypass_xy()
     s = s.cut(cq.Workplane("XY").workplane(offset=z0 - 1).center(bx, by).circle(C.BYPASS["id"] / 2).extrude(C.PLENUM_T + 2))
     s = s.cut(cq.Workplane("XY").workplane(offset=zt - 4).center(bx, by).circle(C.BYPASS["od"] / 2 + 0.15).extrude(5))
-    s = s.cut(cq.Workplane("XY").workplane(offset=zt - 3.4).center(bx, by).circle(C.BYPASS["od"] / 2 + 1.6).extrude(2.4))   # AS568-012 gland
     s = s.cut(screw_ring(z0 + C.PLENUM_T / 2, 3, 0, 2.6))
     return save(s, DIRS["flight"], "08_plenum_bulkhead_PCFR", "PCFR")
 
@@ -332,6 +397,14 @@ def retainer():
         s = s.cut(box(4.0, C.RECT_FIN["t"] + 0.6, 9.0, C.R + 1.2, 0, zb + 4.5).rotate((0, 0, 0), (0, 0, 1), C.RECT_FIN["az0_deg"] + 90 * i))
     return save(s, DIRS["flight"], "10_motor_retainer_cap_PCFR", "PCFR")
 
+def bypass_tube():
+    """Rev 4: the ejection bypass tube is printed PC-FR (was 3/8 in 6061). Exported for printing;
+    its mass is carried by wf_core.bypass_mass(), so flight=False keeps it out of the double count."""
+    bx, by = bypass_xy()
+    s = (cq.Workplane("XY").workplane(offset=zx(C.X_BYPASS_BOT)).center(bx, by)
+         .circle(C.BYPASS["od"] / 2).circle(C.BYPASS["id"] / 2).extrude(C.BYPASS["L"]))
+    return save(s, DIRS["flight"], "14_bypass_tube_PCFR", "PCFR", flight=False)
+
 def f15_spacer():
     z = zx(C.X_MOTOR_TOP)
     s = tube(14.6, 10.0, z - 10.0, 10.0)
@@ -349,18 +422,25 @@ def rect_fin(i=0, export=True):
         pass
     tab_r0 = C.MMT_ID / 2 + C.MMT_WALL + 0.2
     tab = None
-    for zc in (zle - 25.0, zle - c + 25.0):      # two 30 mm through-the-wall tabs, not a full-length tab
-        tb_ = box(r0 - tab_r0 + 0.5, t, 30.0, (r0 + tab_r0) / 2, 0, zc)
+    for zc in (zle - 22.0, zle - c + 22.0):      # two 24 mm through-the-wall tabs, not a full-length tab
+        tb_ = box(r0 - tab_r0 + 0.5, t, 24.0, (r0 + tab_r0) / 2, 0, zc)
         tab = tb_ if tab is None else tab.union(tb_)
     s = blade.union(tab).rotate((0, 0, 0), (0, 0, 1), rf["az0_deg"] + 90 * i)
     return save(s, DIRS["flight"], "12_rect_fin_PETGCF_x4", "PETGCF", qty=4, export=export) if (i == 0 and export) else s
 
 def rail_button_spacer():
+    """Rev 4: printed 1010 rail button with its saddle in one piece (PETG-CF), M4 screw into a
+    heat-set insert in the wall boss. Head 11.1 mm, neck 6.0 mm x 2.6 mm to ride the 1010 slot
+    lips (VERIFY against the rail: neck must slide freely, head must not pull through)."""
     zb = zx(C.X_MB_BOT) + 20
-    s = cyl_x(11.0, C.RAIL_BUTTON_STANDOFF + 0.6, C.R - 0.6).cut(cyl_x(4.0, 6, C.R - 2)).translate((0, 0, zb))
-    s = s.cut(cq.Workplane("XY").workplane(offset=zb - 10).circle(C.R).extrude(20))     # saddle: underside follows the tube
+    r0 = C.R - 0.6
+    sad = cyl_x(14.0, C.RAIL_BUTTON_STANDOFF + 0.6, r0)
+    neck = cyl_x(6.0, 2.6, r0 + C.RAIL_BUTTON_STANDOFF + 0.6)
+    head = cyl_x(11.1, 2.4, r0 + C.RAIL_BUTTON_STANDOFF + 3.2)
+    s = sad.union(neck).union(head).cut(cyl_x(4.4, 20, C.R - 2)).translate((0, 0, zb))
+    s = s.cut(cq.Workplane("XY").workplane(offset=zb - 10).circle(C.R).extrude(20))     # saddle follows the tube
     s = s.rotate((0, 0, 0), (0, 0, 1), C.RAIL_BUTTON_AZ_DEG)
-    return save(s, DIRS["flight"], "13_rail_button_spacer_PETGCF_x2", "PETGCF", qty=2)
+    return save(s, DIRS["flight"], "13_rail_button_1010_printed_PETGCF_x2", "PETGCF", qty=2)
 
 def upper_rail_pad():
     """Upper 1010 button lands in the RB-floor coupler overlap (5.0 mm of wall + coupler)."""
@@ -443,15 +523,15 @@ def wt_parts():
     s = cq.Workplane("XY").polyline(pts).close().extrude(110)
     s = s.cut(cq.Workplane("XY").center(14, 0).circle(WT["sting_d"] / 2 + 0.6).extrude(110))
     save(s, out, "WT_strut_fairing_ASA", "ASA", flight=False)
-    # 200 sq -> 8 in (203 mm) round transition for the AC Infinity Cloudline T8, 150 mm long
+    # 200 sq -> 8 in (203 mm) round transition for the 8 in inline duct fan, 150 mm long (Phase B)
     a = cq.Workplane("XY").rect(WT["ts_w"] + 6, WT["ts_h"] + 6).workplane(offset=150).circle(106.5).loft()
     b = cq.Workplane("XY").rect(WT["ts_w"], WT["ts_h"]).workplane(offset=150).circle(101.6).loft()
     save(a.cut(b), out, "WT_diffuser_200sq_to_8in_round_PETG", "PETGCF", flight=False)
 
 def wt_phase_a():
     """Phase A: single-fin half-model in the STOCK 100 x 100 mm test section. The flight fin, hub
-    and a KST X08 Plus sit on a reflection-plane wall panel; the servo hangs outside the tunnel
-    on a cradle carried by two 100 g load cells (normal force + centre of pressure).
+    and an EMAX ES9251 II sit on a reflection-plane wall panel; the servo hangs outside the tunnel
+    on a cradle carried by two 1 kg bar load cells (normal force + centre of pressure).
     The fin root sits 1.0 mm off the panel, the same gap as on the airframe, and the servo spline
     sits as far behind the airflow face as it does behind the flight wall (R - SPLINE_TOP_R),
     so the flight hub fits."""
@@ -467,29 +547,155 @@ def wt_phase_a():
     p = p.cut(cq.Workplane("XZ").polyline([(-88, 0.01), (-88, -t - 0.1), (-80, -t - 0.1)]).close().extrude(60, both=True))
     save(p, out, "WTA_reflection_plane_wall_panel_PETG", "PETGCF", flight=False)
     # servo cradle: the flight pad geometry (ears on a pad, servo top through a window),
-    # floating on two TAL221 100 g cells 60 mm apart along the chord.
+    # floating on two 1 kg bar cells 60 mm apart along the chord (rev 4b; was 100 g TAL221s).
     # Distances behind the airflow face copy the flight wall exactly (R - r): spline tip, servo top,
     # ear plane, servo base -> the flight hub and fin fit unchanged.
-    zc = -(C.R - C.PAD_INNER_R)                       # ear plane (ears bear on the pad's lower face)
-    z_base = -(C.R - C.SERVO_BASE_R)
-    pad = cq.Workplane("XY").box(sv["ear_span"] + 6, 16.0, 4.0).translate((0, 0, zc + 2.0))
+    # rev 4b: the servo sits WT_DZ deeper than on the flight wall so a 40 T gear fits between the
+    # spline and the panel (fin angle measured by an AS5600, see wt_angle_sensor()). The tunnel hub
+    # WTA_hub_gear40 is longer by the same amount, so the fin root still sits 1.0 mm off the panel.
+    zc = -(C.R - C.PAD_INNER_R) + WT_DZ               # ear plane (ears bear on the pad's lower face)
+    z_base = -(C.R - C.SERVO_BASE_R) + WT_DZ
+    pad = cq.Workplane("XY").box(sv["ear_span"] + 16, sv["W"] + 8.0, 4.0).translate((0, 0, zc + 2.0))   # rev 4b: legs moved outboard of the ear tips
     pad = pad.cut(cq.Workplane("XY").box(sv["L"] + 0.4, sv["W"] + 0.4, 10).translate((0, 0, zc + 2.0)))
     for dx in (-sv["hole_pitch"] / 2, sv["hole_pitch"] / 2):
-        pad = pad.cut(cq.Workplane("XY").workplane(offset=zc - 2).center(dx, 0).circle(0.9).extrude(8))
-    base = cq.Workplane("XY").box(90.0, 24.0, 5.0).translate((0, 0, z_base - 3.0))
-    for dx in (-30, 30):                                                  # cell end blocks: 2 x M3 each (VERIFY TAL221)
-        for dy in (-2.5, 2.5):
-            base = base.cut(cq.Workplane("XY").workplane(offset=z_base - 7).center(dx, dy * 2).circle(M3_CLR / 2).extrude(8))
+        for dy in (-sv["hole_across"] / 2, sv["hole_across"] / 2):
+            pad = pad.cut(cq.Workplane("XY").workplane(offset=zc - 2).center(dx, dy).circle(sv.get("ear_screw_d", 1.8) / 2).extrude(8))
+    base = cq.Workplane("XY").box(90.0, 26.0, 5.0).translate((0, 0, z_base - 3.0))
+    for dx in (-30, 30):                                                  # rev 4b: 1 kg bar cells (12.7 mm sq), 2 x M4/M5 at 15 mm each end (VERIFY)
+        for dy in (-7.5, 7.5):
+            base = base.cut(cq.Workplane("XY").workplane(offset=z_base - 7).center(dx, dy).circle(5.3 / 2).extrude(8))
     legs = None
-    for dx in (-(sv["ear_span"] + 6) / 2 + 3, (sv["ear_span"] + 6) / 2 - 3):
-        lg = cq.Workplane("XY").box(6.0, 16.0, zc - (z_base - 0.5)).translate((dx, 0, (zc + z_base - 0.5) / 2))
+    for dx in (-(sv["ear_span"] + 16) / 2 + 3, (sv["ear_span"] + 16) / 2 - 3):
+        lg = cq.Workplane("XY").box(6.0, sv["W"] + 8.0, zc - (z_base - 0.5)).translate((dx, 0, (zc + z_base - 0.5) / 2))
         legs = lg if legs is None else legs.union(lg)
-    cr = pad.union(legs).union(base)
+    # rev 4b fix: the spline is shaft_from_end from one end of the servo, not at its middle, so the pad
+    # window and legs move by that offset to put the spline (and the hub) on the panel hole's axis.
+    sx = -(sv["L"] / 2 - sv["shaft_from_end"])
+    cr = pad.union(legs).translate((sx, 0, 0)).union(base).union(wt_sensor_mount(zc))
     save(cr, out, "WTA_servo_balance_cradle_PETG", "PETGCF", flight=False)
-    # stock section exit -> 8 in round for the Cloudline T8 (250 mm long, 100 sq -> 203 round)
-    a_ = cq.Workplane("XY").rect(106, 106).workplane(offset=250).circle(106.5).loft()
-    b_ = cq.Workplane("XY").rect(100, 100).workplane(offset=250).circle(101.6).loft()
-    save(a_.cut(b_), out, "WTA_diffuser_100sq_to_8in_round_PETG", "PETGCF", flight=False)
+    wt_angle_sensor()
+    fin_zero_jig(flat=True)
+    fin_zero_jig(flat=False)
+    # stock section exit -> 6 in round (rev 3f): 160 mm loft from 100 sq to 152.4 mm ID (area ratio 1.82,
+    # equivalent cone half-angle ~7 deg, so the flow stays attached), then a 30 mm socket that slides over
+    # a 6 in fan collar or the BLDC shroud and takes a 6 in duct clamp. 3 mm wall.
+    L_t, r_in, w_t, L_c = 160.0, 76.2, 3.0, 30.0
+    a_ = cq.Workplane("XY").rect(100 + 2 * w_t, 100 + 2 * w_t).workplane(offset=L_t).circle(r_in + w_t).loft()
+    b_ = cq.Workplane("XY").rect(100, 100).workplane(offset=L_t).circle(r_in).loft()
+    col = (cq.Workplane("XY").workplane(offset=L_t).circle(r_in + w_t).extrude(L_c)
+           .cut(cq.Workplane("XY").workplane(offset=L_t - 1).circle(r_in).extrude(L_c + 2)))
+    save(a_.cut(b_).union(col), out, "WTA_diffuser_100sq_to_6in_round_PETG", "PETGCF", flight=False)
+    # Inclined water manometer for the pitot (replaces the SDP810 sensor). 1:10 ramp (5.71 deg), so
+    # 1 mm of water column reads as 10 mm along the tube: about 74 mm of travel at 11 m/s (q ~ 73 Pa); the 200 mm ramp reads to ~195 Pa (18 m/s).
+    # The 1/4 in OD clear tube snaps into the groove; ticks every 5 mm along the slope (long every 10).
+    # The low end is a sealed 40 mm reservoir (area ratio ~160:1 to the 1/8 in bore, so its level drop
+    # is a 0.6 % correction): its lid barb takes the pitot TOTAL line, the tube's top end the STATIC.
+    L_r, W_r, slope = 200.0, 44.0, 0.1
+    ang = math.degrees(math.atan(slope))
+    base = cq.Workplane("XY").box(L_r, W_r, 4.0).translate((L_r / 2, 0, 2.0))
+    wedge = (cq.Workplane("XZ").polyline([(0, 4.0), (L_r, 4.0), (L_r, 4.0 + 8.0 + L_r * slope), (0, 4.0 + 8.0)]).close()
+             .extrude(W_r / 2 - 10, both=True))
+    ramp = base.union(wedge)
+    gd = 4.6                                                              # groove depth for the 6.35 mm tube
+    groove = (cq.Workplane("XZ").polyline([(-5, 12.0 - gd - 5 * slope), (L_r + 5, 12.0 - gd + (L_r + 5) * slope),
+                                            (L_r + 5, 40 + L_r * slope), (-5, 40)]).close().extrude(3.3, both=True))
+    ramp = ramp.cut(groove)
+    for i in range(0, int(L_r // 5)):
+        xx = 10.0 + i * 5.0
+        if xx > L_r - 5: break
+        tick = cq.Workplane("XY").box(0.5, 6.0 if i % 2 == 0 else 3.0, 1.2).translate((xx, -6.5 - (3.0 if i % 2 == 0 else 1.5), 12.0 + xx * slope))
+        ramp = ramp.cut(tick)
+    cx = -20.0                                                            # reservoir overlaps the ramp's low end
+    cup = cq.Workplane("XY").circle(22.0).circle(20.0).extrude(32.0).translate((cx, 0, 0)).union(
+          cq.Workplane("XY").circle(22.0).extrude(2.0).translate((cx, 0, 0)))
+    ramp = ramp.union(cup).cut(cq.Workplane("XY").circle(20.0).extrude(40.0).translate((cx, 0, 2.0)))
+    # straight bore along the slope from inside the cup into the groove (tube centre 3.2 mm below the top face)
+    zc0 = 12.0 - 3.2
+    bore = cq.Solid.makeCylinder(3.15, 30.0, cq.Vector(-26.0, 0, zc0 - 26.0 * slope), cq.Vector(1.0, 0, slope))
+    ramp = ramp.cut(cq.Workplane("XY").add(bore))
+    save(ramp, out, "WTA_inclined_manometer_ramp_PETG", "PETGCF", flight=False)
+    lid = cq.Workplane("XY").circle(22.0).extrude(2.5).union(cq.Workplane("XY").circle(19.8).extrude(6.0).translate((0, 0, -3.5)))
+    lid = lid.union(cq.Workplane("XY").circle(1.75).extrude(10.0).translate((0, 0, 2.5))).cut(cq.Workplane("XY").circle(0.9).extrude(20).translate((0, 0, -5)))
+    save(lid, out, "WTA_inclined_manometer_lid_PETG", "PETGCF", flight=False)
+
+# ------------------------------------------------------------------ tunnel fin-angle measurement (rev 4b)
+# Stack below the airflow face (z = 0, panel back face at -4): 3.0 mm clearance, AS5600 board
+# (1.6 mm, chip down, 1.5 mm body), 1.5 mm air gap, 5 mm gears, horn pocket, spline tip.
+WT_GEAR_M, WT_Z_HUB, WT_Z_SEN, WT_GEAR_T = 1.0, 40, 20, 5.0
+WT_CD = WT_GEAR_M * (WT_Z_HUB + WT_Z_SEN) / 2 + 0.10        # centre distance, +0.1 mm for printed teeth
+WT_BOARD = dict(L=25.4, W=17.78, holes=[(-10.16, -6.35), (10.16, -6.35), (-10.16, 6.35), (10.16, 6.35)])  # VERIFY on the 6357
+WT_Z_PCB_TOP = -4.0 - 3.0
+WT_Z_GEAR_TOP = WT_Z_PCB_TOP - 1.6 - 1.5 - 1.5               # -11.6
+WT_Z_SPLINE = WT_Z_GEAR_TOP - WT_GEAR_T                       # -16.6: horn sits in the gear's underside
+WT_DZ = WT_Z_SPLINE + (C.R - C.SPLINE_TOP_R)                  # -12.4 vs the flight-wall depth
+
+def wt_angle_sensor():
+    """Tunnel hub with a 40 T m1 gear + the 20 T sensor gear (2:1 step-up) that carries the AS5600 magnet.
+    Hub axis = z, chord = x, fin thickness = y, sensor gear at +y."""
+    out = os.path.join(DIRS["wind_tunnel"])
+    sv = C.SERVO; zg0 = WT_Z_SPLINE
+    hub = spur_gear(WT_GEAR_M, WT_Z_HUB, WT_GEAR_T, z0=zg0)
+    hub_end = C.CFIN["gap"] + C.CFIN["root_boss_L"] - 1.0
+    hub = hub.union(cq.Workplane("XY").workplane(offset=zg0 + WT_GEAR_T).circle(C.CFIN["hub_d"] / 2).extrude(hub_end - zg0 - WT_GEAR_T))
+    hub = hub.cut(box(12, 3, 12, 0, C.CFIN["hub_d"] / 2 + 0.5, 0).rotate((0, 0, 0), (0, 1, 0), 90).translate((0, 0, hub_end - 4.0)))  # D-flat
+    hub = hub.cut(cq.Workplane("XY").workplane(offset=zg0 - 0.1).circle((sv["horn_disc_d"] + 0.4) / 2).extrude(1.5))   # horn disc pocket
+    if sv.get("horn_type") == "arm":
+        hub = hub.cut(box((sv["horn_arm_L"] / 2 + 0.4), sv["horn_arm_w"] + 0.4, 1.5, (sv["horn_arm_L"] / 2 + 0.4) / 2, 0, zg0 + 0.65))
+        hub = hub.cut(cq.Workplane("XY").workplane(offset=zg0 - 1).center(sv.get("horn_hole_r", 4.0), 0).circle(0.5).extrude(5))
+    hub = hub.cut(cq.Workplane("XY").workplane(offset=zg0 - 1).circle(1.1).extrude(30))                    # servo screw access
+    hub = hub.cut(cq.Workplane("YZ").workplane(offset=-10).center(0, C.CFIN["gap"] + 3.0).circle(1.1).extrude(20))   # cross-pin (chordwise)
+    save(hub, out, "WTA_hub_gear40_m1_PETGCF", "PETGCF", flight=False)
+    # sensor gear: 20 T, boss below riding on the cradle's 4 mm post, magnet pocket on top, preload pin below
+    y0 = WT_CD
+    sg = spur_gear(WT_GEAR_M, WT_Z_SEN, WT_GEAR_T, z0=zg0).rotate((0, 0, 0), (0, 0, 1), 180.0 / WT_Z_SEN).translate((0, y0, 0))   # half-pitch phase so teeth meet gaps
+    sg = sg.union(cq.Workplane("XY").workplane(offset=zg0 - 4.0).center(0, y0).circle(4.0).extrude(4.0))
+    sg = sg.cut(cq.Workplane("XY").workplane(offset=zg0 - 4.1).center(0, y0).circle(2.15).extrude(4.1))       # rides on the post
+    sg = sg.cut(cq.Workplane("XY").workplane(offset=WT_Z_GEAR_TOP - 2.6).center(0, y0).circle(3.08).extrude(3.0))   # 6 x 2.5 magnet
+    sg = sg.union(cq.Workplane("XY").workplane(offset=zg0 - 3.0).center(7.0, y0).circle(1.0).extrude(3.0))    # preload pin
+    save(sg, out, "WTA_sensor_gear20_m1_PETGCF", "PETGCF", flight=False)
+
+def wt_sensor_mount(zc):
+    """Arm on the cradle pad (+y side) for the sensor gear: post, rubber-band hook, and a bridge that holds
+    the AS5600 board chip-down over the magnet. Rides on the balance with everything else."""
+    sv = C.SERVO; y0 = WT_CD; pad_y = (sv["W"] + 8.0) / 2
+    arm = box(18.0, y0 + 17.0 - pad_y + 1.0, 4.0, 0, (pad_y - 1.0 + y0 + 17.0) / 2, zc + 2.0)
+    post = cq.Workplane("XY").workplane(offset=zc + 4.0).center(0, y0).circle(2.0).extrude(WT_Z_SPLINE - (zc + 4.0) - 0.1)
+    hook = cq.Workplane("XY").workplane(offset=zc + 4.0).center(-7.5, y0 + 6.0).circle(1.2).extrude(3.5)
+    col = box(26.0, 4.0, (WT_Z_PCB_TOP - 1.6) - zc, 0, y0 + 15.0, (zc + WT_Z_PCB_TOP - 1.6) / 2)
+    m = arm.union(post).union(hook).union(col)
+    zl_top = WT_Z_PCB_TOP - 1.6                                # board underside sits on the ledges
+    for xs in (-1, 1):
+        ledge = box(4.0, y0 + 15.0 - (y0 - WT_BOARD["W"] / 2) + 2.0, 1.5, xs * 10.16, (y0 - WT_BOARD["W"] / 2 - 2.0 + y0 + 15.0) / 2 + 1.0, zl_top - 0.75)
+        m = m.union(ledge)
+    for (hx, hy) in WT_BOARD["holes"]:
+        m = m.cut(cq.Workplane("XY").workplane(offset=zl_top - 3).center(hx, y0 + hy).circle(1.05).extrude(4))   # M2.5 self-tap pilots
+    return m
+
+def fin_zero_jig(flat=False):
+    """Fin zero jig (rev 4b, replaces the digital angle gauge). Two fingers with 90 deg V-grooves catch the
+    root leading and trailing edges; every section is symmetric, so both edges lie on the chord line and the
+    grooves centre the fin at exactly 0 deg whatever its thickness. Flight version: a saddle on the 58 mm
+    body between the stabilizers. Tunnel version (flat=True): a plate on the reflection panel. A 11 mm slot
+    clears the fin root and its 10 mm boss. Local frame: chord along z (LE at -), span along +x, thickness y.
+    Trim a fin until the jig slides on and off without moving it."""
+    ch = C.CFIN["root"]; le = -C.CFIN["hinge_frac"] * ch; te = le + ch
+    base_r = 0.0 if flat else C.R
+    x0, x1 = base_r + 0.1, base_r + 3.0                   # base plate / saddle thickness
+    zlo, zhi = le - 10.0, te + 10.0
+    if flat:
+        b = box(x1 - x0, 30.0, zhi - zlo, (x0 + x1) / 2, 0, (zlo + zhi) / 2)
+    else:
+        b = (cq.Workplane("XY").workplane(offset=zlo).circle(x1).circle(x0).extrude(zhi - zlo)
+             .intersect(box(x1 + 2, 2 * x1 * math.sin(math.radians(20)), zhi - zlo, (x1 + 2) / 2, 0, (zlo + zhi) / 2)))
+    b = b.cut(box(20.0, 11.0, te - le + 0.4, x0 + 9.0, 0, (le + te) / 2))            # slot for the fin root + boss
+    xr0, xr1 = base_r + C.CFIN["gap"] + 0.5, base_r + C.CFIN["gap"] + 9.0              # fingers cover the first 8 mm of span
+    for zf, sgn in ((le, -1), (te, +1)):
+        f = box(xr1 - x0, 24.0, 6.0, (x0 + xr1) / 2, 0, zf + sgn * 3.1)
+        g = (cq.Workplane("YZ").polyline([(-3.2, zf - sgn * 0.1 + sgn * 3.2), (0.0, zf - sgn * 0.1), (3.2, zf - sgn * 0.1 + sgn * 3.2)])
+             .close().extrude(xr1 - xr0 + 2).translate((xr0 - 1, 0, 0)))
+        b = b.union(f).cut(g)
+    name = "WTA_fin_zero_jig_PETG" if flat else "15_fin_zero_jig_PETG"
+    return save(b, DIRS["wind_tunnel"] if flat else DIRS["flight"], name, "PETGCF", flight=False)
 
 def wt_phase_b():
     """Phase B: full four-fin control tube + a removable stabilizer tail in the 200 x 200 section.
@@ -524,6 +730,24 @@ def wt_phase_b():
     save(plug, out, "WTB_slot_plug_x8_PETG", "PETGCF", flight=False, qty=8)
 
 # ------------------------------------------------------------------------------- run
+def wt_cal_pulley():
+    """Calibration pulley for the thread-and-pulley balance calibration (rev 3f). An MR105 bearing
+    (5 x 10 x 4, owned) presses into a 30 mm grooved wheel that runs on an M5 bolt. The L-bracket's
+    vertical slot lets the wheel top be set level with the thread's attachment point on the fin."""
+    out = os.path.join(DIRS["wind_tunnel"])
+    w = (cq.Workplane("XY").circle(15.0).extrude(6.0)
+         .cut(cq.Workplane("XY").circle(5.03).extrude(4.0))                  # bearing pocket, 10 mm OD
+         .cut(cq.Workplane("XY").circle(3.5).extrude(6.0)))                  # lip leaves 1 mm shoulder
+    groove = cq.Workplane("XZ").polyline([(15.01, 1.5), (13.5, 3.0), (15.01, 4.5)]).close().revolve(360, (0, 0, 0), (0, 1, 0))
+    w = w.cut(groove)
+    save(w, out, "WTA_calibration_pulley_wheel_PETG", "PETGCF", flight=False)
+    br = cq.Workplane("XY").box(40, 30, 4).translate((0, 0, 2))
+    br = br.union(cq.Workplane("XY").box(30, 5, 70).translate((0, -12.5, 35)))
+    br = br.cut(cq.Workplane("XZ").center(0, 42).slot2D(40, 5.4, 90).extrude(20, both=True))          # M5 slot, 20-62 mm
+    for x in (-13, 13):
+        br = br.cut(cq.Workplane("XY").center(x, 5).slot2D(10, 3.4, 90).extrude(10))       # M3 slots to the base
+    save(br, out, "WTA_calibration_pulley_bracket_PETG", "PETGCF", flight=False)
+
 if __name__ == "__main__":
     only_mass = "--mass-only" in sys.argv
     print("== flight parts")
@@ -542,6 +766,7 @@ if __name__ == "__main__":
     # F15 spacer retired in rev 3 (83 mm F67 case)
     fin0 = rect_fin(0)
     rail_button_spacer()
+    bypass_tube()
     print("== control fins (flight copy at nominal H)")
     cf = [control_fin("NACA0006", C.CFIN_H_NOMINAL, az, xh, export=False)
           for az, xh in ((0, C.X_HINGE_A), (180, C.X_HINGE_A), (90, C.X_HINGE_B), (270, C.X_HINGE_B))]
@@ -558,6 +783,7 @@ if __name__ == "__main__":
         print("== wind tunnel")
         wt_parts()
         wt_phase_a()
+        wt_cal_pulley()
         wt_phase_b()
     # assembly (flight config)
     print("== assembly")
@@ -574,7 +800,7 @@ if __name__ == "__main__":
     for i, f in enumerate(cf): asm.add(f, name=f"cfin{i}", color=cq.Color(0.75, 0.2, 0.15))
     bx, by = bypass_xy()
     bp = cq.Workplane("XY").workplane(offset=zx(C.X_BYPASS_BOT)).center(bx, by).circle(C.BYPASS["od"] / 2).circle(C.BYPASS["id"] / 2).extrude(C.BYPASS["L"])
-    asm.add(bp, name="bypass_tube_Al", color=cq.Color(0.7, 0.7, 0.75))
+    asm.add(bp, name="bypass_tube_PCFR", color=cq.Color(0.72, 0.42, 0.12))
     # servo envelopes (for interference checks): one ring, four servos
     sv = C.SERVO
     zc = zx(C.X_CT_BOT) + C.SERVO_RING_Z
@@ -594,13 +820,14 @@ if __name__ == "__main__":
     checks = {}
     servo_names = [c.name for c in asm.children if c.name.startswith("servo_")]
     for a in servo_names + ["imu", "spine"]:
-        for b in ["bypass_tube_Al", "ct", "spine"] + [s_ for s_ in servo_names if s_ != a]:
+        for b in ["bypass_tube_PCFR", "ct", "spine"] + [s_ for s_ in servo_names if s_ != a]:
             if a == b: continue
             va = shp(a); vb = shp(b)
             inter = va.intersect(vb).Volume()
             if inter > 1e-3: checks[f"{a} x {b}"] = round(inter, 3)
     print("   overlaps (mm3):", checks or "none")
-    json.dump(dict(generator="gen_wyvern_fin.py", L_total_mm=L, interference=checks, parts=report),
+    json.dump(dict(generator="gen_wyvern_fin.py", L_total_mm=L, interference=checks, parts=report,
+                   cad=dict(rect_span=C.RECT_FIN["span"], rect_root=C.RECT_FIN["root"], cfin_H=C.CFIN_H_NOMINAL, cfin_root=C.CFIN["root"])),
               open(os.path.join(HERE, "mass_report.json"), "w"), indent=2)
     tot = sum(p["mass_g"] for p in report if p["flight"])
     print(f"printed flight parts total: {tot:.1f} g")

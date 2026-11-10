@@ -13,7 +13,7 @@ Launch: `/opt/homebrew/bin/python3 run_gui.py` (or double-click `launch.command`
 | Flight Computer SIL | flies the authority manoeuvre and replays it through the firmware's own `controller.h` (compiled for your computer from `Flight Computer/firmware/sil_host/replay.cpp`); sim and firmware metrics side by side, state timeline, emulated ground-station lines, save as a `wyvern_host.py --replay` recording |
 | Authority Manoeuvre | the doublet + attitude-step programme: nominal A/B response and the Monte-Carlo spread of the identified authority |
 | Fin Authority / SQ1 | plots from `wf_fin_authority`, `wf_stabilizer`, `wf_stabilizer_planform_trade`, `wf_flightsim`, with a re-run button |
-| Wind Tunnel Bench | Phase A sweep through two TAL221 cells and NAU7802s, four profiles, raw vs calibrated |
+| Wind Tunnel Bench | Phase A sweep through two 1 kg bar cells and HX711s, four profiles, raw vs calibrated |
 | Static Motor Tester | any `.eng` in `Simulations/motors` on the stand through the HX711 chain |
 | Super Combined | live N-flight run: apogee vs wind, landing scatter, tilt rms, authority fits; saves the outcomes |
 | Project Engines | runs each `wf_*.py`, the airfoil panel code and the SimScale package generator, streaming output |

@@ -5,8 +5,8 @@
    motor test stand, through the stand's structural response and an HX711 load-cell chain. The
    DAQ model is the one built for the TVC-era stand (mount ring, aliasing, quantization, drift,
    calibration-slope residual), now driven by the real AeroTech curves.
-2. Wind-tunnel Phase A bench: one control fin on the reflection plate, servo cradle on two 100 g
-   TAL221 cells (60 mm apart along the chord) read by NAU7802s. The t2 sweep (-15..+15 deg in
+2. Wind-tunnel Phase A bench: one control fin on the reflection plate, servo cradle on two 1 kg
+   bar cells (60 mm apart along the chord) read by two HX711s on the tunnel Metro M4 (rev 4b; was 100 g TAL221s). The t2 sweep (-15..+15 deg in
    0.5 deg steps, 3 s dwell, last 2 s averaged) is simulated with cell noise, flow unsteadiness
    and the spanwise-moment crosstalk the thread-and-pulley calibration has to remove. It shows
    whether the bench resolves the differences RQ1/RQ2 ask about.
@@ -103,10 +103,10 @@ def motor_figure(name, cell_kg=10.0, sps=HX711_SPS, seed=0):
 # ------------------------------------------------------------------------------ tunnel Phase A
 LE_SUCTION = dict(flat_plate=0.5, double_wedge=0.0, NACA0006=0.6, NACA0012=0.9)   # as wf_fin_authority
 X_PLATE_A = 0.090
-CELL_FS_N = 0.1 * 9.80665        # TAL221 100 g
+CELL_FS_N = 1.0 * 9.80665        # rev 4b: 1 kg bar cell (ShangHJ kit, B09K7G51KJ)
 CELL_PITCH_MM = 60.0
-NAU_SPS = 80.0
-NAU_NOISE_FS = 2e-4              # rms, fraction of FS after the NAU7802 (assumed; measure on the bench)
+NAU_SPS = 10.0                   # HX711 default rate (RATE pin low on most boards; 80 SPS if it is tied high)
+NAU_NOISE_FS = 5e-5              # rms, fraction of FS per sample: HX711 at 3.3 V on a 1 mV/V cell (~1.5e-5) + cell repeatability (assumed; measure on the bench)
 FLOW_UNSTEADY = 0.015            # rms fraction of the fin load (fan + section turbulence)
 CROSSTALK = 0.03                 # spanwise moment leaking into the normal-force sum before calibration
 
@@ -125,7 +125,7 @@ def fin_force(m, delta_deg, V):
     cn = m["cna"] * math.sin(a) * math.cos(a) ** 2 + m["Kv"] * math.cos(a) * math.sin(a) ** 2
     return s * q * m["Sf"] * cn          # plate boundary-layer loss applied by the caller
 
-def tunnel_sweep(profile="NACA0006", H=40.0, V=12.0, dmax=15.0, step=0.5, dwell=3.0, avg_last=2.0, seed=0,
+def tunnel_sweep(profile="NACA0006", H=40.0, V=11.0, dmax=15.0, step=0.5, dwell=3.0, avg_last=2.0, seed=0,
                  calibrated=True):
     m = fin_model(profile, H); rng = np.random.default_rng(seed)
     try:
@@ -153,7 +153,7 @@ def tunnel_sweep(profile="NACA0006", H=40.0, V=12.0, dmax=15.0, step=0.5, dwell=
         rows.append(dict(delta=d, N_true=N, N_meas=Nm, N_se=se, cp_true=xc, cp_meas=cp))
     return rows, m, bl
 
-def tunnel_figure(profile="NACA0006", H=40.0, V=12.0, seed=0, calibrated=True, compare=None):
+def tunnel_figure(profile="NACA0006", H=40.0, V=11.0, seed=0, calibrated=True, compare=None):
     fig = Figure(figsize=(10, 5.4), dpi=100); a1 = fig.add_subplot(121); a2 = fig.add_subplot(122)
     profs = [profile] + [p for p in (compare or []) if p != profile]
     cols = dict(flat_plate="#555", double_wedge="#bc4749", NACA0006="#2a6f97", NACA0012="#386641")

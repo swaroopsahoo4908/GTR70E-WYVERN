@@ -35,26 +35,26 @@ def tunnel():
     ax.text(x + 20, y, "->  ~2-4 m/s\n(140 mm PC fan)", fontsize=8, va="center")
     # ---- phase A
     y = 380
-    ax.text(-10, y + 150, "PHASE A — main RQ: one fin on a reflection-plane wall panel in the stock section, Cloudline T8", fontsize=9, weight="bold", color="#9a3412")
+    ax.text(-10, y + 150, "PHASE A — main RQ: one fin on a reflection-plane wall panel in the stock section, 6 in EC duct fan (405 CFM)", fontsize=9, weight="bold", color="#9a3412")
     x = 0
     for L, a_, b_, fc, lab in up + ((250, 202, 100, "#fef3c7", "stock contraction"), (175, 100, 100, "#ffedd5", "stock section\n+ WTA wall panel"),
-                                    (250, 100, 203, "#fef3c7", "WTA 100 sq -> 8 in"), (290, 203, 203, "#e5e7eb", "Cloudline PRO T8")):
+                                    (190, 100, 152, "#fef3c7", "WTA 100 sq -> 6 in"), (240, 152, 152, "#e5e7eb", "6 in EC fan (405 CFM)")):
         duct(x, L, a_, b_, fc, lab, y); x += L
-    ax.text(x + 20, y, "->  ~12 m/s\n(measure)", fontsize=8, va="center")
+    ax.text(x + 20, y, "->  ~11 m/s\n(pitot + manometer)", fontsize=8, va="center")
     xs = 75 * 3 + 250
     ax.add_patch(Rectangle((xs, y - 50), 175, 4, fc="#64748b", ec=INK, lw=0.5))
     xh = xs + 87
     ax.add_patch(Polygon([[xh - 27, y - 46], [xh + 33, y - 46], [xh + 33, y - 46 + 40]], fc="#c2410c", ec=INK, lw=0.5))
     ax.add_patch(Rectangle((xh - 12, y - 85), 24, 30, fc="#2563eb", ec=INK, lw=0.5))
     ax.add_patch(Rectangle((xh - 45, y - 100), 90, 8, fc="#fde68a", ec=INK, lw=0.5))
-    ax.text(xh, y - 118, "X08 Plus on the cradle, 2 x 100 g cells (N + CP)", ha="center", fontsize=6.8)
+    ax.text(xh, y - 118, "ES9251 II on the cradle, 2 x 1 kg cells (N + CP)", ha="center", fontsize=6.8)
     ax.text(xh + 120, y - 30, "fin root 1 mm off the panel,\nspline 4 mm behind it (as in flight)", fontsize=6.5)
     # ---- phase B
     y = 0
     ax.text(-10, y + 150, "PHASE B — SQ1 + SQ2: full four-fin control tube + removable stabilizer tail, 200 x 200 x 750 section", fontsize=9, weight="bold", color="#0f766e")
     x = 0
     for L, a_, b_, fc, lab in up + ((12, 228, 228, "#a7f3d0", ""), (750, 200, 200, "#dcfce7", "NEW test section 200 x 200 x 750 (2020 corners + 3 mm acrylic)"),
-                                    (12, 228, 228, "#a7f3d0", ""), (150, 200, 203, "#fef3c7", "200 sq->8 in"), (290, 203, 203, "#e5e7eb", "Cloudline PRO T8")):
+                                    (12, 228, 228, "#a7f3d0", ""), (150, 200, 203, "#fef3c7", "200 sq->8 in"), (290, 203, 203, "#e5e7eb", "8 in fan (VEVOR 750 CFM)")):
         duct(x, L, a_, b_, fc, lab, y); x += L
     ax.text(x + 20, y, "->  ~6-8 m/s\n(measure)", fontsize=8, va="center")
     x0 = 75 * 3 + 12 + 128
@@ -70,17 +70,17 @@ def tunnel():
     xr = x0 + 100 + (C.X_RECT_LE - C.X_CT_TOP); sp = C.RECT_FIN["span"] * 0.707
     for sg in (1, -1):
         ax.add_patch(Rectangle((xr, sg * 35 if sg > 0 else -35 - sp), C.RECT_FIN["root"], sp, fc="#334155", ec=INK, lw=0.5, alpha=0.85))
-    ax.text(xr + 60, 35 + sp + 8, "stabilizers: off (plugs) / 30 / 50 mm", ha="center", fontsize=6.8, color="#334155")
+    ax.text(xr + 60, 35 + sp + 8, "stabilizers: off (plugs) / 20 / 30 / 40 mm", ha="center", fontsize=6.8, color="#334155")
     ax.add_patch(Rectangle((xt + 30, -100), 12, 85, fc="#64748b", ec=INK, lw=0.5))
     ax.add_patch(Rectangle((xt, -150), 80, 40, fc="#fde68a", ec=INK, lw=0.6)); ax.text(xt + 40, -170, "3-cell strut balance (rotates for yaw sweep)", ha="center", fontsize=6.8)
-    ax.plot([x0 - 60, x0 - 20], [60, 60], color="#0284c7", lw=2); ax.text(x0 - 40, 70, "pitot", ha="center", fontsize=6.8, color="#0284c7")
+    ax.plot([x0 - 60, x0 - 20], [60, 60], color="#0284c7", lw=2); ax.text(x0 - 40, 70, "pitot -> inclined manometer", ha="center", fontsize=6.8, color="#0284c7")
     ax.text(x0 + 100 + Lct / 2, 0, "REAL control tube", ha="center", va="center", fontsize=7, color="white", weight="bold")
     ax.set_xlim(-30, 1700); ax.set_ylim(-190, 900)
     # ---- predictions
     tx = fig.add_axes([0.03, 0.02, 0.94, 0.34]); tx.axis("off")
     d = json.load(open(os.path.join(ROOT, "Simulations", "plots_authority", "authority_matrix.json")))
     rows = [r for r in d["rows"] if r["H_mm"] in C.CFIN_HEIGHTS]
-    txt = "PHASE A  expected normal force on ONE fin at 10° deflection, 12 m/s (model, mN)  [scale x (V/12)^2]\n\n"
+    txt = "PHASE A  expected normal force on ONE fin at 10° deflection, 11 m/s (model, mN)  [scale x (V/11)^2]\n\n"
     txt += "H (mm)        " + "  ".join(f"{h:>6.0f}" for h in C.CFIN_HEIGHTS) + "\n"
     for p in C.CFIN_PROFILES:
         txt += f"{p:13s} " + "  ".join(f"{1000*[r for r in rows if r['profile']==p and r['H_mm']==h][0]['tunnelA_fin_N_at10deg']:6.1f}" for h in C.CFIN_HEIGHTS) + "\n"
@@ -119,8 +119,8 @@ def research_plan():
             ax.text(3.6 + j * 1.25, 13.75 - i * 0.75, f"{short[p]}-{int(h)}", ha="center", va="center", fontsize=6.5)
         ax.text(2.9, 13.75 - i * 0.75, p, ha="right", va="center", fontsize=7.5)
     b(0.4, 5.4, 9.0, 5.0, "Simulation", "panel CFD -> VLM -> slender body + BL\n-> vortex interference -> 3-DOF closed loop\nmain RQ: 4 sections x H 15-50\nSQ1: wf_stabilizer.py, span 0-60 x offset 0/22.5/45\n-> predictions for Phase A and Phase B", "#eff6ff")
-    b(11.0, 9.0, 10.4, 4.4, "Tunnel Phase A  (main RQ)", "one fin on a reflection-plane panel, stock 100 sq\nX08 Plus cradle on 2 cells: N, CP\n20 configs, ±15° in 0.5° steps, 2 repeats\n-> P* = most OBSERVED authority", "#fff7ed")
-    b(11.0, 3.6, 10.4, 4.6, "Tunnel Phase B  (SQ1 + SQ2)", "full control tube + stabilizer tail, 200 x 200 x 750\nP* at H 35 / 40 / 45, stabilizers off / 30 / 50\ndN/N_off = interference ratio I\nyaw sweep: restoring slope; body carry-over", "#f0fdf4")
+    b(11.0, 9.0, 10.4, 4.4, "Tunnel Phase A  (main RQ)", "one fin on a reflection-plane panel, stock 100 sq\nES9251 II cradle on 2 cells (HX711): N, CP\npitot + inclined manometer: q\n20 configs, ±15° in 0.5° steps, 2 repeats\n-> P* = most OBSERVED authority", "#fff7ed")
+    b(11.0, 3.6, 10.4, 4.6, "Tunnel Phase B  (SQ1 + SQ2)", "full control tube + stabilizer tail, 200 x 200 x 750\nP* at H 35 / 40 / 45, stabilizers off / 20 / 30 / 40\ndN/N_off = interference ratio I\nyaw sweep: restoring slope; body carry-over", "#f0fdf4")
     b(23.2, 9.6, 10.4, 3.8, "Selection rule", "H* = height with the most SIMULATED authority\nfly P* at H* - 5, H*, H* + 5 mm\ncurrent prediction: H* = 40 -> 35 / 40 / 45", "#fef3c7")
     b(23.2, 3.6, 10.4, 5.0, "Three flights (a little extra)", f"{C.FLIGHT_MOTOR}, only the fins change\nrail-exit fit + coast doublets -> flight Cmδ\none installed point per flight vs the\ntunnel-calibrated prediction (SQ2)\nRMS tilt vs simulated", "#fdf2f8")
     b(11.0, 0.2, 10.4, 2.8, "Analysis", "blockage + reflection-plane corrections; slopes with 95 % CI;\nANOVA section x height; Spearman sim vs tunnel; fit WYV_INTERF", "#f5f3ff")

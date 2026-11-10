@@ -1,7 +1,7 @@
 #pragma once
-// Cross-core state. Core 0 (control) is the only writer of NavState/CtrlState; core 1 (radio,
-// logging, baro, battery) is the only writer of AuxState. A seqlock gives core 1 a consistent copy
-// without ever blocking core 0.
+// Flight state shared between the modules of the single-loop Pico 2 W firmware (rev 4b). NavState and
+// CtrlState are written by the 200 Hz control step; AuxState by the sensor/housekeeping tasks.
+// The SIL host (firmware/sil_host) includes this file too, so it stays free of board-specific code.
 #include <Arduino.h>
 
 enum FlightState : uint8_t {
@@ -9,7 +9,7 @@ enum FlightState : uint8_t {
   ST_LANDED, ST_FAULT
 };
 
-struct NavState {            // written by core 0 at 200 Hz
+struct NavState {            // written by the control step at 200 Hz
   uint32_t t_ms;
   float q[4];                // attitude quaternion (w,x,y,z), world = pad frame (Z up)
   float tilt_a, tilt_b;      // rad: tilt about body X (axis A) and body Y (axis B)
@@ -20,7 +20,7 @@ struct NavState {            // written by core 0 at 200 Hz
   float qbar;                // Pa
 };
 
-// Result of the authority-demonstration manoeuvre (one per axis), filled by core 0 as it runs.
+// Result of the authority-demonstration manoeuvre (one per axis), filled as it runs.
 struct ManAxis {
   float qbar_d;              // Pa, mean over the doublet fit window
   float b_fit, b_t;          // M_delta/I fit (1/s^2 per rad, + = fins push the way the PID thinks), t-stat
@@ -44,42 +44,19 @@ struct CtrlState {
   float ref_a, ref_b;        // attitude references (deg; 0 = hold vertical) -- manoeuvre steps
   float sched;
   float auth_b_a, auth_t_a;  // rail-exit authority monitor: fitted b and t-statistic (axis A)
-  float a_axial;             // m/s^2, axial specific force used by the vertical channel
+  float a_axial;             // m/s^2, axial specific force used by the vertical channel (BNO085, or thrust model while clipped)
   uint8_t state;
   uint8_t flags;             // bit0 control_enabled, bit1 auth_abort, bit2 tilt_abort, bit3 doublet,
-                             // bit4 attitude step, bit5 manoeuvre aborted/skipped, bit6 high-g in use
+                             // bit4 attitude step, bit5 manoeuvre aborted/skipped, bit6 accel clipped -> thrust model
   uint32_t t_launch_ms;
   ManResult man;
 };
 
-struct AuxState {            // written by core 1
-  float baro_alt_m, baro_hpa, temp_c, rh;
+struct AuxState {            // sensor / housekeeping tasks
+  float baro_alt_m, baro_hpa;      // BMP388 (primary altimeter), pressure altitude and hPa
+  float env_hpa, temp_c, rh;       // BME688 (temperature, humidity; cross-check pressure)
+  float rho_pad;                   // kg/m^3 moist-air density at the pad, frozen at arming
+  float temp_pad_c;                // degC at the pad, frozen at arming (ISA lapse from here in flight)
   float vbat;
-  uint8_t sd_ok, radio_ok;
-  uint8_t cmd_arm;           // set by a valid ARM uplink
-  uint8_t cmd_servo_test;    // counter (incremented per valid uplink)
-  uint8_t cmd_zero;          // counter: re-zero pad attitude
+  uint8_t sd_ok, baro_ok, env_ok;
 };
-
-template <typename T>
-class SeqBox {
- public:
-  void write(const T& v) { seq_++; mb_(); data_ = v; mb_(); seq_++; }
-  bool read(T& out) const {
-    for (int i = 0; i < 4; i++) {
-      uint32_t s0 = seq_; mb_();
-      if (s0 & 1) continue;
-      out = data_; mb_();
-      if (seq_ == s0) return true;
-    }
-    return false;
-  }
- private:
-  volatile uint32_t seq_ = 0;
-  T data_{};
-  static inline void mb_() { __asm volatile("dmb" ::: "memory"); }
-};
-
-extern SeqBox<NavState>  g_nav;
-extern SeqBox<CtrlState> g_ctrl;
-extern SeqBox<AuxState>  g_aux;

@@ -30,7 +30,7 @@ import wf_flightsim as F
 OUT = os.path.join(C.HERE, "plots_stabilizer"); os.makedirs(OUT, exist_ok=True)
 MOTOR = C.FLIGHT_MOTOR
 H = C.CFIN_H_NOMINAL
-V_TUNNEL_B = 7.0             # m/s, 200 x 200 section with the Cloudline T8 (measure; 6-8 expected)
+V_TUNNEL_B = 7.0             # m/s, 200 x 200 section with the 8 in duct fan (measure; 6-8 expected)
 PHASE_B_HEIGHTS = [35.0, 40.0, 45.0]
 
 def interference(H_, span, off):

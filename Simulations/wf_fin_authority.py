@@ -33,8 +33,8 @@ from run_airfoil_cfd import cl_alpha_2d
 OUT = os.path.join(C.HERE, "plots_authority"); os.makedirs(OUT, exist_ok=True)
 MOTOR = C.FLIGHT_MOTOR
 V_REF = 55.0          # m/s, mid-burn reference airspeed (F67), sets BL thickness
-V_TUNNEL = 7.0        # m/s, Phase B: 200 x 200 mm section, Cloudline T8 (measure; 6-8 expected)
-V_TUNNEL_A = 12.0     # m/s, Phase A: stock 100 x 100 section, Cloudline T8 via 100 sq -> 8 in (measure)
+V_TUNNEL = 7.0        # m/s, Phase B: 200 x 200 mm section, 8 in duct fan (measure; 6-8 expected)
+V_TUNNEL_A = 11.0     # m/s, Phase A: stock 100 x 100 section, 6 in EC fan via 100 sq -> 6 in (est. ~12 m/s, kept at 11; measure with the pitot)
 X_PLATE_A = 0.090     # m, reflection-plate leading edge to the fin hinge
 LE_SUCTION = dict(flat_plate=0.5, double_wedge=0.0, NACA0006=0.6, NACA0012=0.9)
 # ^ fraction of leading-edge suction retained (1 = fully attached, no vortex lift). Hypotheses,
@@ -102,7 +102,7 @@ def closed_loop(rows, profile, rect_span):
     for r in [r for r in rows if r["profile"] == profile]:
         H = r["H_mm"]
         veh = F.Vehicle(MOTOR, H=H, rect_span=rect_span,
-                        profile_eta=r["CNa_fin_isolated"] / fin_vlm(H)["CNa"])
+                        profile_eta=r["CNa_fin_isolated"] / fin_vlm(H, c=C.CFIN["root"], hinge_frac=C.CFIN["hinge_frac"])["CNa"])
         res, _ = F.simulate(veh, wind=4.0, gust=4.0, dt=0.001, gains=F.GAINS_FLIGHT)
         veh.interf *= 0.5
         res_h, _ = F.simulate(veh, wind=4.0, gust=4.0, dt=0.001, gains=F.GAINS_FLIGHT)
@@ -158,7 +158,7 @@ if __name__ == "__main__":
         ax[2].plot(Hs, [c["hinge_max"] * 1000 for c in cl[p]], "o-", c=cols[p], label=p)
     ax[0].set(xlabel="H (mm)", ylabel="RMS tilt, rail exit -> burnout+2 s (deg)", title="Closed-loop gust rejection (lower = more authority)")
     ax[1].set(xlabel="H (mm)", ylabel="apogee (m)", title="Apogee cost of fin height")
-    ax[2].set(xlabel="H (mm)", ylabel="peak hinge moment (mN·m)", title=f"Servo load vs {C.SERVO['name']} stall ≈ {C.SERVO['torque_kgcm'][7.4]*98.07:.0f} mN·m at 7.4 V")
+    ax[2].set(xlabel="H (mm)", ylabel="peak hinge moment (mN·m)", title=f"Servo load vs {C.SERVO['name']} stall ≈ {F.servo_stall_Nm()*1000:.0f} mN·m at {C.SERVO.get('v_rail', 7.4):.1f} V")
     for a in ax: a.grid(alpha=.3); a.legend(fontsize=8)
     fig.tight_layout(); fig.savefig(os.path.join(OUT, "C_closed_loop_vs_H.png"), dpi=130); plt.close(fig)
     # selection per profile: H* = argmax |Cmd_net_A| (open-loop simulated authority)

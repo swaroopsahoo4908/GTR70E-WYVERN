@@ -1,0 +1,415 @@
+e1d5a9008f9937aa463974c30b610d36  ./Documentation/WYVERN_BOM.xlsx
+52208543847adaaffa1f7fc3fb9a4248  ./Documentation/gen_canonical_md.py
+4cbd52d7f126c4c5070207db7ae719da  ./Documentation/Decisions_and_Risks.md
+bd5349b468c70223c85ac8116af3070f  ./Documentation/Design_Overview.md
+ced40a1c1211126b54539f2994cd0e70  ./Documentation/Build_and_Test.md
+a18eae5c70d105bd75ac365e21d62754  ./Documentation/build_bom.py
+5c29f236ff693c6e79e4e9c78da4fa4a  ./Documentation/Electronics_Telemetry.md
+f7aa82bf0a51580f46b2510831d8db4d  ./Documentation/Wind_Tunnel_Adaptation.md
+d31105f59050da7a3df6c114c05514bb  ./Documentation/Proposal/toc_pages.json
+a6923c55c9b1d669611911097ceca1dd  ./Documentation/Proposal/build_proposal.js
+98d3c4ff71ad8ab800cfd6f53ccb3161  ./Documentation/Proposal/gen_proposal_figures.py
+89b20693a3b10786fb58231d48135754  ./Documentation/Proposal/figures/Fig6_authority_predictions.png
+227b7a878e6164756c704722b5b84b3c  ./Documentation/Proposal/figures/Fig2_vehicle_layout.png
+e38a4ad403d4aac0e4b8bf9d23fb0084  ./Documentation/Proposal/figures/Fig4_wind_tunnel_adaptation.png
+608d076ec06424d00f964cf5ad5abe70  ./Documentation/Proposal/figures/Fig8_authority_manoeuvre.png
+719cfec0f5be3a889778ea0a62219fc2  ./Documentation/Proposal/figures/Fig3_research_plan.png
+068e2940a13115fee53a957fed56416f  ./Documentation/Proposal/figures/Fig5_wind_tunnel_parts.png
+3c16cbcafd905de99a5c831025658fda  ./Documentation/Proposal/figures/Fig1_cad_renders.png
+2c38634c414fe2482da8a5fae9b2f52e  ./Documentation/Proposal/figures/Fig7_stabilizer_interference.png
+a496499856eed2a4f1daf6a79505c053  ./Documentation/Proposal/GTR70E_WYVERN_Research_Proposal.pdf
+38527f7a32325ee0d1a754ce042e1f49  ./Documentation/Proposal/build_proposal.sh
+3908991a351181907018effb1036038a  ./Documentation/Proposal/toc_entries.json
+7e7d426b9392820e789a6189bd37c963  ./Documentation/Proposal/GTR70E_WYVERN_Research_Proposal.docx
+66e45d784b91415eac91416b688b33c5  ./Documentation/CANONICAL_NUMBERS.md
+455c8278446353ad24e172fe17e1cac7  ./Documentation/Research_Plan.md
+8a2b483e8a2495d633da6797e2d8e468  ./Documentation/diagrams/D5_research_plan.svg
+29446b61e52463f9067123bb52a554ac  ./Documentation/diagrams/gen_wt_renders.py
+c86f85b5066b0e9ec199572f4d457e08  ./Documentation/diagrams/gen_cad_renders.py
+78f288d09d68e5162f4862bcf9d8ace7  ./Documentation/diagrams/D5_research_plan.png
+12423cfafc4be96d072c5ffdf924fe44  ./Documentation/diagrams/D3_assembly_stages.png
+e427798e015cc3efdb8eb302293ca93b  ./Documentation/diagrams/D0_cad_renders.png
+cf95c63108c75c7dab1771a790a4b10b  ./Documentation/diagrams/D7_wind_tunnel_parts.png
+b6537167f245ad13ff6d739a94a351e4  ./Documentation/diagrams/D1_vehicle_layout.png
+8a6130f13ae5551a85e88ad8207771af  ./Documentation/diagrams/D3_assembly_stages.svg
+47b3f3458d7e3aec992d1f4f644a6db1  ./Documentation/diagrams/D6_fit_check.png
+914228833c943483669282d41ec5aba1  ./Documentation/diagrams/D1_vehicle_layout.svg
+65698005c87bc57b5fc2efd2b57ee90c  ./Documentation/diagrams/D4_wind_tunnel_adaptation.png
+4c4325c28e16ee3adb395ca2f2fa8720  ./Documentation/diagrams/gen_vehicle_drawings.py
+eb6deb514ebb38ff0b43c66e72994221  ./Documentation/diagrams/gen_fit_render.py
+8f82cee52aace4326893ab4699df181e  ./Documentation/diagrams/D4_wind_tunnel_adaptation.svg
+6c73f075427f51ae25f3b3c41c4407bb  ./Documentation/diagrams/D2_cross_sections.svg
+53a276ef21195167dba61c221e3cf57f  ./Documentation/diagrams/D2_cross_sections.png
+8656633d1cd2c57df7ce8f716f13274c  ./Documentation/diagrams/gen_tunnel_research.py
+b93588563d45186d7699a0f219f36569  ./Simulations/plots_stabilizer/S4_planform_trade.png
+c67795541a0c1844f117789449b49ace  ./Simulations/plots_stabilizer/S3_tunnel_phaseB.png
+1180047a3909d4f284bd7a9817c1db96  ./Simulations/plots_stabilizer/planform_trade.json
+e92e5517d74f3ffcd1ce2d0d005b908e  ./Simulations/plots_stabilizer/stabilizer_sweep.csv
+8fba1538f339f00cb1ededbcf63011c7  ./Simulations/plots_stabilizer/S1_margin_interference.png
+649c579d21208473f08a1f5cbb2552ca  ./Simulations/plots_stabilizer/S2_closed_loop.png
+a4f691310e0aaeb4155fdafd2a8a0e85  ./Simulations/plots_stabilizer/stabilizer_sweep.json
+590ef9947002c54c016b0ecd10658d24  ./Simulations/plots_authority/B_net_authority_vs_H.png
+1ec38ca511a4325ae6d52a3cde410243  ./Simulations/plots_authority/A_isolated_vs_H.png
+e8d6a301211738a69131d78de69e9558  ./Simulations/plots_authority/authority_matrix.json
+e96ff7467aa8be6288ed4c0fa72ef11c  ./Simulations/plots_authority/authority_matrix.csv
+f10640de3a6ccefada9f8cd05ed01c8b  ./Simulations/plots_authority/C_closed_loop_vs_H.png
+389a6b2b4c9a3244b4949933d4138ff7  ./Simulations/wf_bypass.py
+1e17964c76aaa009ee620b73d1987aa8  ./Simulations/wf_flightsim.py
+aaab363b2dd1b97abb901431e7cd99dc  ./Simulations/README.md
+5da3e4a30a26694c90ec0eb3f218b291  ./Simulations/CFD/simscale/predictions.csv
+455c4ddb74488f39c7fcc1b03590e73e  ./Simulations/CFD/simscale/gen_simscale.py
+b6651692caf6c97c8abec727111e63da  ./Simulations/CFD/simscale/SIMSCALE_SETUP.md
+dda2732805a668016a21822da92899a2  ./Simulations/CFD/simscale/geometry/R3_part_stab_az315.stl
+ecd9cff544c3fdad6ed0cfab3bcf84f5  ./Simulations/CFD/simscale/geometry/A7_part_fin_and_hub.stl
+453bd9ef34d46bdfb1bf9a7fd6ed43a8  ./Simulations/CFD/simscale/geometry/A2_solids.step
+b4c6b6cb28acf73ee218a1fe1f30fb8c  ./Simulations/CFD/simscale/geometry/A7_fluid.stl
+525b2c4710ad41be2f080183e7e32e0e  ./Simulations/CFD/simscale/geometry/R1_part_stab_az135.stl
+d5b4a21e93fa38dad90ea31c06d841e1  ./Simulations/CFD/simscale/geometry/R2_part_body.stl
+1bdf5b9b1f75eda008f8cbb70bcf433f  ./Simulations/CFD/simscale/geometry/A7_fluid.step
+3f1464c23d813114d62f12ccc512c4d2  ./Simulations/CFD/simscale/geometry/A4_part_fin_and_hub.stl
+f84bcc67bf4fe76d012bfb115c162056  ./Simulations/CFD/simscale/geometry/A4_fluid.step
+6e2c37aaf30f5a8229c08acc90e5c480  ./Simulations/CFD/simscale/geometry/A4_fluid.stl
+d87a63697632fd5746eb5d827073617a  ./Simulations/CFD/simscale/geometry/R2_part_cfin_az0.stl
+a98dd6188245ce0f4d60d1f8652c1b88  ./Simulations/CFD/simscale/geometry/R1_solids.step
+b229d3112646bd4324c422b84f3d1103  ./Simulations/CFD/simscale/geometry/A3_fluid.stl
+469dec9c8f427893b12e00c50feabd74  ./Simulations/CFD/simscale/geometry/R3_part_cfin_az0.stl
+153a22b0a358b94593ff665f41d57d4a  ./Simulations/CFD/simscale/geometry/A5_fluid.stl
+1423ce32b44f964d1b2ecbcd5bc9c525  ./Simulations/CFD/simscale/geometry/R2_part_cfin_az180.stl
+7f68527c839a59421d557b8cef410b52  ./Simulations/CFD/simscale/geometry/R3_part_cfin_az180.stl
+aac64fd47a26b1e9c751151c8e6f4bc7  ./Simulations/CFD/simscale/geometry/R1_fluid.step
+2209961a94d747bec053e3cce05394dd  ./Simulations/CFD/simscale/geometry/R3_part_stab_az135.stl
+097d1886f064ce24741728c3cfee8a2f  ./Simulations/CFD/simscale/geometry/R3_part_cfin_az90.stl
+99602a07b0b10225601bb4cb0e954ad0  ./Simulations/CFD/simscale/geometry/A5_part_fin_and_hub.stl
+8c426308107c033afde10d3fc819ff68  ./Simulations/CFD/simscale/geometry/A2_part_fin_and_hub.stl
+ece27a010d04e688a63d48c3157bfe4b  ./Simulations/CFD/simscale/geometry/A3_part_fin_and_hub.stl
+9fc9a4afe385a08086223bb14bdf2aec  ./Simulations/CFD/simscale/geometry/R3_part_stab_az45.stl
+fc845373055a69e2d4c855735e9dd81b  ./Simulations/CFD/simscale/geometry/A3_solids.step
+ff569aecb081aca28e65fc341fd5298e  ./Simulations/CFD/simscale/geometry/R3_part_body.stl
+97b7b3db52894f0aa531f620ebbc9ea1  ./Simulations/CFD/simscale/geometry/R3_part_stab_az225.stl
+2422ef944cfb3c970d1025b619bdd419  ./Simulations/CFD/simscale/geometry/A1_solids.step
+d87a63697632fd5746eb5d827073617a  ./Simulations/CFD/simscale/geometry/R1_part_cfin_az0.stl
+d8b1c761f0933fd02f519a7e24065f52  ./Simulations/CFD/simscale/geometry/R1_part_cfin_az270.stl
+d5b4a21e93fa38dad90ea31c06d841e1  ./Simulations/CFD/simscale/geometry/R1_part_body.stl
+eb463db47cf9c62ed0f82bf59aae8e86  ./Simulations/CFD/simscale/geometry/R2_solids.step
+cd30b1caceb40c997d744bd14c2e217e  ./Simulations/CFD/simscale/geometry/R1_part_cfin_az90.stl
+bc0634188473ca4971ade621ed55d12c  ./Simulations/CFD/simscale/geometry/A2_fluid.stl
+97fb9d96476bb03d7fb6782a5b8b8bec  ./Simulations/CFD/simscale/geometry/R3_fluid.stl
+fb5b1a7fb1d889f2dc6923de516d1f2f  ./Simulations/CFD/simscale/geometry/A6_part_fin_and_hub.stl
+54778aa7a3ed41f65426b514fbedea0f  ./Simulations/CFD/simscale/geometry/R3_fluid.step
+c65fdc6fc11f3a5f5b6d59255775401c  ./Simulations/CFD/simscale/geometry/A7_solids.step
+9b08c914b4272390a2cfc0c38166ffb2  ./Simulations/CFD/simscale/geometry/A6_fluid.step
+373249a1a7ef0ee14dcd181ed95af27e  ./Simulations/CFD/simscale/geometry/A3_fluid.step
+ffc579c45580f9fe330239a260933500  ./Simulations/CFD/simscale/geometry/A5_fluid.step
+baf84e7621d024e1f59e7a060057a516  ./Simulations/CFD/simscale/geometry/R2_fluid.step
+9cc24cc3cd002a0ca711c28062f242f5  ./Simulations/CFD/simscale/geometry/A1_fluid.step
+cd30b1caceb40c997d744bd14c2e217e  ./Simulations/CFD/simscale/geometry/R2_part_cfin_az90.stl
+187de904a5e6739af70b0b831c88121a  ./Simulations/CFD/simscale/geometry/R1_part_stab_az315.stl
+33ced195f6405caafdba5176114f2fea  ./Simulations/CFD/simscale/geometry/A6_fluid.stl
+d8b1c761f0933fd02f519a7e24065f52  ./Simulations/CFD/simscale/geometry/R2_part_cfin_az270.stl
+c6db68cea706a624a6eea53cc4d4ae89  ./Simulations/CFD/simscale/geometry/A1_part_fin_and_hub.stl
+0142d58848f67b8285a0a0ef8d976b2a  ./Simulations/CFD/simscale/geometry/R2_fluid.stl
+018900bf461ac301a989156a72aa13ab  ./Simulations/CFD/simscale/geometry/R1_part_stab_az45.stl
+1c5a29c5cb650c506e12a3a781266549  ./Simulations/CFD/simscale/geometry/R3_part_cfin_az270.stl
+c86e1bff72e2239ac69ccf3bb47bdec8  ./Simulations/CFD/simscale/geometry/A2_fluid.step
+47b9a51f82ab087f4f7494e2961e5dc7  ./Simulations/CFD/simscale/geometry/A1_fluid.stl
+0adc21188b5ce42334039d629598299d  ./Simulations/CFD/simscale/geometry/A5_solids.step
+d72bcb66b4dda12f3105f2594c2e6526  ./Simulations/CFD/simscale/geometry/A4_solids.step
+55df5acd1005d78f739d5185b684611a  ./Simulations/CFD/simscale/geometry/R1_part_stab_az225.stl
+e2dcb8d59f5be654c9ac48e598085f13  ./Simulations/CFD/simscale/geometry/R1_fluid.stl
+1423ce32b44f964d1b2ecbcd5bc9c525  ./Simulations/CFD/simscale/geometry/R1_part_cfin_az180.stl
+ff728dd84e52d9da8a1a1d42b5c16c94  ./Simulations/CFD/simscale/geometry/A6_solids.step
+7e26a58e27b77d83e9db7645f6624f7b  ./Simulations/CFD/simscale/geometry/R3_solids.step
+2520b021e7b8ef4c0fe01594f96fee19  ./Simulations/CFD/simscale/manifest.json
+f83a7e5989b33ee12c2871714ec9fd2f  ./Simulations/CFD/vlm.py
+953072951a2248ccd40a34820aae0c44  ./Simulations/CFD/README.md
+4fdadefb73922433664c36d98fb89a12  ./Simulations/CFD/cl_alpha.png
+ca7d2d04b41dd8acc1cbc9c1279bb555  ./Simulations/CFD/run_airfoil_cfd.py
+bb4b1d5d97ec772763fe19236db24a4a  ./Simulations/CFD/airfoil_polars.csv
+0a41a62c26f5a74ec0b2251fcb23f456  ./Simulations/CFD/cp_distribution.png
+e636309c7b2d9dec34b89dc38bc1c70a  ./Simulations/CFD/airfoil_profiles.py
+385db36ac06b15314fae0a27a447c8ea  ./Simulations/wf_power.py
+8caae249757aa4f00f671bf223e86607  ./Simulations/wyvern_finsim/sil.py
+2bde8f61441338595a319ed752a68b0d  ./Simulations/wyvern_finsim/README.md
+456f735d1619e91e3a92807d667138ee  ./Simulations/wyvern_finsim/bench.py
+dae06cc34e55b8007430df7fe125c671  ./Simulations/wyvern_finsim/run_gui.py
+64107905fdc34507c3e60d1c11431d54  ./Simulations/wyvern_finsim/engine.py
+d2be1c6a8bf5b99e765ad132ed796bf3  ./Simulations/wyvern_finsim/datasets/combined_20261016_162009.csv
+7402f77a4ce98c7fb81e7e55e414387a  ./Simulations/wyvern_finsim/datasets/combined_20261016_113856.csv
+d41d8cd98f00b204e9800998ecf8427e  ./Simulations/wyvern_finsim/datasets/.keep
+4d7daf3127494d94703fa76e6ccc9ae3  ./Simulations/wyvern_finsim/gui.py
+039caba954317aae9c5c78cedbb23511  ./Simulations/wyvern_finsim/datagen.py
+eb5adc76b851bfc08dbeadb8baeb19bf  ./Simulations/wyvern_finsim/launch.command
+947bf41077e37d250e51abd9782b5169  ./Simulations/wyvern_finsim/analysis.py
+cef1dea1b120f33e724ec658e5bc6464  ./Simulations/motors/AeroTech_G40W.eng
+90758a4475ecf5e76c4ed863dcba6f56  ./Simulations/motors/AeroTech_F20W.eng
+1b2e4928d1d4a1ad11ba86d78f84eaf8  ./Simulations/motors/AeroTech_F67W.eng
+581ad972dac40661c9349f3ec8565730  ./Simulations/motors/AeroTech_F27R.eng
+60a90073763e1c324f0a7064466c5b0c  ./Simulations/motors/AeroTech_G74W.eng
+ba252fbfed48ba12d02d50d7ccef4bab  ./Simulations/motors/AeroTech_F50T.eng
+52481a7ac995c348cb70d690aa377203  ./Simulations/motors/AeroTech_F67C.eng
+4d7e734b22c41691892f7e8c941c0441  ./Simulations/motors/AeroTech_F42T.eng
+cbb7c4d5624c5258dffd96b72cce6bc0  ./Simulations/canonical_numbers.json
+e20a691a5fbabc2dbfd9cf1465cff862  ./Simulations/plots_flight/A_motor_trade.png
+509568b67d8c051a640d2777d5826b4d  ./Simulations/plots_flight/maneuver_prediction.json
+fe7979e9cf0a4c978ee81d0bbcb435d8  ./Simulations/plots_flight/B_authority_maneuver.png
+ab4418f472daab6fc973a9ae63387ac4  ./Simulations/plots_flight/D_motor_study.png
+25ae97b8ed325562d9ec90320c61f306  ./Simulations/plots_flight/apogee_cap_trade.json
+327a42b500e251e21448dcf67c99f2db  ./Simulations/plots_flight/tuned_gains.json
+f652cd3c528259a379abd746d2a8835c  ./Simulations/plots_flight/C_apogee_cap_trade.png
+fc4e86d06df2d1ab91866becf27f6ad6  ./Simulations/plots_flight/flight_summary.json
+98d3e82e8ece864a320f2a786bb8a1d3  ./Simulations/plots_flight/motor_study.json
+281a4ec7a038f90cf750122e7d377309  ./Simulations/wf_core.py
+dcb2286d81876d588a656d71b7281869  ./Simulations/wf_apogee_cap_trade.py
+7df62f03709325b7f994417713c39a86  ./Simulations/wf_stabilizer.py
+19324b47a0847c828dd0e96221f0d476  ./Simulations/wf_motor_study.py
+d33fdeec11fba821400c2f5823342870  ./Simulations/wf_stabilizer_planform_trade.py
+f923be3c4a7bdd7010d9ffd0dd1c19eb  ./Simulations/plots_bypass/B_traces.png
+bc70a64a48fcb939413d74e11ea43515  ./Simulations/plots_bypass/bypass_trade.json
+91b589d98f0e3b7952e48d03c17b78d7  ./Simulations/plots_bypass/A_bay_pressure_vs_d.png
+98446eadc4e4919ac501bd36042abbe2  ./Simulations/plots_power/battery_budget.png
+cbcc38e4ca29a8f7cbba3f6f857ecca1  ./Simulations/plots_power/battery_budget.json
+c3faf2fdb06b8d80d1c737aec08d13ca  ./Simulations/wf_fin_authority.py
+3eb207ab4ed7946d640bdc410a5a2d78  ./3D parts/assembly/fit_meshes/servo_horn_az90.stl
+998a805e81a2f6b41602d0f20395594e  ./3D parts/assembly/fit_meshes/stabilizer_2.stl
+e0fa75cc8ca58561559fadc56b1ed990  ./3D parts/assembly/fit_meshes/AeroTech_F42-4T.stl
+a277722077a7c0a88ffef0d0e1d20077  ./3D parts/assembly/fit_meshes/servo_hub_az0.stl
+211caff78a578b95b6ab9d821c3e57bf  ./3D parts/assembly/fit_meshes/01_nose_tangent_ogive_150_ASAAero.stl
+fc13302ccf1be22d7490a6e082b426a2  ./3D parts/assembly/fit_meshes/stabilizer_0.stl
+2952af6472801445ee5564a1196cb5ad  ./3D parts/assembly/fit_meshes/whip_915MHz_78mm.stl
+37336e80b725237e4feb6ad705b4290d  ./3D parts/assembly/fit_meshes/feather.stl
+529c1b06b294a3b6e550b4dcb4f5f273  ./3D parts/assembly/fit_meshes/EMAX_ES9251II_az0.stl
+790454c170e49245a3b155255a59e75e  ./3D parts/assembly/fit_meshes/10_motor_retainer_cap_PCFR.stl
+1c648741e96d3113f9c2da89a321f09b  ./3D parts/assembly/fit_meshes/pololu_D24V10F5_buck.stl
+75ade9c212973c68b3327fe53e8b32f9  ./3D parts/assembly/fit_meshes/adafruit_MPM3610_buck.stl
+7032155c2abfc773eb551653ec246d96  ./3D parts/assembly/fit_meshes/05b_avionics_spine_PETGCF.stl
+c642b3b1e2ba81ff38b2e436a7147705  ./3D parts/assembly/fit_meshes/rail_button_1010_upper.stl
+e41855d218c524c62b4fff7d70d2b0d2  ./3D parts/assembly/fit_meshes/perfboard_16x62.stl
+5af7449deb2738943a27b426c8221863  ./3D parts/assembly/fit_meshes/gps.stl
+9d569481dcf90c768679205fec00f0d5  ./3D parts/assembly/fit_meshes/oring_plenum.stl
+85e786e1322e602e6d6aeb625b89112d  ./3D parts/assembly/fit_meshes/oring_rb_floor.stl
+33e3db8681ec703f45baf2fad4007c0f  ./3D parts/assembly/fit_meshes/shock_cord_bundle.stl
+92292ff0e3753f4985b21fedead754d6  ./3D parts/assembly/fit_meshes/arm_led_3mm.stl
+bae5ace66d056f4139e7ef378a38b366  ./3D parts/assembly/fit_meshes/servo_hub_az180.stl
+d46a1838b357ad74c0dc94d3b0dceccc  ./3D parts/assembly/fit_meshes/09_motor_mount_tube_aft_ring_PCFR.stl
+40f53a5e62592eef28c63fe4ecb3a441  ./3D parts/assembly/fit_meshes/08_plenum_bulkhead_PCFR.stl
+937e8804b75ccc68ee88dbac11c7497a  ./3D parts/assembly/fit_meshes/rail_button_printed_upper.stl
+94b849215de72d6348b9b72c0d771727  ./3D parts/assembly/fit_meshes/control_fin_az0.stl
+c3600118fbdd9ab6907ad7f3a89c253e  ./3D parts/assembly/fit_meshes/rail_button_spacer_upper.stl
+b2c3f8cb56dcf30c780724adecfcf46d  ./3D parts/assembly/fit_meshes/servo_hub_az90.stl
+844fca7ece100ee0553196a271e11f93  ./3D parts/assembly/fit_meshes/microsd.stl
+0869de98fdd3121f870c28db97135142  ./3D parts/assembly/fit_meshes/stabilizer_1.stl
+95fdad3f7d0bee8d51e20f0d3aa3152f  ./3D parts/assembly/fit_meshes/adafruit_MPM3610_buck_servo.stl
+4c46a3b35c96a9638a3d6f540445aa69  ./3D parts/assembly/fit_meshes/bypass_tube_3_8in_Al.stl
+e296e00c8daa1e0787972861c0121a4c  ./3D parts/assembly/fit_meshes/rail_button_spacer_lower.stl
+9f1a9ff36a796516cc2627fb4189ec84  ./3D parts/assembly/fit_meshes/control_fin_az90.stl
+aa3d4c7e33c8fdd4956ac1ebc5ca4852  ./3D parts/assembly/fit_meshes/bme688.stl
+831e527efbf51b9a7d15151525c7faf2  ./3D parts/assembly/fit_meshes/microsd_254.stl
+0d1c97f0214e2f4b19ec86c2415529a5  ./3D parts/assembly/fit_meshes/control_fin_az180.stl
+3e3fd12a2c2cf805580512445315016c  ./3D parts/assembly/fit_meshes/perfboard_16x60.stl
+a95168d9287dbdc017259257e1a388ad  ./3D parts/assembly/fit_meshes/stabilizer_3.stl
+ed2c2922e9474b37c07bb08df6872550  ./3D parts/assembly/fit_meshes/04_control_tube_servo_ring_ASAAero.stl
+9935aacce9271f7f616ce4cd984247d2  ./3D parts/assembly/fit_meshes/bmp388.stl
+719891800663282b01bd8a3025309465  ./3D parts/assembly/fit_meshes/EMAX_ES9251II_az180.stl
+e0fa75cc8ca58561559fadc56b1ed990  ./3D parts/assembly/fit_meshes/AeroTech_F67-6W.stl
+1ca7a927a5ad51766dfff77ac7f81a69  ./3D parts/assembly/fit_meshes/lipo_2S_450.stl
+9786026669620e7a2519ab1554b99df1  ./3D parts/assembly/fit_meshes/02_recovery_bay_tube_ASAAero.stl
+94da07daf1d14bb1b8f9fc93dfaa947c  ./3D parts/assembly/fit_meshes/teensy41.stl
+73d4d67690e947beb6f1a91086de72e4  ./3D parts/assembly/fit_meshes/nose_ballast_pour.stl
+0fc3a1fa0e10e55a38e3bb24b40f7952  ./3D parts/assembly/fit_meshes/chute_24in_packed.stl
+7c08ae0b74eda958aebc6ad07e10452d  ./3D parts/assembly/fit_meshes/screw_switch_standoff_M2.stl
+e0fa75cc8ca58561559fadc56b1ed990  ./3D parts/assembly/fit_meshes/AeroTech_F42-6T.stl
+74a9e8e4d6cd8b2e3d513f61bb0e585c  ./3D parts/assembly/fit_meshes/servo_horn_az180.stl
+58790ac53e2ad580a8b8566c3e6b4230  ./3D parts/assembly/fit_meshes/adxl375.stl
+5f23f6d5e4d58e6b0a2abc8adae5f9c9  ./3D parts/assembly/fit_meshes/bno085.stl
+470d0d3cac6f1a686b078f7b6d498860  ./3D parts/assembly/fit_meshes/rail_button_printed_lower.stl
+c3a2afa9d6cb7b3e9a1b40923a8a3768  ./3D parts/assembly/fit_meshes/arm_button_6mm.stl
+84762a0fbc2fe396eb9df81b0f4419d7  ./3D parts/assembly/fit_meshes/05_spine_deck_PETGCF.stl
+72d89a8d26a6c301ae3785c1db6f6dd0  ./3D parts/assembly/fit_meshes/servo_hub_az270.stl
+33cebce79bfe8782df8e2658a5ee390e  ./3D parts/assembly/fit_meshes/cap_470uF_under_board.stl
+df900819e3abcbb9428fab9ab14a5bda  ./3D parts/assembly/fit_meshes/index.json
+2399a5afc12c86f8d8820421fc5acf97  ./3D parts/assembly/fit_meshes/piezo_12mm_lowprofile.stl
+4b503239de541da1fb10d685dba2078d  ./3D parts/assembly/fit_meshes/servo_horn_az270.stl
+a3d82b7e5dc2e20c62799b39d95485f2  ./3D parts/assembly/fit_meshes/pololu_2810_switch.stl
+9d5613719d362650983403b2bbd4a285  ./3D parts/assembly/fit_meshes/03_rb_floor_coupler_PCFR.stl
+17a1e3e2abec2814cfcb7a9920cec3e3  ./3D parts/assembly/fit_meshes/M5_eyebolt.stl
+5a64fe7aa9f1766ce07399dee8b63840  ./3D parts/assembly/fit_meshes/14_bypass_tube_PCFR.stl
+f3a9534f84f8c09b0ab2c96f9ef252a6  ./3D parts/assembly/fit_meshes/EMAX_ES9251II_az270.stl
+a3caf7c929bb7269c9eaae6cffc08e56  ./3D parts/assembly/fit_meshes/control_fin_az270.stl
+aa9cab4e64cec6d36a5e9be4b25da718  ./3D parts/assembly/fit_meshes/rail_button_1010_lower.stl
+441b24838e4aa7160e8b6fc5c221e124  ./3D parts/assembly/fit_meshes/EMAX_ES9251II_az90.stl
+1da671e03bb54670ce1c72e9f8745926  ./3D parts/assembly/fit_meshes/nomex_wrap.stl
+4ddf4157c5049928c20249fe739fb32f  ./3D parts/assembly/fit_meshes/servo_horn_az0.stl
+60e4b9e8ef2ea9fb20a53634898f60f6  ./3D parts/assembly/fit_meshes/07_motor_bay_tube_ASAAero.stl
+25be25f816cde794f87b3aa147986855  ./3D parts/assembly/FIT_REPORT.md
+ecd552714a10eb46ca1ab4215f274897  ./3D parts/assembly/fit_report.json
+ba5a6fea7bba694c3995b175a3bd56ee  ./3D parts/assembly/GTR70E_WYVERN_fit_assembly.step
+d3a156c46d89b9fe368d91b97f882792  ./3D parts/assembly/GTR70E_WYVERN_fin_assembly.step
+e6b79c7136290479f7737f66b4083fed  ./3D parts/assembly/GTR70E_WYVERN_fin_assembly.stl
+a7bb17ab85c53e880a5e4764a3080689  ./3D parts/README.md
+798cc229b62cbd62ecdb772fe05c5ba8  ./3D parts/wind_tunnel/WT_adapter_228sq_to_200sq_x2_PETG.step
+970f0caafb207fc7edd133727a838b38  ./3D parts/wind_tunnel/WTA_servo_balance_cradle_PETG.stl
+c4c5781413aa2c2b3f9fcdac9e232bcd  ./3D parts/wind_tunnel/WT_adapter_228sq_to_200sq_x2_PETG.stl
+28b2d99e84e87e42e656f66599f25035  ./3D parts/wind_tunnel/WTA_calibration_pulley_bracket_PETG.stl
+35f1798d74297b22278abf82383d04c0  ./3D parts/wind_tunnel/WTA_inclined_manometer_ramp_PETG.stl
+f458c7446b45cf5d362ad4c4f37b8f49  ./3D parts/wind_tunnel/WT_tail_fairing_sting_socket_ASA.step
+35c4b915d01b3185a29544c7ca29741b  ./3D parts/wind_tunnel/WTB_slot_plug_x8_PETG.stl
+221ed87da9df4a8f5930e23dc33481a0  ./3D parts/wind_tunnel/WTB_stabilizer_blade_span20_PETGCF_x4.step
+42d1f60fef20aec2754fd522814fdfe0  ./3D parts/wind_tunnel/WTA_diffuser_100sq_to_6in_round_PETG.step
+92368e9cacf1638714e8f484bd530c93  ./3D parts/wind_tunnel/WTA_calibration_pulley_wheel_PETG.stl
+cb17e853c7e701013eef60ff70cc5f15  ./3D parts/wind_tunnel/WTB_stabilizer_blade_span40_PETGCF_x4.stl
+cf7e649c8cbd37834ac3c65198eb1148  ./3D parts/wind_tunnel/WTA_servo_balance_cradle_PETG.step
+cc2f159c2353cff448229b72e75b1a23  ./3D parts/wind_tunnel/WT_diffuser_200sq_to_8in_round_PETG.step
+57a3249d1876eb094ae4e18df8cf2698  ./3D parts/wind_tunnel/WTB_stabilizer_blade_span30_PETGCF_x4.step
+e17014a84e7a06a25cbd534750a3cdc5  ./3D parts/wind_tunnel/WTA_reflection_plane_wall_panel_PETG.stl
+aaa6110f57522ac91d78de841db838b6  ./3D parts/wind_tunnel/WTB_stabilizer_tail_section_ASA.step
+578d061004c631359818f160890a17eb  ./3D parts/wind_tunnel/WTA_inclined_manometer_ramp_PETG.step
+2975efb4ea94b9d6353c6f6269da1b11  ./3D parts/wind_tunnel/WT_tail_fairing_sting_socket_ASA.stl
+fe24a817cb14b150275d423383556a8b  ./3D parts/wind_tunnel/WTA_reflection_plane_wall_panel_PETG.step
+cc006a2ef4526dbe37da8ec95f717414  ./3D parts/wind_tunnel/WT_strut_fairing_ASA.stl
+c7c8ebeafd74bd068906556759a3862f  ./3D parts/wind_tunnel/WTA_calibration_pulley_wheel_PETG.step
+841626ef892a901671d9b673f8a6bfb7  ./3D parts/wind_tunnel/WTB_stabilizer_blade_span30_PETGCF_x4.stl
+6f2a18fb74dc7ff129af7e7a709ae7c4  ./3D parts/wind_tunnel/WTA_calibration_pulley_bracket_PETG.step
+a10b2120126fc88fa91d9fe611c3c470  ./3D parts/wind_tunnel/WT_diffuser_200sq_to_8in_round_PETG.stl
+748db2f76da5f780429ae18127388e9a  ./3D parts/wind_tunnel/WTB_stabilizer_tail_section_ASA.stl
+7216b9818c7c0c14546c6d3292960d3f  ./3D parts/wind_tunnel/WT_nose_fairing_ogive100_ASA.step
+4d2bbb941eee2fd33afef1163d68ec32  ./3D parts/wind_tunnel/WT_strut_fairing_ASA.step
+6fbdbe3402d8fc6941dedda23811359e  ./3D parts/wind_tunnel/WTA_diffuser_100sq_to_6in_round_PETG.stl
+351e8313a8be04cee013cc13627a41af  ./3D parts/wind_tunnel/WTB_slot_plug_x8_PETG.step
+8e9ea16a84303ac1cbf80860a046ec70  ./3D parts/wind_tunnel/WTA_inclined_manometer_lid_PETG.step
+3cac681b10118b5564002ab09ed9de27  ./3D parts/wind_tunnel/WTB_stabilizer_blade_span20_PETGCF_x4.stl
+4f069d654ba939a86d0fa281460381ce  ./3D parts/wind_tunnel/WT_nose_fairing_ogive100_ASA.stl
+d95932acf640eefea88ec4721bf698d9  ./3D parts/wind_tunnel/WTA_inclined_manometer_lid_PETG.stl
+37a537346b110d393e6b2ce3a68112ad  ./3D parts/wind_tunnel/WTB_stabilizer_blade_span40_PETGCF_x4.step
+5c8bc74370eb30b06ae584da24036c13  ./3D parts/flight/01_nose_tangent_ogive_150_ASAAero.stl
+f215da1d49c958a18dd8dd1d5f6125ef  ./3D parts/flight/02_recovery_bay_tube_ASAAero.step
+16ed8b025e3469080fa77b031e21dd85  ./3D parts/flight/05_spine_deck_PETGCF.step
+7f453f8ce60785c374cb89a368e31a03  ./3D parts/flight/10_motor_retainer_cap_PCFR.stl
+837790ae09f401009a22650d1aeec14f  ./3D parts/flight/09_motor_mount_tube_aft_ring_PCFR.step
+c809951fcb8ad9f34227dd2d50daff8a  ./3D parts/flight/12_rect_fin_PETGCF_x4.step
+2ebcdd0758ca58c7deb1c86b8ca3c038  ./3D parts/flight/05b_avionics_spine_PETGCF.stl
+975f24004b831685906b7434d0607b16  ./3D parts/flight/04_control_tube_servo_ring_ASAAero.step
+bd7cb72f78fbe1d91be66a82916012db  ./3D parts/flight/06_servo_hub_PETGCF_x4.step
+d91a780cd8fc590a7647778c6d8b2920  ./3D parts/flight/09_motor_mount_tube_aft_ring_PCFR.stl
+01c00e72a0ae268a68bc1e5f87ca58fe  ./3D parts/flight/08_plenum_bulkhead_PCFR.stl
+a0a463a98b766a06da208406e18e31f1  ./3D parts/flight/10_motor_retainer_cap_PCFR.step
+3ee76abcf78608739068fd74f3177f26  ./3D parts/flight/03_rb_floor_coupler_PCFR.step
+9415a8be7952a89292aac6093e28149d  ./3D parts/flight/13_rail_button_1010_printed_PETGCF_x2.step
+7b22f2e3627b4ea890e7b56c7c9c310d  ./3D parts/flight/13_rail_button_1010_printed_PETGCF_x2.stl
+df62899fbdf083d17a8de71e23ecfd98  ./3D parts/flight/14_bypass_tube_PCFR.step
+727938c2c9cdd38151ebbb0b4665d6bb  ./3D parts/flight/04_control_tube_servo_ring_ASAAero.stl
+c9e0033211c08156f0f6e750175dad86  ./3D parts/flight/06_servo_hub_PETGCF_x4.stl
+02e1b04647b223ca2e3d3e6599d696d3  ./3D parts/flight/02_recovery_bay_tube_ASAAero.stl
+8d25a8962fb40e928738fbf31c5fc0b5  ./3D parts/flight/08_plenum_bulkhead_PCFR.step
+d7be3499dff6fc6a2317d814d20f2fa0  ./3D parts/flight/05b_avionics_spine_PETGCF.step
+dd5e5a7bdd3c556602fb1ef27b3e5285  ./3D parts/flight/05_spine_deck_PETGCF.stl
+0d383dde9110d0ffb24dab1312c6db69  ./3D parts/flight/03_rb_floor_coupler_PCFR.stl
+927ba1d14111d069e2e3fe85dbb77707  ./3D parts/flight/14_bypass_tube_PCFR.stl
+5ffef22980c255919c82bd46bf5aa654  ./3D parts/flight/01_nose_tangent_ogive_150_ASAAero.step
+6cb10b2c56fb17d8a31b9f8936730d46  ./3D parts/flight/07_motor_bay_tube_ASAAero.step
+3f1d75b32def38f234b11e12a9078225  ./3D parts/flight/07_motor_bay_tube_ASAAero.stl
+6cd83cc09bbe95362bb8d9fe0da3b28f  ./3D parts/flight/12_rect_fin_PETGCF_x4.stl
+1a7f0406ed2f73eb6997c60c9df95682  ./3D parts/control_fins/NACA0012/cfin_NACA0012_H40_PETGCF.stl
+50538dacef64790f94a1a4cdb702a993  ./3D parts/control_fins/NACA0012/cfin_NACA0012_H25_PETGCF.stl
+71f9c7501e591d8f36d4237701418404  ./3D parts/control_fins/NACA0012/cfin_NACA0012_H30_PETGCF.stl
+17349b53e9b9a49d2bc8d9c87c756b87  ./3D parts/control_fins/NACA0012/cfin_NACA0012_H45_PETGCF.step
+277662c6c22d446c15d69fb9de85a71b  ./3D parts/control_fins/NACA0012/cfin_NACA0012_H45_PETGCF.stl
+75764d1298b29913ece43335ff94a557  ./3D parts/control_fins/NACA0012/cfin_NACA0012_H25_PETGCF.step
+fe1999c64b817646ca57b2c992d6677a  ./3D parts/control_fins/NACA0012/cfin_NACA0012_H20_PETGCF.step
+24f204494edcb67d144cacf32319911c  ./3D parts/control_fins/NACA0012/cfin_NACA0012_H40_PETGCF.step
+32f1d15abbb0bb46b74e1a77b6256102  ./3D parts/control_fins/NACA0012/cfin_NACA0012_H20_PETGCF.stl
+558f7a42a4f4f9049d8204b3aced26f7  ./3D parts/control_fins/NACA0012/cfin_NACA0012_H35_PETGCF.stl
+71dd5a3e75721114a9455eedee08a146  ./3D parts/control_fins/NACA0012/cfin_NACA0012_H35_PETGCF.step
+ec07d948a9c2336776cbe1395d34d710  ./3D parts/control_fins/NACA0012/cfin_NACA0012_H30_PETGCF.step
+8c7e9dc825100f2d016b620f123f6d5d  ./3D parts/control_fins/flat_plate/cfin_flat_plate_H25_PETGCF.step
+e45d8da312e42d2a7159e5184e5ce747  ./3D parts/control_fins/flat_plate/cfin_flat_plate_H20_PETGCF.step
+352df29fcf4493a2db0b144b7401454f  ./3D parts/control_fins/flat_plate/cfin_flat_plate_H20_PETGCF.stl
+4b256dff6bd157bd2921a16362e4915a  ./3D parts/control_fins/flat_plate/cfin_flat_plate_H40_PETGCF.step
+1d54119ec40fe03bf8371cffd225831b  ./3D parts/control_fins/flat_plate/cfin_flat_plate_H25_PETGCF.stl
+926c9d2b6f9a33593a84c4ba08ba68a9  ./3D parts/control_fins/flat_plate/cfin_flat_plate_H35_PETGCF.stl
+dc96c7d7fc3d81a290142d90fabfccc4  ./3D parts/control_fins/flat_plate/cfin_flat_plate_H40_PETGCF.stl
+2720121ffaaef78dfa642e0e8225fbd3  ./3D parts/control_fins/flat_plate/cfin_flat_plate_H45_PETGCF.step
+3f1af7032063ac1bc76f7194dd38d0e7  ./3D parts/control_fins/flat_plate/cfin_flat_plate_H30_PETGCF.step
+48b9646b6b7eacb272cb6289c15015b8  ./3D parts/control_fins/flat_plate/cfin_flat_plate_H35_PETGCF.step
+202eb913537ae54969ea00516c33eab7  ./3D parts/control_fins/flat_plate/cfin_flat_plate_H45_PETGCF.stl
+d5221fa2194c144dac7656080244b5f2  ./3D parts/control_fins/flat_plate/cfin_flat_plate_H30_PETGCF.stl
+049b3836285bc4fcab0583a0262ec09d  ./3D parts/control_fins/NACA0006/cfin_NACA0006_H35_PETGCF.step
+48d20e053b033d2b0d719859d212ba33  ./3D parts/control_fins/NACA0006/cfin_NACA0006_H30_PETGCF.step
+310a8aeb0a2ab18434769367a608745a  ./3D parts/control_fins/NACA0006/cfin_NACA0006_H30_PETGCF.stl
+eeb4723503ff4f2bbffa281c20b7298f  ./3D parts/control_fins/NACA0006/cfin_NACA0006_H40_PETGCF.stl
+e26a99648fbb52b162d124cae45ccaee  ./3D parts/control_fins/NACA0006/cfin_NACA0006_H20_PETGCF.stl
+9d63d05cbf26b9795cda62516384718c  ./3D parts/control_fins/NACA0006/cfin_NACA0006_H40_PETGCF.step
+a286849b166e884349b2a8865f3a21ff  ./3D parts/control_fins/NACA0006/cfin_NACA0006_H35_PETGCF.stl
+8b2856de29b2c11f1e38d62b827cbf13  ./3D parts/control_fins/NACA0006/cfin_NACA0006_H20_PETGCF.step
+44647c720a16347121d42b55de9c8114  ./3D parts/control_fins/NACA0006/cfin_NACA0006_H25_PETGCF.stl
+89f6c60c6d63bd8621e4a30b6a2bebf3  ./3D parts/control_fins/NACA0006/cfin_NACA0006_H45_PETGCF.step
+abb0225910babcc876c4d735d0c574b9  ./3D parts/control_fins/NACA0006/cfin_NACA0006_H25_PETGCF.step
+7353b0a8387dbf747bf87751c6c29c1a  ./3D parts/control_fins/NACA0006/cfin_NACA0006_H45_PETGCF.stl
+1a698fd5aebbedcc0117329dbe1b5504  ./3D parts/control_fins/double_wedge/cfin_double_wedge_H30_PETGCF.step
+c7adcc176f8139d5d706f17cc767513d  ./3D parts/control_fins/double_wedge/cfin_double_wedge_H25_PETGCF.stl
+7c3bdbe99f4afc5cff3ccdd6a725ea45  ./3D parts/control_fins/double_wedge/cfin_double_wedge_H40_PETGCF.stl
+8a0c3718fb69fbfbb6453520bcecd8e3  ./3D parts/control_fins/double_wedge/cfin_double_wedge_H35_PETGCF.stl
+e3271ae6a65caa33a916881d091213f8  ./3D parts/control_fins/double_wedge/cfin_double_wedge_H35_PETGCF.step
+11709790ab95dbfc52b3a21063f942e9  ./3D parts/control_fins/double_wedge/cfin_double_wedge_H30_PETGCF.stl
+27b8927f5d333378d12d6f73689e5a63  ./3D parts/control_fins/double_wedge/cfin_double_wedge_H25_PETGCF.step
+6be3b8df1e3b21a04f3da5f5701ec78e  ./3D parts/control_fins/double_wedge/cfin_double_wedge_H20_PETGCF.stl
+211efbf0a6949f33fbdb0061800a2bc7  ./3D parts/control_fins/double_wedge/cfin_double_wedge_H45_PETGCF.stl
+d7aef6a618a1d04e5bf4b8bda0de3ceb  ./3D parts/control_fins/double_wedge/cfin_double_wedge_H20_PETGCF.step
+20b5c2610b6407fd160e7dbe5334a585  ./3D parts/control_fins/double_wedge/cfin_double_wedge_H40_PETGCF.step
+8cbaee66f6c9b7e82a20f762aa22aade  ./3D parts/control_fins/double_wedge/cfin_double_wedge_H45_PETGCF.step
+85b01605391c37b4c4ede444b3344ca4  ./3D parts/vendor/pololu_D24V10F5_buck.step
+dbfa89f086a00fb4c5f98319a4f95c34  ./3D parts/vendor/adafruit_5046_bme688.step
+cdb1ecf98c7f39201fabc2ed3de32c56  ./3D parts/vendor/adafruit_4415_pa1010d_gps.step
+94efb5f595832bd346fe228ffb61bf73  ./3D parts/vendor/adafruit_4739_mpm3610_buck.step
+61b6a7479329bb6000d590a9963f9300  ./3D parts/vendor/adafruit_4754_bno085.step
+5384ab8109917f571d2f47a286543c3e  ./3D parts/vendor/adafruit_5712_feather_rp2040_rfm_formfactor.step
+1e432dd56098166333272ba1f8d949e5  ./3D parts/vendor/adafruit_4097_adxl343_formfactor_for_5374_adxl375.step
+08dbac7bad984abd14ae228eebb715f4  ./3D parts/vendor/adafruit_4682_microsd.step
+6786cc20e1729307c1c790cbbcce7a1f  ./3D parts/vendor/pololu_2810_mini_mosfet_switch.step
+21c3274287698513bf82c4fdc9c0571e  ./3D parts/_generator/mass_report.json
+76c333a26460c23a20f67625cfcee18b  ./3D parts/_generator/gen_wyvern_fin.py
+d085758e1df2533eeef7110551721b11  ./3D parts/_generator/gen_fit_assembly.py
+a7af6c70a8c6ad1860fac2af34cd9157  ./README.md
+1fd7db5a18abbc95ff1c273e8032b744  ./TVC ARCHIVED/README.md
+a5eea0f99fc2e9830245c3000017ac42  ./Data/README.md
+6984fa067f9759f493126031ae23d27f  ./Wind Tunnel/wt_balance_daq/wt_balance_daq.ino
+ee6a9ad53419ecf38f4fa37d4119209e  ./Wind Tunnel/README.md
+8043377fb6b66696ffc983869510c067  ./Flight Computer/wiring/W1_wiring.png
+ec6842e2aa58a6ea22e882ffa3b98ade  ./Flight Computer/wiring/W2_power_tree.png
+48f96e1c6157443252a55a97badf19ff  ./Flight Computer/wiring/W4_spine_perfboard.png
+3846672e2657feb73dbcc55c60429b1c  ./Flight Computer/wiring/W2_power_tree.svg
+cac5dc4626836ed246850846a067f864  ./Flight Computer/wiring/W3_system.png
+ab6df445fa79fa4fb1a2d71845a693a7  ./Flight Computer/wiring/W5_harness.csv
+d2af081fb3a91cfff59492d288d3a55f  ./Flight Computer/wiring/W5_harness.md
+8102ca389785fa889402c69eb517237b  ./Flight Computer/wiring/W4_spine_perfboard.svg
+64aa5e74f236d1d94d4671e3442351e6  ./Flight Computer/wiring/W3_system.svg
+09c4200a3429c6fe30acbc0fcff4abe5  ./Flight Computer/wiring/gen_wiring.py
+e8237da2c28b2eb8aadab9d9b7cb5fa5  ./Flight Computer/wiring/W1_wiring.svg
+c652b7978118fa678702e95ef36a6020  ./Flight Computer/README.md
+98cb5e1ab172a86b4db3c61046dbe567  ./Flight Computer/sync_headers.py
+0d858a40d6b0d0295c542024f35ac00b  ./Flight Computer/firmware/wyvern_fin/wyvern_fin.ino
+28e093617ca8384ec93c1ca222bc03c1  ./Flight Computer/firmware/wyvern_fin/fin_mixer.h
+090037129a5bbd752ba729f9530908f6  ./Flight Computer/firmware/wyvern_fin/controller.h
+b5ddb2da9b6232200a4e8b7786968f64  ./Flight Computer/firmware/wyvern_fin/baro.h
+9c93550fc7c9a2cb3e54017dc68710c5  ./Flight Computer/firmware/wyvern_fin/attitude.h
+ecbd2a10c56ae2beb8527743f329f38d  ./Flight Computer/firmware/wyvern_fin/fc_config.h
+c75f7a0c2efd0be4f381fdcf600a8a0b  ./Flight Computer/firmware/wyvern_fin/shared_state.h
+c4c83f36984130fedf902da95293acb5  ./Flight Computer/firmware/wyvern_fin/arming.h
+ddc11eec7fbd405edb864d10a98d1618  ./Flight Computer/firmware/wyvern_fin/logger.h
+2cda0d243771efe6035693d82d1b1c12  ./Flight Computer/firmware/sil_host/replay.cpp
+ba8be5721a557f84c950e4e11f676f6e  ./Flight Computer/firmware/sil_host/sil_check.json
+a0bf86ee882dbd09800ca075dc6bb55f  ./Flight Computer/firmware/sil_host/sil_check.py
+80dde26b054f6794af48b2175d3d611e  ./Flight Computer/firmware/sil_host/replay
+e667eea543f8723c4eba6dd68bab6036  ./Flight Computer/firmware/sil_host/shim/Arduino.h
+8e706453391c2447fea01c55f3c6dc25  ./Flight Computer/firmware/sil_host/shim/Wire.h
+6ce84b727a490b7f9c8dcdb4156b6dde  ./Flight Computer/test_code/t2_servo_cal/fin_mixer.h
+545368bf9ef5e36a4aafef8caf2b89e8  ./Flight Computer/test_code/t2_servo_cal/t2_servo_cal.ino
+c2391dd5f40998dce182cfeb760da059  ./Flight Computer/test_code/t2_servo_cal/fc_config.h
+c828a85a7d0ae7350cc4d842b64a8693  ./Flight Computer/test_code/t1_i2c_scan/t1_i2c_scan.ino
+0de1e3dc7a5f0c569fe03ffb1407102a  ./Flight Computer/test_code/t1_i2c_scan/baro.h
+c2391dd5f40998dce182cfeb760da059  ./Flight Computer/test_code/t1_i2c_scan/fc_config.h
+c6ec0a944b375c8c8991a8bb129f985e  ./Flight Computer/test_code/t3_arm_log/t3_arm_log.ino
+c2391dd5f40998dce182cfeb760da059  ./Flight Computer/test_code/t3_arm_log/fc_config.h
+c2af922a83b13ac2bfbd77ab8f725551  ./Flight Computer/test_code/t3_arm_log/shared_state.h
+6fbc74497c6f261004c98b632958c67a  ./Flight Computer/test_code/t3_arm_log/arming.h
+a2c74ef62b2ef159ac9088023e1cba23  ./Flight Computer/test_code/t3_arm_log/logger.h
+c90f0dc4857df3328dabe439d42de21c  ./Flight Computer/host/wyvern_host.py

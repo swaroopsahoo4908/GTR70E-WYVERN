@@ -7,7 +7,6 @@ can = json.load(open(os.path.join(SIM, "canonical_numbers.json")))
 fl = json.load(open(os.path.join(SIM, "plots_flight", "flight_summary.json")))
 au = json.load(open(os.path.join(SIM, "plots_authority", "authority_matrix.json")))
 pw = json.load(open(os.path.join(SIM, "plots_power", "battery_budget.json")))
-lk = json.load(open(os.path.join(SIM, "plots_link", "link_budget.json")))
 bp = json.load(open(os.path.join(SIM, "plots_bypass", "bypass_trade.json")))
 mr = json.load(open(os.path.join(HERE, "..", "3D parts", "_generator", "mass_report.json")))
 FM = C.FLIGHT_MOTOR
@@ -32,7 +31,7 @@ for k, v in [("Overall length / OD", f"{C.L_TOTAL:.0f} mm / {C.OD:.0f} mm"),
              ("Control fins", f"triangular, root {C.CFIN['root']:.0f} mm, hinge {C.CFIN['hinge_frac']*100:.0f} % chord, H* = {C.CFIN_H_NOMINAL:.0f} mm, ±{C.CFIN['defl_max_deg']:.0f}°"),
              ("Stabilizers (fixed fins)", f"4 x {C.RECT_FIN['root']:.0f} x {C.RECT_FIN['span']:.0f} x {C.RECT_FIN['t']} mm at 45°"),
              ("Servo", f"{C.SERVO['name']}, base r = {C.SERVO_BASE_R:.1f} mm, spline tip r = {C.SPLINE_TOP_R:.1f} mm"),
-             ("Bypass tube", f"{C.BYPASS['od']} x {C.BYPASS['id']} mm Al, {C.BYPASS['L']:.0f} mm, {C.bypass_mass():.1f} g, on the vehicle centreline")]:
+             ("Bypass tube", f"{C.BYPASS['od']} x {C.BYPASS['id']} mm printed PC-FR, {C.BYPASS['L']:.0f} mm, {C.bypass_mass():.1f} g, on the vehicle centreline")]:
     a(f"| {k} | {v} |")
 a(f"\n## Flight ({FM}, 4 m/s wind + 4 m/s gust)\n\n| | control on | fins locked |\n|---|---|---|")
 for k, key, fmt in [("Rail exit speed (6 ft)", "rail_exit_v", "{:.1f} m/s"), ("Burnout speed", "v_burnout", "{:.0f} m/s"), ("Max q", "max_q_Pa", "{:.0f} Pa"),
@@ -53,7 +52,7 @@ a(f"\nSelection: {au['selection']['NACA0006']}")
 a("\n## Electronics\n\n| | |\n|---|---|")
 a(f"| Pad idle / flight current | {pw['idle_mA']:.0f} mA / {pw['flight_mA']:.0f} mA |")
 a(f"| Mission charge / derated requirement / pack | {pw['mission_mAh']:.1f} / {pw['required_with_derating_mAh']:.0f} / {pw['pack_mAh']} mAh ({pw['margin_x']:.1f}x) |")
-a(f"| LoRa | SF{lk['config']['sf']}/{lk['config']['bw']/1e3:.0f} kHz, {lk['payload_B']} B, {lk['time_on_air_ms']:.1f} ms, {lk['flight_rate_Hz']} Hz, margin {lk['margin_at_slant_dB']:.0f} dB at {lk['worst_slant_m']:.0f} m |")
+a("| Telemetry | none in flight (rev 4): microSD (Adafruit 4682 on the Pico 2 W) is the only record; USB CSV on the pad |")
 if b05:
     b03 = [r for r in bp["results"]["0.3"] if abs(r["d_mm"] - C.BYPASS["id"]) < 0.01][0]
     a(f"\n## Ejection (chosen tube)\n\n0.3 g BP: bay {b03['peak_bay_kPa']:.0f} kPa → {b03['nose_force_peak_N']:.0f} N push vs {bp['release_force_N']:.0f} N release; plenum {b03['peak_plenum_kPa']:.0f} kPa, kick-out {b03['motor_kickout_N']:.0f} N")

@@ -1,4 +1,4 @@
-// t2 -- servo trim / sign / us-per-degree calibration, and the bench SIGN CHECK.
+// t2 -- (Pico 2 W, rev 4b) servo trim / sign / us-per-degree calibration, and the bench SIGN CHECK.
 // Serial commands:  f<i>        select fin i (0 A+, 1 A-, 2 B+, 3 B-)
 //                   u<us>       raw pulse to the selected fin (e.g. u1520)
 //                   d<deg>      command the selected fin through the flight mixer convention
@@ -6,9 +6,10 @@
 //                   c           centre all
 //                   w<pair>     wind-tunnel sweep of pair 0 (A) or 1 (B): -15..+15 deg, 0.5 deg steps,
 //                               3 s dwell, prints 'WT,<ms>,<deg>' at each step for balance-log sync
-// Procedure (Documentation/Build_and_Test.md s.5): clamp the printed protractor jig on each fin,
-// find the us that squares the fin to the body (-> WYV_SERVO_TRIM), measure us per 10 deg
-// (-> WYV_SERVO_US_PER_DEG), then confirm that +delta on each pair makes the trailing edge move so
+// Procedure (Documentation/Build_and_Test.md s.3, rev 4b, no angle gauge): slide the printed
+// 15_fin_zero_jig onto each fin and find the us at which it slides on and off without moving the fin
+// (-> WYV_SERVO_TRIM). us per degree comes from the tunnel rig: each flight servo in turn in the cradle
+// with the AS5600 hub, wt_balance_daq a<deg> commands vs the measured angle (-> WYV_SERVO_US_PER_DEG), then confirm that +delta on each pair makes the trailing edge move so
 // that the fin's force points toward +Y (pair A) / +X (pair B). Flip WYV_SERVO_SIGN where it doesn't.
 #include "fc_config.h"
 #include "fin_mixer.h"

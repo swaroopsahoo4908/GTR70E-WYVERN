@@ -2,7 +2,7 @@
 
 Authors: Swaroop Sahoo, Chris Liu, Allison Hong
 
-A single-stage, 58 mm, actively stabilised rocket. Four servo-driven triangular fins sit in one ring just above the motor, all at the same station, and steer it on ascent; four fixed rectangular stabilizers run the length of the motor and keep it passively stable. The motor's ejection gas reaches the recovery bay through an aluminium tube on the centreline, and the avionics ride on a square spine around that tube. The flight computer is an Adafruit Feather RP2040 with an onboard 915 MHz LoRa radio, which streams telemetry live to a ground station. The thrust-vector-control revision lives, complete, in `TVC ARCHIVED/`.
+A single-stage, 58 mm, actively stabilised rocket. Four servo-driven triangular fins sit in one ring just above the motor, all at the same station, and steer it on ascent; four fixed rectangular stabilizers run the length of the motor and keep it passively stable. The motor's ejection gas reaches the recovery bay through a printed PC-FR tube on the centreline, and the avionics ride on a square spine around that tube. The flight computer is a Raspberry Pi Pico 2 W (radio left off) that logs everything to an Adafruit 4682 microSD; there is no radio, and a pushbutton through the wall arms it on the pad. The thrust-vector-control revision lives, complete, in `TVC ARCHIVED/`.
 
 ![vehicle](Documentation/diagrams/D0_cad_renders.png)
 
@@ -10,15 +10,15 @@ A single-stage, 58 mm, actively stabilised rocket. Four servo-driven triangular 
 
 | | |
 |---|---|
-| Length / OD | 692 mm / 58 mm, four printed sections (each fits a 256 mm printer), only the nose separates |
-| Liftoff mass | 806.7 g on an AeroTech Econojet F42-4T (T/W 4.6 avg; 4 motors $87.98, no certification) |
-| CG / CP / margin | 360 / 418 mm, 1.01 cal at liftoff, 1.18 at burnout; 214 g nose ballast, stabilizers 81 x 20 mm at 45°, H45 flight fins |
-| Rail exit | 14.8 m/s off the 6 ft Estes Pro Series II rail (an 8 ft rail would add margin) |
-| Apogee | 167 m (549 ft, under the 600 ft cap) at 6.2 s; motor ejection (4 s delay) via the central 3/8 in bypass tube |
-| Control | 4 x KST X08 Plus in one ring, bases 5 mm from the axis, ±15°, q-scheduled PID at 200 Hz; gust case 0.44° RMS tilt vs 10.4° with fins locked; fins active from rail exit until q̄ < 15 Pa (88 % of the ascent); in-flight authority manoeuvre (doublets + 1° steps) |
-| Avionics | Feather RP2040 RFM95, BNO085 + ADXL375 (core 0 bus), BME688 (core 1 bus) and microSD on a square spine around the bypass tube; a second Feather RP2040 RFM95 is the ground station |
-| Power | 2S 450 mAh, internal screw switch on a MOSFET switch; 26-min mission uses 57 mAh (4.3x margin) |
-| Telemetry | LoRa SF7 / 500 kHz: 42-byte state frames at 20 Hz, manoeuvre result after coast; 57 dB margin at worst slant range |
+| Length / OD | 693 mm / 58 mm, four printed sections (each fits a 256 mm printer), only the nose separates |
+| Liftoff mass | 784.5 g on an AeroTech Econojet F42-4T (T/W 4.7 avg; 4 motors $98.98 at eRockets, no certification) |
+| CG / CP / margin | 338 / 422 mm, 1.44 cal at liftoff, 1.63 at burnout; 253 g nose ballast, stabilizers 81 x 20 mm at 45°, H45 flight fins |
+| Rail exit | 15.0 m/s off the 6 ft Estes Pro Series II rail (printed 1010 buttons) |
+| Apogee | 176 m (577 ft, under the 600 ft cap) at 6.3 s; motor ejection (4 s delay) via the central printed PC-FR bypass tube |
+| Control | 4 x EMAX ES9251 II in one ring on their own 5 V rail (rev 3f; was the KST X08 Plus), bases 5 mm from the axis, ±15°, q-scheduled PID at 200 Hz; gust case 0.6° RMS tilt vs 10.8° with fins locked; fins active from rail exit until q̄ < 15 Pa (96 % of the ascent); in-flight authority manoeuvre (doublets + 1° steps) |
+| Avionics | Raspberry Pi Pico 2 W (rev 4b, radio off) logging to an Adafruit 4682 microSD; BNO085 on one I2C bus, BMP388 + BME688 on the other, on a square spine around the bypass tube; arm button + LED in the -Y wall |
+| Power | 2S 450 mAh through a Pololu 2810 MOSFET switch flipped through a wall slot; 26-min mission uses 35 mAh (6.9x margin) |
+| Data | 96 B records at 100 Hz to the card once armed, manoeuvre summary in `MANxxx.TXT`; USB CSV at 10 Hz on the bench and pad only; no telemetry in flight |
 
 ## Research questions (`Documentation/Research_Plan.md`)
 
@@ -36,11 +36,11 @@ GTR70E WYVERN/
 │   ├── Design_Overview.md          architecture, servo ring, spine, stability/ballast, motor, bypass sizing
 │   ├── Research_Plan.md            main RQ + SQ1/SQ2, single fin vs four, test matrix, selection rule
 │   ├── Wind_Tunnel_Adaptation.md   Phase A half-model (stock section), Phase B 200 x 200 x 750 + stabilizer tail
-│   ├── Electronics_Telemetry.md    board choice, pin map, power + battery budget, LoRa, firmware
+│   ├── Electronics_Telemetry.md    board choice, pin map, power + battery budget, arming, logging, firmware
 │   ├── Build_and_Test.md           print settings, assembly stages, sign check, ejection test, pad procedure
 │   ├── Decisions_and_Risks.md      decision log + risk register
 │   ├── CANONICAL_NUMBERS.md        generated by gen_canonical_md.py
-│   ├── WYVERN_FIN_BOM.xlsx         built by build_bom.py (to-buy flight, to-buy tunnel, on hand, retired)
+│   ├── WYVERN_BOM.xlsx             built by build_bom.py: one sheet, Rocket / Wind Tunnel / Flow-Vis, everything to buy
 │   └── diagrams/                   D0 renders, D1 layout, D2 sections, D3 assembly, D4 tunnel, D5 research plan, D6 fit check
 ├── 3D parts/
 │   ├── _generator/                 gen_wyvern_fin.py (CadQuery), gen_fit_assembly.py (fit check), mass_report.json
@@ -58,16 +58,15 @@ GTR70E WYVERN/
 │   ├── wf_stabilizer_planform_trade.py  equal-span / AIM-54 layout trade (S4 plot)
 │   ├── wf_apogee_cap_trade.py      rev 3d: 600 ft cap without losing authority (C plot)
 │   ├── wf_motor_study.py           F42-4T vs F27R-4 / F20W-4 / F20W-7 on 6-10 ft rails (D plot)
-│   ├── wf_bypass.py · wf_power.py · wf_link_budget.py
+│   ├── wf_bypass.py · wf_power.py
 │   ├── wyvern_finsim/              GUI simulation & dataset suite (run_gui.py), headless datagen.py
 │   └── CFD/                        vortex-panel 2D + vlm.py 3D vortex lattice + simscale/ RANS package (10 cases)
 ├── Flight Computer/
-│   ├── firmware/wyvern_fin/        flight firmware (arduino-pico, compiles)
-│   ├── ground_station/             second Feather RP2040 RFM95 receiver, host recorder
-│   ├── test_code/                  t1 I2C scan, t2 servo cal / tunnel sweep, t3 LoRa range
+│   ├── firmware/wyvern_fin/        flight firmware (Pico 2 W, arduino-pico, compiles) + sil_host/
+│   ├── host/                       wyvern_host.py: SD log decoder, USB live plot
+│   ├── test_code/                  t1 I2C scan, t2 servo cal + bench sign check, t3 arm button + SD soak
 │   └── wiring/                     gen_wiring.py -> W1 wiring, W2 power tree, W3 system, W4 spine + perfboard
-├── Wind Tunnel/                    Jerrod H STLs (unchanged) + wt_balance_daq firmware
-├── Motor Test Stand/               static thrust stand (reused)
+├── Wind Tunnel/                    Jerrod H STLs (unchanged) + wt_balance_daq (Metro M4: servo + 2 x HX711 balance + BME688)
 ├── Data/                           Flight / Motor / Wind Tunnel (empty until testing)
 ├── Paper/
 └── TVC ARCHIVED/                   everything from the TVC revision that is not reused
@@ -87,7 +86,7 @@ python3 wf_fin_authority.py        # ~1 min
 python3 wf_stabilizer.py           # ~20 s
 python3 wf_stabilizer_planform_trade.py
 python3 wf_apogee_cap_trade.py && python3 wf_motor_study.py
-python3 wf_bypass.py && python3 wf_power.py && python3 wf_link_budget.py
+python3 wf_bypass.py && python3 wf_power.py
 cd ../Documentation && python3 gen_canonical_md.py && python3 build_bom.py
 cd diagrams && python3 gen_vehicle_drawings.py && python3 gen_cad_renders.py && python3 gen_tunnel_research.py && python3 gen_fit_render.py
 cd "../../Flight Computer/wiring" && python3 gen_wiring.py

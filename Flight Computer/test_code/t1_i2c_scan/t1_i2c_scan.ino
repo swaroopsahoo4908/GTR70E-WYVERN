@@ -1,35 +1,32 @@
-// t1 -- I2C bring-up for the flight Feather RP2040 RFM95. Scans both buses, then streams the
-// ADXL375 axes next to the BNO-free gravity check so WYV_ADXL_AXIS / WYV_ADXL_SIGN can be set.
-//   Wire1 (STEMMA QT, GP2/GP3, core 0 in flight): expect 0x4A BNO085, 0x53 ADXL375
-//   Wire  (TX/RX pads, GP0/GP1, core 1 in flight): expect 0x77 BME688
-// Stand the rocket (or the spine) nose-up: the ADXL axis that reads about +1 g with the chosen sign
-// is the one to put in fc_config.h. Expect a 0-g offset of a few hundred mg; the flight code
-// learns it on the pad against the BNO085.
+// t1 -- I2C bring-up for the flight Pico 2 W (rev 4b). Scans both buses, then streams the BMP388
+// pressure next to the BME688 so you can see both barometers agree before the first flight.
+//   Wire  (I2C0, GP4 SDA / GP5 SCL): expect 0x4A BNO085
+//   Wire1 (I2C1, GP2 SDA / GP3 SCL): expect 0x76 BMP388 (ADDR jumper closed; chip id 0x50, or 0x60 for a
+//                                     BMP390) and 0x77 BME688. Only 0x77 twice-over = the jumper is still open.
+// A missing device: check the STEMMA QT lead's colour order at the Pico end (black GND, red 3V3,
+// blue SDA, yellow SCL) and that the board's own 3V3 is not back-fed from another rail.
 #include <Wire.h>
+#include "fc_config.h"
+#include "baro.h"
 void scan(TwoWire& w, const char* name) {
   int n = 0;
   for (uint8_t a = 1; a < 127; a++) { w.beginTransmission(a); if (w.endTransmission() == 0) { Serial.printf("%s found 0x%02X\n", name, a); n++; } }
   Serial.printf("%s: %d device(s)\n", name, n);
 }
-bool adxl = false;
+BMP388 bmp; EnvSensor env;
 void setup() {
   Serial.begin(115200); while (!Serial && millis() < 4000) {}
-  Wire1.setSDA(2); Wire1.setSCL(3); Wire1.begin(); Wire1.setClock(400000);
-  Wire.setSDA(0); Wire.setSCL(1); Wire.begin(); Wire.setClock(400000);
-  Wire1.beginTransmission(0x53); Wire1.write(0x00); Wire1.endTransmission(false);
-  Wire1.requestFrom((uint8_t)0x53, (uint8_t)1); adxl = Wire1.available() && Wire1.read() == 0xE5;
-  if (adxl) { Wire1.beginTransmission(0x53); Wire1.write(0x2D); Wire1.write(0x08); Wire1.endTransmission(); }
+  Wire.setSDA(WYV_PIN_SDA);   Wire.setSCL(WYV_PIN_SCL);   Wire.begin();  Wire.setClock(400000);
+  Wire1.setSDA(WYV_PIN_SDA1); Wire1.setSCL(WYV_PIN_SCL1); Wire1.begin(); Wire1.setClock(400000);
+  scan(Wire, "Wire  (BNO085)"); scan(Wire1, "Wire1 (BMP388 + BME688)");
+  Serial.printf("BMP388 init %d   BME688 init %d\n", bmp.begin(Wire1, WYV_ADDR_BMP388), env.begin());
+  Serial.println("bmp388_hPa,bme688_hPa,diff_Pa,bmp_alt_m,bme_T_C,bme_RH");
 }
 void loop() {
-  scan(Wire1, "Wire1/STEMMA"); scan(Wire, "Wire/TX-RX");
-  if (adxl) {
-    for (int k = 0; k < 10; k++) {
-      Wire1.beginTransmission(0x53); Wire1.write(0x32); Wire1.endTransmission(false);
-      Wire1.requestFrom((uint8_t)0x53, (uint8_t)6); int16_t v[3];
-      for (int i = 0; i < 3; i++) { uint8_t lo = Wire1.read(), hi = Wire1.read(); v[i] = (int16_t)(lo | (hi << 8)); }
-      Serial.printf("ADXL375 g: x %+.2f  y %+.2f  z %+.2f\n", v[0] * 0.049f, v[1] * 0.049f, v[2] * 0.049f);
-      delay(200);
-    }
-  }
-  Serial.println(); delay(1000);
+  uint32_t now = millis();
+  bmp.poll(now); env.poll(now);
+  static uint32_t t = 0;
+  if (now - t >= 200) { t = now;
+    float pb = bmp.pressure_pa(), pe = env.hpa() * 100.f;
+    Serial.printf("%.2f,%.2f,%.1f,%.2f,%.1f,%.0f\n", pb / 100.f, pe / 100.f, pb - pe, pressure_alt_m(pb), env.temp_c(), env.rh()); }
 }

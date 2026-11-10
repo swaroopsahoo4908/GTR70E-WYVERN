@@ -24,9 +24,9 @@ H1 (section). Thin-aerofoil and panel results rank the 2D lift slopes NACA 0012 
 
 H2 (section, nonlinear). At larger deflections the sharp leading edges shed a leading-edge vortex and gain vortex lift (Polhamus suction analogy). With the assumed suction-retention factors, the model gives the double wedge 17 % more normal force than linear at 10°, flat plate 7 %, NACA 0006 5 % and NACA 0012 -1.5 %. These factors are guesses; the curvature of the measured $C_N(\delta)$ is what tests them, and smoke plus the laser sheet can show whether the vortex is there. This is where the sections are most likely to separate.
 
-H3 (height). Authority grows faster than linearly with H. Aspect ratio rises from 1.33 to 2.67, and more of the fin clears the body boundary layer (effectiveness 0.78 at H = 20, 0.88 at H = 40). The Phase A prediction for one NACA 0006 fin at 10° and 12 m/s is 15 / 23 / 31 / 40 / 50 mN at H = 20 / 25 / 30 / 35 / 40.
+H3 (height). Authority grows faster than linearly with H. Aspect ratio rises from 1.33 to 2.67, and more of the fin clears the body boundary layer (effectiveness 0.78 at H = 20, 0.88 at H = 40). The Phase A prediction for one NACA 0006 fin at 10° and 11 m/s is 13 / 19 / 26 / 34 / 42 mN at H = 20 / 25 / 30 / 35 / 40.
 
-H4 (what it buys). In the closed-loop gust case (4 m/s wind, 4 m/s 1-cos gust, light turbulence), RMS tilt falls from 5.7° at H = 20 to 2.2° at H = 40 and 1.9° at H = 45, for about 1 m of apogee per 5 mm. Peak hinge moment in the H = 40 flight sim is about 12 mN·m, roughly 40x below the X08 Plus stall torque at 7.4 V.
+H4 (what it buys). In the closed-loop gust case (4 m/s wind, 4 m/s 1-cos gust, light turbulence), RMS tilt falls from 5.7° at H = 20 to 2.2° at H = 40 and 1.9° at H = 45, for about 1 m of apogee per 5 mm. The worst-case hinge moment (H = 45, 15° at max q) is about 14 mN·m, half the ES9251 II's 27 mN·m stall torque at 5 V; the simulated flight peak is about 2 mN·m.
 
 ### Factors and levels
 
@@ -43,7 +43,7 @@ H4 (what it buys). In the closed-loop gust case (4 m/s wind, 4 m/s 1-cos gust, l
 
 - P* = the section with the most observed authority in the tunnel (largest corrected $C_{N\delta}$ over ±10°, tie-break on linearity to 15°).
 - H* = the height with the most simulated installed authority (`wf_fin_authority.py`).
-- Fly P* at H* - 5, H*, H* + 5 mm on the AeroTech F67-6W.
+- Fly P* at H* - 5, H*, H* + 5 mm on the AeroTech Econojet F42-4T.
 
 Simulated authority rises monotonically with H for every section, so H* = 40 mm and the flights are 35 / 40 / 45 mm (rev 3d flies H45 as the demonstration fin, so it carries the authority manoeuvre's headline numbers). 45 mm is one step outside the tunnel set, which makes that flight an out-of-sample check on the height trend.
 
@@ -112,7 +112,7 @@ Why one fin is enough for section x height:
 
 - The main question compares fins with each other. Every configuration would share the same body, hubs and servos, so the body adds the same factor to all of them and does not change the ranking.
 - A half-model on a reflection-plane wall fits the stock 100 x 100 mm section: about 2-3 % blockage at 10° deflection, against about 9 % for the full 58 mm model in a 200 x 200 section. Smaller corrections mean cleaner differences between sections.
-- The stock contraction with the Cloudline T8 should reach about 12 m/s (measure it), and force scales with V², so a single fin at 12 m/s gives more signal (50 mN at H = 40) than a pair at 7 m/s in the large section (46 mN).
+- The stock contraction with the 6 in EC fan should reach about 11-12 m/s (the pitot and manometer measure it), and force scales with V², so a single fin at 11 m/s gives about as much signal (40-46 mN at H = 40) as a pair at 7 m/s in the large section (46 mN), at a third of the blockage.
 - It needs one fin per configuration instead of four.
 
 What one fin cannot show:
@@ -133,9 +133,9 @@ Phase B covers those three with the real control tube, at the three heights that
 
 ## 7. Order of work
 
-1. Print the control tube and servo ring, check the X08 Plus fit and the bench sign check (t2 sketch).
-2. Phase A: wall panel, cradle on two 100 g cells, pitot. Calibrate, run the 20 configurations, pick P*.
+1. Print the control tube and servo ring, check the ES9251 II fit and the bench sign check (t2 sketch).
+2. Phase A: wall panel, cradle on two 1 kg bar cells (HX711s), AS5600 fin-angle sensor, pitot and inclined manometer, one Metro M4. Calibrate, run the 20 configurations, pick P*.
 3. Re-run `wf_fin_authority.py` with the measured section factors and confirm H*.
 4. Phase B: 200 x 200 section, stabilizer tail, P* at 35 / 40 / 45, stabilizers off / 30 / 50, yaw sweep.
-5. Ground ejection test, static burn of the spare F67-6W, pad rehearsal with telemetry.
+5. Ground ejection test (bypass tube and printed PC-FR recovery path), pad rehearsal (arm button, USB pre-flight check).
 6. Three flights, swapping only the control fins.

@@ -11,6 +11,7 @@
 class FinMixer {
  public:
   void begin() {
+    // arduino-pico: one PWM frequency and range for every analogWrite pin
     analogWriteFreq(WYV_SERVO_HZ);
     analogWriteRange(WYV_SERVO_RANGE);
     for (int i = 0; i < 4; i++) { pinMode(WYV_PIN_SERVO[i], OUTPUT); last_[i] = 0; write_(i, 0); }
@@ -34,11 +35,16 @@ class FinMixer {
     }
   }
   float defl(int i) const { return last_[i]; }
-  void raw_us(int i, int us) { analogWrite(WYV_PIN_SERVO[i], us); }   // bench calibration only
+  void raw_us(int i, int us) { out_us_(i, (float)us); }   // bench calibration only
  private:
   void write_(int i, float deg) {
     float us = WYV_SERVO_CENTER_US + WYV_SERVO_TRIM[i] + WYV_SERVO_SIGN[i] * deg * WYV_SERVO_US_PER_DEG;
-    analogWrite(WYV_PIN_SERVO[i], (int)lroundf(us));
+    out_us_(i, us);
+  }
+  static void out_us_(int i, float us) {     // pulse width -> duty counts at WYV_SERVO_HZ
+    const float counts_per_us = (float)WYV_SERVO_RANGE * WYV_SERVO_HZ * 1e-6f;   // 1.0 at 200 Hz / 5000
+    us = constrain(us, 800.f, 2200.f);
+    analogWrite(WYV_PIN_SERVO[i], (int)lroundf(us * counts_per_us));
   }
   float target_[4] = {0, 0, 0, 0}, last_[4] = {0, 0, 0, 0};
 };
